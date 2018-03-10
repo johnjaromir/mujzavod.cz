@@ -1,0 +1,35 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    Layout = null;
+    ViewBag.Title = "Error";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/Nifty/css/nifty.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div id="container" class="cls-container">
+        <div class="cls-content">
+            <h1 class="error-code text-info">500</h1>
+            <p class="text-main text-semibold text-lg text-uppercase">Došlo k chybě!</p>
+            <div class="pad-btm text-muted">
+                Omlouváme se, došlo k chybě při vyřizování Vašeho požadavku.
+            </div>
+            <hr class="new-section-sm bord-no">
+            <div class="pad-top"><a class="btn-link" href="/">Zpět na úvodní stránku</a></div>
+        </div>
+    </div>
+</body>
+</html>
+

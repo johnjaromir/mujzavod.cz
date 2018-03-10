@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Seznam závodů";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeaderButtons{
+<button type="button" class="btn btn-primary pull-right" onclick="createRace();">Vytvořit</button>
+}
+<div>
+    @Html.MzGrid(new MujZavod.Admin.Models.Race.RaceGridViewModel())
+</div>
+
+
+
+
+
+
+<script>
+    function createRace() {
+        var modalEdit = new MujZavod.Modal();
+        modalEdit.loadFromUrl('@Url.Action("Edit","Race")', function () { MujZavod.Grids['GridRaces'].refresh(); modalEdit.close(); });
+
+    }
+</script>

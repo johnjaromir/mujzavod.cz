@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Můj závod</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <!-- Core stylesheets -->
+    <link href="/content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/pixeladmin.min.css" rel="stylesheet" type="text/css">
+    <link href="/content/css/widgets.min.css" rel="stylesheet" type="text/css">
+    <!-- Theme -->
+    <link href="/content/css/themes/clean.min.css" rel="stylesheet" type="text/css">
+    <!-- Pace.js -->
+    <script src="/scripts/pace/pace.min.js"></script>
+
+    @RenderSection("head", required: false)
+    <style>
+
+
+        .account-container {
+            width: auto;
+            margin: 30px 10px;
+        }
+
+            .account-container form {
+                border: 0;
+                box-shadow: 0 2px 2px rgba(0,0,0,.05), 0 1px 0 rgba(0,0,0,.05);
+            }
+
+        @@media (min-width: 544px) {
+            .account-container {
+                width: 350px;
+                margin: 60px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==============================================================================
+    |
+    |  SCRIPTS
+    |
+    =============================================================================== -->
+    <!-- Load jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Core scripts -->
+    <script src="/scripts/js/bootstrap.min.js"></script>
+    <script src="/scripts/js/pixeladmin.min.js"></script>
+    <!-- Your scripts -->
+    <script src="/scripts/js/app.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    <!-- Content -->
+    <div class="px-content">
+
+        <div class="account-container">@RenderBody()</div>
+    </div>
+
+
+</body>
+</html>

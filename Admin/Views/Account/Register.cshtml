@@ -1,0 +1,55 @@
+﻿@model MujZavod.Admin.Models.RegisterViewModel
+@using MujZavod.Admin.Helpers
+@{
+    ViewBag.Title = "Registrace";
+    Layout = "~/Views/Shared/_LayoutPresentation.cshtml";
+}
+
+@section head{
+    
+}
+
+
+
+    <div class="page-signup-container">
+        <h2 class="m-t-0 m-b-4 text-xs-center font-weight-semibold font-size-20">Vytvořit účet pořadatele</h2>
+
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "panel p-a-4", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group  form-group-lg">
+
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group  form-group-lg">
+
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Heslo" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group form-group-lg">
+
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Potvrzení hesla" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group form-group-lg">
+
+            @Html.MzDatePickerFor(m => m.BirthDate, new { @class = "form-control", @placeholder = "Datum narození" })
+
+        </div>
+
+        <div class="form-group form-group-lg">
+
+            @Html.MzDropDownFor(m => m.EGenderId , new MujZavod.Admin.Models.DropDown.EGenderDropDownModel(), "Pohlaví", new { @class = "form-control" })
+
+        </div>
+
+        <button type="submit" class="btn btn-block btn-lg btn-primary m-t-3">Vytvořit</button>
+}
+
+
+    </div>
+

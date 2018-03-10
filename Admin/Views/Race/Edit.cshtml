@@ -1,0 +1,15 @@
+﻿@model MujZavod.Admin.Models.Race.RaceViewModel
+
+@using (Html.BeginForm("Edit", "Race", FormMethod.Post, new { @class="form-horizontal", role = "form" }))
+{
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.HiddenFor(x=>x.Id)
+
+    @Html.MzEditLineFor(x => x.Name)
+    @Html.MzEditLineFor(x => x.Description)
+    @Html.MzEditLineFor(x => x.Date)
+    @Html.MzEditLineFor(x => x.SignToDate)
+
+}

@@ -1,0 +1,121 @@
+﻿@model MujZavod.Admin.Models.Organizer.CreateViewModel
+@using MujZavod.Admin.Helpers
+@{
+    ViewBag.Title = "Registrace";
+    Layout = "~/Views/Shared/_LayoutPresentation.cshtml";
+}
+
+@section head{
+    <style>
+        .page-signup-header {
+            box-shadow: 0 2px 2px rgba(0,0,0,.05), 0 1px 0 rgba(0,0,0,.05);
+        }
+
+            .page-signup-header .btn {
+                position: absolute;
+                top: 12px;
+                right: 15px;
+            }
+
+        html[dir="rtl"] .page-signup-header .btn {
+            right: auto;
+            left: 15px;
+        }
+
+        .page-signup-container {
+            width: auto;
+            margin: 30px 10px;
+        }
+
+            .page-signup-container form {
+                border: 0;
+                box-shadow: 0 2px 2px rgba(0,0,0,.05), 0 1px 0 rgba(0,0,0,.05);
+            }
+
+        @@media (min-width: 544px) {
+            .page-signup-container {
+                width: 350px;
+                margin: 60px auto;
+            }
+        }
+
+        .page-signup-social-btn {
+            width: 40px;
+            padding: 0;
+            line-height: 40px;
+            text-align: center;
+            border: none !important;
+        }
+    </style>
+}
+
+
+
+    <div class="page-signup-container">
+        <h2 class="m-t-0 m-b-4 text-xs-center font-weight-semibold font-size-20">Vytvořit účet pořadatele</h2>
+
+        @using (Html.BeginForm("RegisterOrganizer", "Organizer", FormMethod.Post, new { @class = "panel p-a-4", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group  form-group-lg">
+
+            @Html.TextBoxFor(m => m.registerViewModel.Email, new { @class = "form-control", @placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.registerViewModel.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group  form-group-lg">
+
+            @Html.PasswordFor(m => m.registerViewModel.Password, new { @class = "form-control", @placeholder = "Heslo" })
+            @Html.ValidationMessageFor(m => m.registerViewModel.Password, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group form-group-lg">
+
+            @Html.PasswordFor(m => m.registerViewModel.ConfirmPassword, new { @class = "form-control", @placeholder = "Potvrzení hesla" })
+            @Html.ValidationMessageFor(m => m.registerViewModel.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group form-group-lg">
+
+            @Html.MzTextBoxFor(m => m.registerViewModel.FirstName, new { @class = "form-control", @placeholder = "Jméno" })
+
+        </div>
+
+        <div class="form-group form-group-lg">
+
+            @Html.MzTextBoxFor(m => m.registerViewModel.SurName, new { @class = "form-control", @placeholder = "Příjmení" })
+
+        </div>
+
+
+        <div class="form-group form-group-lg">
+
+            @Html.MzDatePickerFor(m => m.registerViewModel.BirthDate, new { @class = "form-control", @placeholder = "Datum narození" })
+
+        </div>
+
+        <div class="form-group form-group-lg">
+
+            @Html.MzDropDownFor(m => m.registerViewModel.EGenderId, new MujZavod.Admin.Models.DropDown.EGenderDropDownModel(), "Pohlaví", new { @class = "form-control" })
+
+        </div>
+
+        <div class="form-group form-group-lg">
+
+            @Html.MzTextBoxFor(m => m.organizerViewModel.Name, new { @class = "form-control", @placeholder = "Název pořadatele" })
+
+        </div>
+
+        <div class="form-group form-group-lg">
+
+            @Html.TextAreaFor(m => m.organizerViewModel.Description, new { @class = "form-control", @placeholder = "Popis" })
+
+        </div>
+
+
+
+        <button type="submit" class="btn btn-block btn-lg btn-primary m-t-3">Vytvořit</button>
+}
+
+
+    </div>

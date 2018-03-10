@@ -1,0 +1,13 @@
+﻿@model MujZavod.Admin.Models.Race.RaceViewModel
+
+@{
+
+    ViewBag.Title = "Detail závodu - " + Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.LabelValueRowFor(x => x.Name, 4, 8)
+@Html.LabelValueRowFor(x => x.Description, 4, 8)
+@Html.LabelValueRowFor(x => x.Date, 4, 8)
+@Html.LabelValueRowFor(x => x.SignToDate, 4, 8)

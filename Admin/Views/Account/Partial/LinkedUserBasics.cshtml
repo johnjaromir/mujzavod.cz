@@ -1,0 +1,8 @@
+﻿@model MujZavod.Admin.Models.PartialLinkedUserbasics
+
+@if (!string.IsNullOrEmpty(Model.photoUrl))
+{
+    <img src="@Model.photoUrl" class="img-circle img-@Model.imgSize"/>
+}
+
+@Model.fullName

@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>@ViewBag.title</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <!-- Core stylesheets -->
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="content/css/pixeladmin.min.css" rel="stylesheet" type="text/css">
+    <link href="content/css/widgets.min.css" rel="stylesheet" type="text/css">
+    <!-- Theme -->
+    <link href="content/css/themes/clean.min.css" rel="stylesheet" type="text/css">
+    <!-- Pace.js -->
+    <script src="scripts/pace/pace.min.js"></script>
+    @RenderSection("head", required: false)
+
+
+
+    <!-- ==============================================================================
+    |
+    |  SCRIPTS
+    |
+    =============================================================================== -->
+    <!-- Load jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Core scripts -->
+    <script src="scripts/js/bootstrap.min.js"></script>
+    <script src="scripts/js/pixeladmin.min.js"></script>
+    <!-- Your scripts -->
+    <script src="scripts/js/app.js"></script>
+
+    @Scripts.Render("~/Scripts/MujZavod/js")
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="px-nav px-nav-left">
+        <button type="button" class="px-nav-toggle" data-toggle="px-nav">
+            <span class="px-nav-toggle-arrow"></span>
+            <span class="navbar-toggle-icon"></span>
+            <span class="px-nav-toggle-label font-size-11">Sbalit menu</span>
+        </button>
+        <ul class="px-nav-content">
+            <li class="px-nav-item active">
+                <a href="@Url.Action("Index","Race")"><i class="px-nav-icon ion-home"></i><span class="px-nav-label">Seznam závodů</span></a>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- Navbar -->
+    <nav class="navbar px-navbar">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">MujZavod</a>
+        </div>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#px-navbar-collapse" aria-expanded="false"><i class="navbar-toggle-icon"></i></button>
+        <div class="collapse navbar-collapse" id="px-navbar-collapse">
+            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        @User.Identity.Name
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Osobní údaje</a></li>
+                        <li><a href="@Url.Action("ChangePassword","Account")">Změna hesla</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary btn-block">
+                                    <i class="pli-unlock icon-fw"></i> Odhlásit
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Content -->
+    <div class="px-content">
+        <div class="page-header">
+            <h1>@ViewBag.title</h1>
+            <div class="pull-right">@RenderSection("HeaderButtons", required: false)</div>
+        </div>
+        <div>@RenderBody()</div>
+    </div>
+    <!-- Footer -->
+    <footer class="px-footer px-footer-bottom">
+        Copyright © 2018 MujZavod.cz All rights reserved.
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<button type="button" onclick="new MujZavod.Modal('md').setBody('test test test <button onclick=openSecond() >zanorene</button>');">test modal</button>
+
+
+<script>
+    function openSecond() {
+        new MujZavod.Modal('lg').setBody('test');
+    }
+</script>
