@@ -1,0 +1,32 @@
+﻿@model MujZavod.Admin.Models.Race.RaceViewModel
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title">
+            Základní informace
+            <a href="#" class="btn btn-info pull-right" onclick="new MujZavod.Modal('md').loadFromUrl('@Url.Action("Edit","Race", new { Id = Model.Id })', function (raceModal) { raceModal.close(); $('#raceHead').load('@Url.Action("Head", "Race", new { id = Model.Id })'); });">Upravit</a>
+        </div>
+    </div>
+    <div class="panel-body form-horizontal">
+        <div class="row">
+            <div class="col-sm-4">
+                @Html.LabelValueRowFor(x => x.Name, 4, 8)
+            </div>
+            <div class="col-sm-4">
+                @Html.LabelValueRowFor(x => x.Date, 4, 8)
+            </div>
+            <div class="col-sm-4">
+                @Html.LabelValueRowFor(x => x.SignToDate, 4, 8)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                Popis
+                <div>
+                    @Model.RaceDescription
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

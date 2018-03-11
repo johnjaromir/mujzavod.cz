@@ -1,13 +1,16 @@
-﻿@model MujZavod.Admin.Models.Race.RaceViewModel
+﻿@model MujZavod.Admin.Models.Race.RaceDetailModel
 
 @{
 
-    ViewBag.Title = "Detail závodu - " + Model.Name;
+    ViewBag.Title = "Detail závodu - " + Model.RaceViewModel.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div id="raceHead">
+    @Html.Partial("Head", Model.RaceViewModel)
+</div>
 
-@Html.LabelValueRowFor(x => x.Name, 4, 8)
-@Html.LabelValueRowFor(x => x.Description, 4, 8)
-@Html.LabelValueRowFor(x => x.Date, 4, 8)
-@Html.LabelValueRowFor(x => x.SignToDate, 4, 8)
+
+<div id="raceCategories">
+    @Html.Partial("Category/Categories", Model.RaceCategoriesViewModel)
+</div>

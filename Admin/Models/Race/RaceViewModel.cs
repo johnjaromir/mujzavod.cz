@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MujZavod.Admin.Models.Race
 {
@@ -16,7 +17,8 @@ namespace MujZavod.Admin.Models.Race
         [DisplayName("Registrace do")]
         public DateTime SignToDate { get; set; }
         [DisplayName("Popis")]
-        public string Description { get; set; }
+        [AllowHtml]
+        public string RaceDescription { get; set; }
 
         public RaceViewModel()
         {
@@ -31,7 +33,7 @@ namespace MujZavod.Admin.Models.Race
                 Name = race.Name;
                 Date = race.Date;
                 SignToDate = race.SignToDate;
-                Description = race.Description;
+                RaceDescription = race.Description;
             }
         }
     }

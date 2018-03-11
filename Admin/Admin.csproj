@@ -215,6 +215,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Organizer\CreateViewModel.cs" />
     <Compile Include="Models\Organizer\OrganizerViewModel.cs" />
+    <Compile Include="Models\Race\RaceCategory\RaceCategoriesViewModel.cs" />
+    <Compile Include="Models\Race\RaceCategory\RaceCategoryViewModel.cs" />
+    <Compile Include="Models\Race\RaceDetailModel.cs" />
     <Compile Include="Models\Race\RaceGridRow.cs" />
     <Compile Include="Models\Race\RaceGridViewModel.cs" />
     <Compile Include="Models\Race\RaceViewModel.cs" />
@@ -354,6 +357,10 @@
     <Content Include="Views\Race\Index.cshtml" />
     <Content Include="Views\Race\Edit.cshtml" />
     <Content Include="Views\Race\Detail.cshtml" />
+    <Content Include="Views\Race\Head.cshtml" />
+    <Content Include="Views\Race\Category\Categories.cshtml" />
+    <Content Include="Views\Race\Category\Detail.cshtml" />
+    <Content Include="Views\Race\Category\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

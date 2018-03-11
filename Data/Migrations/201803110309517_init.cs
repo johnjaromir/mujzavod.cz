@@ -13,11 +13,39 @@ namespace MujZavod.Data.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        RaceCategory_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.RaceCategories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                        AgeFrom = c.Int(),
+                        AgeTo = c.Int(),
+                        Start = c.DateTime(nullable: false),
+                        RaceId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.RaceCategories", t => t.RaceCategory_Id)
-                .Index(t => t.RaceCategory_Id);
+                .ForeignKey("dbo.Races", t => t.RaceId, cascadeDelete: true)
+                .Index(t => t.RaceId);
+            
+            CreateTable(
+                "dbo.Races",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        OrganizerId = c.Int(nullable: false),
+                        Name = c.String(),
+                        Date = c.DateTime(nullable: false),
+                        SignToDate = c.DateTime(nullable: false),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Organizers", t => t.OrganizerId, cascadeDelete: true)
+                .Index(t => t.OrganizerId);
             
             CreateTable(
                 "dbo.Organizers",
@@ -84,50 +112,6 @@ namespace MujZavod.Data.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.RaceCategories",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                        AgeFrom = c.Int(),
-                        AgeTo = c.Int(),
-                        Start = c.DateTime(nullable: false),
-                        RaceId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Races", t => t.RaceId, cascadeDelete: true)
-                .Index(t => t.RaceId);
-            
-            CreateTable(
-                "dbo.Races",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        OrganizerId = c.Int(nullable: false),
-                        Name = c.String(),
-                        Date = c.DateTime(nullable: false),
-                        SignToDate = c.DateTime(nullable: false),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Organizers", t => t.OrganizerId, cascadeDelete: true)
-                .Index(t => t.OrganizerId);
-            
-            CreateTable(
-                "dbo.RaceRounds",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Distance = c.Double(nullable: false),
-                        RaceId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Races", t => t.RaceId, cascadeDelete: true)
-                .Index(t => t.RaceId);
-            
-            CreateTable(
                 "dbo.RaceRoundUsers",
                 c => new
                     {
@@ -141,6 +125,19 @@ namespace MujZavod.Data.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.RaceRoundId);
+            
+            CreateTable(
+                "dbo.RaceRounds",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Distance = c.Double(nullable: false),
+                        RaceCategoryId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.RaceCategories", t => t.RaceCategoryId, cascadeDelete: true)
+                .Index(t => t.RaceCategoryId);
             
             CreateTable(
                 "dbo.AspNetUserRoles",
@@ -168,63 +165,79 @@ namespace MujZavod.Data.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
-                "dbo.RaceCategoryApplicationUsers",
+                "dbo.RaceCategoryEGenders",
                 c => new
                     {
                         RaceCategory_Id = c.Int(nullable: false),
-                        ApplicationUser_Id = c.String(nullable: false, maxLength: 128),
+                        EGender_Id = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.RaceCategory_Id, t.ApplicationUser_Id })
+                .PrimaryKey(t => new { t.RaceCategory_Id, t.EGender_Id })
                 .ForeignKey("dbo.RaceCategories", t => t.RaceCategory_Id, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id, cascadeDelete: true)
+                .ForeignKey("dbo.EGenders", t => t.EGender_Id, cascadeDelete: true)
                 .Index(t => t.RaceCategory_Id)
-                .Index(t => t.ApplicationUser_Id);
+                .Index(t => t.EGender_Id);
+            
+            CreateTable(
+                "dbo.ApplicationUserRaceCategories",
+                c => new
+                    {
+                        ApplicationUser_Id = c.String(nullable: false, maxLength: 128),
+                        RaceCategory_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.ApplicationUser_Id, t.RaceCategory_Id })
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id, cascadeDelete: true)
+                .ForeignKey("dbo.RaceCategories", t => t.RaceCategory_Id, cascadeDelete: true)
+                .Index(t => t.ApplicationUser_Id)
+                .Index(t => t.RaceCategory_Id);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.RaceCategoryApplicationUsers", "ApplicationUser_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.RaceCategoryApplicationUsers", "RaceCategory_Id", "dbo.RaceCategories");
-            DropForeignKey("dbo.RaceRoundUsers", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.RaceRoundUsers", "RaceRoundId", "dbo.RaceRounds");
-            DropForeignKey("dbo.RaceRounds", "RaceId", "dbo.Races");
             DropForeignKey("dbo.RaceCategories", "RaceId", "dbo.Races");
             DropForeignKey("dbo.Races", "OrganizerId", "dbo.Organizers");
-            DropForeignKey("dbo.EGenders", "RaceCategory_Id", "dbo.RaceCategories");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.RaceRoundUsers", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.RaceRoundUsers", "RaceRoundId", "dbo.RaceRounds");
+            DropForeignKey("dbo.RaceRounds", "RaceCategoryId", "dbo.RaceCategories");
+            DropForeignKey("dbo.ApplicationUserRaceCategories", "RaceCategory_Id", "dbo.RaceCategories");
+            DropForeignKey("dbo.ApplicationUserRaceCategories", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "OrganizerId", "dbo.Organizers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "EGenderId", "dbo.EGenders");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.RaceCategoryApplicationUsers", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.RaceCategoryApplicationUsers", new[] { "RaceCategory_Id" });
+            DropForeignKey("dbo.RaceCategoryEGenders", "EGender_Id", "dbo.EGenders");
+            DropForeignKey("dbo.RaceCategoryEGenders", "RaceCategory_Id", "dbo.RaceCategories");
+            DropIndex("dbo.ApplicationUserRaceCategories", new[] { "RaceCategory_Id" });
+            DropIndex("dbo.ApplicationUserRaceCategories", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.RaceCategoryEGenders", new[] { "EGender_Id" });
+            DropIndex("dbo.RaceCategoryEGenders", new[] { "RaceCategory_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.RaceRounds", new[] { "RaceCategoryId" });
             DropIndex("dbo.RaceRoundUsers", new[] { "RaceRoundId" });
             DropIndex("dbo.RaceRoundUsers", new[] { "UserId" });
-            DropIndex("dbo.RaceRounds", new[] { "RaceId" });
-            DropIndex("dbo.Races", new[] { "OrganizerId" });
-            DropIndex("dbo.RaceCategories", new[] { "RaceId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUsers", new[] { "OrganizerId" });
             DropIndex("dbo.AspNetUsers", new[] { "EGenderId" });
-            DropIndex("dbo.EGenders", new[] { "RaceCategory_Id" });
-            DropTable("dbo.RaceCategoryApplicationUsers");
+            DropIndex("dbo.Races", new[] { "OrganizerId" });
+            DropIndex("dbo.RaceCategories", new[] { "RaceId" });
+            DropTable("dbo.ApplicationUserRaceCategories");
+            DropTable("dbo.RaceCategoryEGenders");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.RaceRoundUsers");
             DropTable("dbo.RaceRounds");
-            DropTable("dbo.Races");
-            DropTable("dbo.RaceCategories");
+            DropTable("dbo.RaceRoundUsers");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Organizers");
+            DropTable("dbo.Races");
+            DropTable("dbo.RaceCategories");
             DropTable("dbo.EGenders");
         }
     }

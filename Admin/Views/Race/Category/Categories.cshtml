@@ -1,0 +1,43 @@
+﻿@model MujZavod.Admin.Models.Race.RaceCategory.RaceCategoriesViewModel
+
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title">
+            Kategorie závodů
+            <a class="pull-right btn btn-info" onclick="createRaceCategory();">Vytvořit</a>
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+
+
+        <ul class="nav nav-tabs tab-resize-nav" id="tab-resize-tabs">
+            @foreach(var category in Model.RaceCategories)
+            {
+                <li class="@(category.Id == Model.RaceCategories[0].Id ? "active" : "")"><a data-toggle="tab" href="#category-tab-@(category.Id)" >@category.Name</a></li>
+            }
+            
+        </ul>
+
+        <div id="divRaceCategoryContent" class="tab-content">
+            @foreach(var category in Model.RaceCategories)
+            {
+                <div class="tab-pane @(category.Id == Model.RaceCategories[0].Id ? "active" : "")" id="category-tab-@(category.Id)">
+                    @Html.Partial("/Views/Race/Category/Detail.cshtml", category)
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function createRaceCategory() {
+        new MujZavod.Modal().loadFromUrl('@Url.Action("CategoryEdit","Race", new { RaceId = Model.RaceId })', function (modal) { location.reload(); });
+    }
+
+    $('#tab-resize-tabs').pxTabResize();
+</script>

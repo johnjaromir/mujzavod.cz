@@ -14,8 +14,8 @@ namespace MujZavod.Data.Models
         }
         public string Name { get; set; }
         public double Distance { get; set; }
-        public int RaceId { get; set; }
-        public Race Race { get; set; }
+        public int RaceCategoryId { get; set; }
+        public RaceCategory RaceCategory { get; set; }
 
 
         public ICollection<RaceRoundUser> RaceRoundUsers { get; set; }

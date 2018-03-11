@@ -1,0 +1,27 @@
+﻿@model MujZavod.Admin.Models.Race.RaceCategory.RaceCategoryViewModel
+
+
+@using (Html.BeginForm("CategoryEdit", "Race", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.RaceId)
+
+    @Html.MzEditLineFor(x => x.Name)
+
+    @Html.MzEditLineFor(x => x.Start)
+    @Html.MzEditLineFor(x => x.AgeFrom)
+    @Html.MzEditLineFor(x => x.AgeTo)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.possibleGenders, new { @class = "col-md-4 control-label" })
+        <div class="col-md-7">
+            @Html.CheckBoxListFor(x => x.SelectedGenders, Model.possibleGenders)
+        </div>
+    </div>
+
+    @Html.LabelFor(x => x.Description)
+    @Html.MzTextEditorFor(x => x.Description)
+}

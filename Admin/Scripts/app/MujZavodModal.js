@@ -89,7 +89,7 @@ MujZavod.Modal = function (size) {
             $.post(form.action, $(form).serialize(), function (data) {
                 if (data === "OK") {
                     if ($.isFunction(that._callBack)) {
-                        that._callBack();
+                        that._callBack(that);
                     }
                 } else {
                     that.setBody(data);

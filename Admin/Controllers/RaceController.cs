@@ -13,6 +13,12 @@ namespace MujZavod.Admin.Controllers
         private Code.Repository.RaceRepository _RaceRepository;
         private Code.Repository.RaceRepository RaceRepository => _RaceRepository ?? (_RaceRepository = new Code.Repository.RaceRepository());
 
+        private Code.Repository.RaceCategoryRepository _RaceCategoryRepository;
+        private Code.Repository.RaceCategoryRepository RaceCategoryRepository => _RaceCategoryRepository ?? (_RaceCategoryRepository = new Code.Repository.RaceCategoryRepository());
+
+        private Code.Repository.EGenderRepository _EGenderRepository;
+        private Code.Repository.EGenderRepository EGenderRepository => _EGenderRepository ?? (_EGenderRepository = new Code.Repository.EGenderRepository());
+
         // GET: Race
         public ActionResult Index()
         {
@@ -35,7 +41,7 @@ namespace MujZavod.Admin.Controllers
             else
                 model = new Models.Race.RaceViewModel();
 
-            return PartialView();
+            return PartialView(model);
         }
 
 
@@ -56,7 +62,7 @@ namespace MujZavod.Admin.Controllers
 
 
                 race.Name = model.Name;
-                race.Description = model.Description;
+                race.Description = model.RaceDescription;
                 race.Date = model.Date;
                 race.SignToDate = model.SignToDate;
 
@@ -75,7 +81,92 @@ namespace MujZavod.Admin.Controllers
         {
             var race = RaceRepository.GetById(id);
 
-            return View(new Models.Race.RaceViewModel(race));
+            return View(new Models.Race.RaceDetailModel(race));
+        }
+
+        public ActionResult Head(int id)
+        {
+            
+            return PartialView(new Models.Race.RaceViewModel(RaceRepository.GetById(id)));
+        }
+
+        
+
+        [HttpGet]
+        public ActionResult CategoryEdit(int? id, int raceId)
+        {
+            Models.Race.RaceCategory.RaceCategoryViewModel model;
+
+            if (id.HasValue)
+                model = new Models.Race.RaceCategory.RaceCategoryViewModel(RaceCategoryRepository.GetById(id.Value));
+            else
+                model = new Models.Race.RaceCategory.RaceCategoryViewModel() { RaceId = raceId };
+
+            return PartialView("/Views/Race/Category/Edit.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult CategoryEdit(Models.Race.RaceCategory.RaceCategoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Data.Models.RaceCategory raceCategory;
+
+                if (!model.Id.HasValue)
+                {
+                    raceCategory = new Data.Models.RaceCategory();
+                    raceCategory.RaceId = model.RaceId;
+                }
+                else
+                    raceCategory = RaceCategoryRepository.GetById(model.Id.Value);
+
+
+                raceCategory.Name = model.Name;
+                raceCategory.Description = model.Description;
+                raceCategory.Start = model.Start.Value;
+                raceCategory.AgeFrom = model.AgeFrom;
+                raceCategory.AgeTo = model.AgeTo;
+
+
+
+                if (model.SelectedGenders != null)
+                {
+                    
+                    var items = raceCategory.AllowedGenders.ToList();
+                    foreach (var item in items)
+                    {
+                        if (!model.SelectedGenders.Contains(item.Id.ToString()))
+                            raceCategory.AllowedGenders.Remove(item);
+                    }
+
+                    foreach (var item in model.SelectedGenders)
+                    {
+                        if (raceCategory.AllowedGenders.Count(x => x.Id == Convert.ToInt32(item)) == 0)
+                            raceCategory.AllowedGenders.Add(EGenderRepository.GetById(Convert.ToInt32(item)));
+                    }
+                }
+                else
+                {
+                    var items = raceCategory.AllowedGenders.ToList();
+                    foreach (var item in items)
+                    {
+                        raceCategory.AllowedGenders.Remove(item);
+                    }
+                }
+
+
+
+
+
+
+                if (model.Id.HasValue)
+                    RaceCategoryRepository.Update(raceCategory, true);
+                else
+                    RaceCategoryRepository.Create(raceCategory, true);
+
+                return Content("OK");
+            }
+            return PartialView("/Views/Race/Category/Edit.cshtml", model);
         }
     }
 }

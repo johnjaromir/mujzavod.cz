@@ -10,7 +10,7 @@ namespace MujZavod.Data.Models
     {
         public Race()
         {
-            RaceRounds = new HashSet<RaceRound>();
+            
             RaceCategories = new HashSet<RaceCategory>();
         }
 
@@ -22,7 +22,7 @@ namespace MujZavod.Data.Models
         public DateTime SignToDate { get; set; }
         public string Description { get; set; }
 
-        public ICollection<RaceRound> RaceRounds { get; set; }
+        
         public ICollection<RaceCategory> RaceCategories { get; set; }
     }
 }

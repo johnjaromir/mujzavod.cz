@@ -44,8 +44,7 @@
         {
             context.EGenders.AddOrUpdate(new Models.Enums.EGender() { Id = 1, Name = "Muž" });
             context.EGenders.AddOrUpdate(new Models.Enums.EGender() { Id = 2, Name = "Žena" });
-            context.EGenders.AddOrUpdate(new Models.Enums.EGender() { Id = 3, Name = "Gender neutrality shit" });
-            context.EGenders.AddOrUpdate(new Models.Enums.EGender() { Id = 4, Name = "Apache helicopter" });
+            
 
 
             var organizer = new Models.Organizer()
@@ -58,7 +57,7 @@
 
 
             var user = CreateUserIfNotExists(context, "poradatel", "johnjaromir@gmail.com", "Jaromír", "John",
-                "test123", new[] { "Organizer" }, new DateTime(1991,04,26), 4, organizer.Id);
+                "test123", new[] { "Organizer" }, new DateTime(1991,04,26), 1, organizer.Id);
 
             
 

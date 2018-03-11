@@ -8,6 +8,10 @@ namespace MujZavod.Data.Models.Enums
 {
     public class EGender:BaseEnum
     {
-        
+        public EGender()
+        {
+            AllowedGenders = new HashSet<RaceCategory>();
+        }
+        public ICollection<RaceCategory> AllowedGenders { get; set; }
     }
 }

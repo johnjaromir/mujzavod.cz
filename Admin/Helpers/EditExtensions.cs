@@ -63,6 +63,16 @@ namespace MujZavod.Admin.Helpers
 
 
 
+        public static MvcHtmlString MzTextEditorFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
+        {
+            var id = htmlHelper.IdFor(expression);
+            string script = "<script>$('#" + id + "').summernote({height: 150});</script>";
+            return MvcHtmlString.Create(htmlHelper.TextAreaFor(expression, htmlAttributes).ToString() + script
+                + htmlHelper.ValidationMessageFor(expression, "", new { @class = "text-danger" }));
+        }
+
+
+
         public static object _mergeHtmlAttributes(object htmlAttributesObject, object defaultHtmlAttributesObject)
         {
             var concatKeys = new string[] { "@class" };

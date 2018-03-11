@@ -12,6 +12,7 @@ namespace MujZavod.Data.Models
         {
             AllowedGenders = new HashSet<Enums.EGender>();
             Racers = new HashSet<Identity.ApplicationUser>();
+            RaceRounds = new HashSet<RaceRound>();
         }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -25,5 +26,6 @@ namespace MujZavod.Data.Models
 
         public ICollection<Enums.EGender> AllowedGenders { get; set; }
         public ICollection<Identity.ApplicationUser> Racers { get; set; }
+        public ICollection<RaceRound> RaceRounds { get; set; }
     }
 }

@@ -8,8 +8,10 @@
     @Html.HiddenFor(x=>x.Id)
 
     @Html.MzEditLineFor(x => x.Name)
-    @Html.MzEditLineFor(x => x.Description)
+    
     @Html.MzEditLineFor(x => x.Date)
     @Html.MzEditLineFor(x => x.SignToDate)
 
+    @Html.LabelFor(x=>x.RaceDescription)
+    @Html.MzTextEditorFor(x=>x.RaceDescription)
 }

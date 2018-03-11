@@ -87,9 +87,9 @@
     <Compile Include="DataDbContext.cs" />
     <Compile Include="Identity\IdentityConfig.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
-    <Compile Include="Migrations\201803080022077_init.cs" />
-    <Compile Include="Migrations\201803080022077_init.Designer.cs">
-      <DependentUpon>201803080022077_init.cs</DependentUpon>
+    <Compile Include="Migrations\201803110309517_init.cs" />
+    <Compile Include="Migrations\201803110309517_init.Designer.cs">
+      <DependentUpon>201803110309517_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Organizer.cs" />
@@ -109,8 +109,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803080022077_init.resx">
-      <DependentUpon>201803080022077_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803110309517_init.resx">
+      <DependentUpon>201803110309517_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -71,6 +71,7 @@
     <Compile Include="Repository\EGenderRepository.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\OrganizerRepository.cs" />
+    <Compile Include="Repository\RaceCategoryRepository.cs" />
     <Compile Include="Repository\RaceRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace MujZavod.Code.Repository
 {
-    public class RaceRepository : BaseRepository<Race>
+    public class RaceCategoryRepository : BaseRepository<RaceCategory>
     {
-        protected override string dbSetContextName => "Races";
+        protected override string dbSetContextName => "RaceCategories";
 
         
-        public override IQueryable<Race> GetAll()
+        public override IQueryable<RaceCategory> GetAll()
         {
-            var query = base.GetAll().Include(x => x.RaceCategories);
+            var query = base.GetAll().Include(x=>x.AllowedGenders);
 
             var actUser = new ApplicationUserRepository().GetActAu();
-            query = query.Where(x => x.OrganizerId == actUser.OrganizerId);
+            query = query.Where(x => x.Race.OrganizerId == actUser.OrganizerId);
 
             return query;
         }
