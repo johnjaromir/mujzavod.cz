@@ -63,6 +63,15 @@ namespace MujZavod.Admin.Helpers
 
 
 
+        public static string ToDateTime(this DateTime? date)
+        {
+            return date.HasValue ? date.Value.ToDateTime() : string.Empty;
+        }
+
+        public static string ToDateTime(this DateTime date)
+        {
+            return date.ToString("dd.MM.yyyy HH:mm");
+        }
 
 
 
@@ -70,8 +79,6 @@ namespace MujZavod.Admin.Helpers
 
 
 
-
-        
 
     }
 }

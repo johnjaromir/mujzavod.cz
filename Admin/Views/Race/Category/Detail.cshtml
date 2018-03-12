@@ -1,27 +1,25 @@
 ﻿@model MujZavod.Admin.Models.Race.RaceCategory.RaceCategoryViewModel
 
-<div class="panel">
-    <div class="panel-heading">
+<div class="panel panel-transparent">
+    
+    <div class="panel-title">
+        @Model.Name - @Model.Start.ToDateTime()
         <a class="pull-right btn btn-info" onclick="new MujZavod.Modal().loadFromUrl('@Url.Action("CategoryEdit","Race", new { Id = Model.Id, RaceId = Model.RaceId })', function (modal) { location.reload(); });">Upravit</a>
+        <a class="pull-right btn btn-info" onclick="new MujZavod.Modal().loadFromUrl('@Url.Action("CategoryRoundEdit","Race", new { RaceCategoryId = Model.Id })', function (modal) { location.reload(); });">Přidat kolo</a>
+
     </div>
-    <div class="form-horizontal">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col-sm-6">
-                        @Html.LabelValueRowFor(x => x.Name, 4, 8)
-                        @Html.LabelValueRowFor(x => x.Start, 4, 8)
-                    </div>
-                    <div class="col-sm-6">
-                        @Html.LabelValueRowFor(x => x.AgeFrom, 4, 8)
-                        @Html.LabelValueRowFor(x => x.AgeTo, 4, 8)
-                    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.LabelFor(x => x.Description)
+                    @Html.Raw(Model.Description)
+                </div>
+                <div class="col-sm-6">
+                    @Html.MzGrid(Model.RoundGridViewModel)
                 </div>
             </div>
-            <div class="col-sm-6">
-                @Html.LabelFor(x => x.Description)
-                @Html.Raw(Model.Description)
-            </div>
         </div>
+        
     </div>
 </div>

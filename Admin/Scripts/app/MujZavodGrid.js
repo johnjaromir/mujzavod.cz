@@ -32,8 +32,19 @@ MujZavod.Grid = function (opts) {
                     "sSortAscending": ": aktivujte pro řazení sloupce vzestupně",
                     "sSortDescending": ": aktivujte pro řazení sloupce sestupně"
                 }
-            }
+            },
+
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
+                ]
         });
+
+        $('#' + opts.Id + '_wrapper .table-caption').text(opts.name);
+
         MujZavod.Grids[opts.Id] = this;
     }
 

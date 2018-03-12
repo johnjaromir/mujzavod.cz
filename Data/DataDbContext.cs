@@ -28,6 +28,8 @@ namespace MujZavod.Data
         public DbSet<Models.RaceCategory> RaceCategories { get; set; }
         public DbSet<Models.RaceRound> RaceRounds { get; set; }
         public DbSet<Models.RaceRoundUser> RaceRoundUsers { get; set; }
+        public DbSet<Models.RaceSubCategory> RaceSubCategories { get; set; }
+        public DbSet<Models.RaceCategoryUser> RaceCategoryUsers { get; set; }
 
 
         // ciselniky

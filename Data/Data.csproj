@@ -91,6 +91,10 @@
     <Compile Include="Migrations\201803110309517_init.Designer.cs">
       <DependentUpon>201803110309517_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803122157507_racecategoryusers.cs" />
+    <Compile Include="Migrations\201803122157507_racecategoryusers.Designer.cs">
+      <DependentUpon>201803122157507_racecategoryusers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Organizer.cs" />
     <Compile Include="Models\Enums\BaseEnum.cs" />
@@ -98,8 +102,10 @@
     <Compile Include="Models\Enums\EGender.cs" />
     <Compile Include="Models\Race.cs" />
     <Compile Include="Models\RaceCategory.cs" />
+    <Compile Include="Models\RaceCategoryUser.cs" />
     <Compile Include="Models\RaceRound.cs" />
     <Compile Include="Models\RaceRoundUser.cs" />
+    <Compile Include="Models\RaceSubCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +117,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803110309517_init.resx">
       <DependentUpon>201803110309517_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803122157507_racecategoryusers.resx">
+      <DependentUpon>201803122157507_racecategoryusers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

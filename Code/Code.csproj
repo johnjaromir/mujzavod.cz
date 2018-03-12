@@ -73,6 +73,7 @@
     <Compile Include="Repository\OrganizerRepository.cs" />
     <Compile Include="Repository\RaceCategoryRepository.cs" />
     <Compile Include="Repository\RaceRepository.cs" />
+    <Compile Include="Repository\RaceRoundRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj">

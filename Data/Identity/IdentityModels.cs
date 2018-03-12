@@ -34,7 +34,7 @@ namespace MujZavod.Data.Identity
         public Models.Organizer Organizer { get; set; }
         //public ICollection<Data.Models.Organizer> UserForOrganizer { get; set; }
 
-        public ICollection<Models.RaceCategory> RaceCategories { get; set; }
+        public ICollection<Models.RaceCategoryUser> RaceCategoryUsers { get; set; }
         public ICollection<Models.RaceRoundUser> RaceRounds { get; set; }
     }
 

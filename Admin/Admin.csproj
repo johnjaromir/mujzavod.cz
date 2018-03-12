@@ -217,6 +217,10 @@
     <Compile Include="Models\Organizer\OrganizerViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceCategoriesViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceCategoryViewModel.cs" />
+    <Compile Include="Models\Race\RaceCategory\Round\RoundGridRow.cs" />
+    <Compile Include="Models\Race\RaceCategory\Round\RoundGridViewModel.cs" />
+    <Compile Include="Models\Race\RaceCategory\Round\RoundViewModel.cs" />
+    <Compile Include="Models\Race\RaceCategory\SubCategory\SubCategoryViewModel.cs" />
     <Compile Include="Models\Race\RaceDetailModel.cs" />
     <Compile Include="Models\Race\RaceGridRow.cs" />
     <Compile Include="Models\Race\RaceGridViewModel.cs" />
@@ -361,6 +365,8 @@
     <Content Include="Views\Race\Category\Categories.cshtml" />
     <Content Include="Views\Race\Category\Detail.cshtml" />
     <Content Include="Views\Race\Category\Edit.cshtml" />
+    <Content Include="Views\Race\Category\SubCategory\Edit.cshtml" />
+    <Content Include="Views\Race\Category\Round\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

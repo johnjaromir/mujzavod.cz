@@ -12,15 +12,8 @@
     @Html.MzEditLineFor(x => x.Name)
 
     @Html.MzEditLineFor(x => x.Start)
-    @Html.MzEditLineFor(x => x.AgeFrom)
-    @Html.MzEditLineFor(x => x.AgeTo)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.possibleGenders, new { @class = "col-md-4 control-label" })
-        <div class="col-md-7">
-            @Html.CheckBoxListFor(x => x.SelectedGenders, Model.possibleGenders)
-        </div>
-    </div>
+ 
+    
 
     @Html.LabelFor(x => x.Description)
     @Html.MzTextEditorFor(x => x.Description)

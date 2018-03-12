@@ -19,6 +19,9 @@ namespace MujZavod.Admin.Controllers
         private Code.Repository.EGenderRepository _EGenderRepository;
         private Code.Repository.EGenderRepository EGenderRepository => _EGenderRepository ?? (_EGenderRepository = new Code.Repository.EGenderRepository());
 
+        private Code.Repository.RaceRoundRepository _RaceRoundRepository;
+        private Code.Repository.RaceRoundRepository RaceRoundRepository => _RaceRoundRepository ?? (_RaceRoundRepository = new Code.Repository.RaceRoundRepository());
+
         // GET: Race
         public ActionResult Index()
         {
@@ -124,11 +127,11 @@ namespace MujZavod.Admin.Controllers
                 raceCategory.Name = model.Name;
                 raceCategory.Description = model.Description;
                 raceCategory.Start = model.Start.Value;
-                raceCategory.AgeFrom = model.AgeFrom;
-                raceCategory.AgeTo = model.AgeTo;
+                //raceCategory.AgeFrom = model.AgeFrom;
+                //raceCategory.AgeTo = model.AgeTo;
 
 
-
+                /*
                 if (model.SelectedGenders != null)
                 {
                     
@@ -153,7 +156,7 @@ namespace MujZavod.Admin.Controllers
                         raceCategory.AllowedGenders.Remove(item);
                     }
                 }
-
+                */
 
 
 
@@ -168,5 +171,56 @@ namespace MujZavod.Admin.Controllers
             }
             return PartialView("/Views/Race/Category/Edit.cshtml", model);
         }
+
+
+
+        public ActionResult RoundGridData(int id)
+        {
+            return Json(RaceRoundRepository.GetAll().Where(x=>x.RaceCategoryId == id).ToGridData(x => new Models.Race.RaceCategory.Round.RoundGridRow(x)), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult CategoryRoundEdit(int? id, int raceCategoryId)
+        {
+            Models.Race.RaceCategory.Round.RoundViewModel model;
+
+            if (id.HasValue)
+                model = new Models.Race.RaceCategory.Round.RoundViewModel(RaceRoundRepository.GetById(id.Value));
+            else
+                model = new Models.Race.RaceCategory.Round.RoundViewModel() { RaceCategoryId = raceCategoryId };
+
+            return PartialView("/Views/Race/Category/Round/Edit.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult CategoryRoundEdit(Models.Race.RaceCategory.Round.RoundViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Data.Models.RaceRound raceRound;
+
+                if (!model.Id.HasValue)
+                {
+                    raceRound = new Data.Models.RaceRound();
+                    raceRound.RaceCategoryId = model.RaceCategoryId;
+                }
+                else
+                    raceRound = RaceRoundRepository.GetById(model.Id.Value);
+
+
+                raceRound.Name = model.Name;
+                raceRound.Distance = model.Distance;
+
+                
+                if (model.Id.HasValue)
+                    RaceRoundRepository.Update(raceRound, true);
+                else
+                    RaceRoundRepository.Create(raceRound, true);
+
+                return Content("OK");
+            }
+            return PartialView("/Views/Race/Category/Edit.cshtml", model);
+        }
+
     }
 }

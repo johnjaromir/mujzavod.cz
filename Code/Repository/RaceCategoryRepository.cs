@@ -16,7 +16,7 @@ namespace MujZavod.Code.Repository
         
         public override IQueryable<RaceCategory> GetAll()
         {
-            var query = base.GetAll().Include(x=>x.AllowedGenders);
+            var query = base.GetAll();
 
             var actUser = new ApplicationUserRepository().GetActAu();
             query = query.Where(x => x.Race.OrganizerId == actUser.OrganizerId);

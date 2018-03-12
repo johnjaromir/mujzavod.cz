@@ -1,0 +1,17 @@
+﻿@model MujZavod.Admin.Models.Race.RaceCategory.Round.RoundViewModel
+
+
+@using (Html.BeginForm("CategoryRoundEdit", "Race", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.RaceCategoryId)
+
+    @Html.MzEditLineFor(x => x.Name)
+    @Html.MzEditLineFor(x => x.Distance)
+
+    
+}
+
