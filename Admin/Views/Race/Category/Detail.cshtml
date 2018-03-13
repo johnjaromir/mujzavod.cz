@@ -11,12 +11,39 @@
     <div class="panel-body">
         <div class="form-horizontal">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     @Html.LabelFor(x => x.Description)
                     @Html.Raw(Model.Description)
                 </div>
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     @Html.MzGrid(Model.RoundGridViewModel)
+                </div>
+            </div>
+            <div class="row m-t-3">
+                <div class="col-sm-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            Podkategorie
+                            <a class="pull-right btn btn-info" onclick="new MujZavod.Modal().loadFromUrl('@Url.Action("SubCategoryEdit","Race", new {  RaceCategoryId = Model.Id })', function (modal) { location.reload(); });">Vytvořit</a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-group" id="accordionSubCategories">
+                            @foreach(var subCategory in Model.SubCategories)
+                            {
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionSubCategories" href="#collapseSubCat@(subCategory.Id)">
+                                            @subCategory.Name
+                                        </a>
+                                    </div>
+                                    <div id="collapseSubCat@(subCategory.Id)" class="panel-collapse collapse">
+                                        @Html.MzGrid(subCategory.RaceRunnersGridViewModel)
+                                    </div>
+                                </div>
+                            }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

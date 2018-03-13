@@ -24,6 +24,10 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.SubCategory
         [DisplayName("Věk do")]
         public int? AgeTo { get; set; }
 
+        public string GendersText { get; set; }
+
+        public RaceRunners.RaceRunnersGridViewModel RaceRunnersGridViewModel { get; set; }
+
         public SubCategoryViewModel()
         {
             possibleGenders = new SelectList(new DropDown.EGenderDropDownModel().items, "Value", "Text");
@@ -40,6 +44,10 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.SubCategory
                 AgeTo = raceSubCategory.AgeTo;
                 possibleGenders = new SelectList(new DropDown.EGenderDropDownModel().items, "Value", "Text");
                 SelectedGenders = raceSubCategory.AllowedGenders.Select(x => x.Id.ToString()).ToList();
+
+                GendersText = string.Join(",", raceSubCategory.AllowedGenders.Select(x => x.Name));
+
+                RaceRunnersGridViewModel = new RaceRunners.RaceRunnersGridViewModel(Id);
             }
         }
     }

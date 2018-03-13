@@ -16,7 +16,9 @@ namespace MujZavod.Code.Repository
         
         public override IQueryable<Race> GetAll()
         {
-            var query = base.GetAll().Include(x => x.RaceCategories);
+            var query = base.GetAll()
+                .Include(x => x.RaceCategories)
+                .Include(x => x.RaceCategories.Select(y => y.RaceSubCategories));
 
             var actUser = new ApplicationUserRepository().GetActAu();
             query = query.Where(x => x.OrganizerId == actUser.OrganizerId);

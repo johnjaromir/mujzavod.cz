@@ -27,13 +27,15 @@ namespace MujZavod.Admin.Models.Race.RaceCategory
         
         public Round.RoundGridViewModel RoundGridViewModel { get; set; }
 
+        public List<SubCategory.SubCategoryViewModel> SubCategories { get; set; }
+
 
         public RaceCategoryViewModel()
         {
             
         }
 
-        public RaceCategoryViewModel(Data.Models.RaceCategory raceCategory)
+        public RaceCategoryViewModel(Data.Models.RaceCategory raceCategory, bool inDetail = false)
         {
             if (raceCategory != null)
             {
@@ -45,7 +47,11 @@ namespace MujZavod.Admin.Models.Race.RaceCategory
 
                 Start = raceCategory.Start;
 
-                RoundGridViewModel = new Round.RoundGridViewModel(raceCategory.Id);
+                if (inDetail)
+                {
+                    RoundGridViewModel = new Round.RoundGridViewModel(raceCategory.Id);
+                    SubCategories = raceCategory.RaceSubCategories.Select(x => new SubCategory.SubCategoryViewModel(x)).ToList();
+                }
             }
         }
     }

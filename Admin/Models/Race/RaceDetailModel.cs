@@ -18,7 +18,7 @@ namespace MujZavod.Admin.Models.Race
                 RaceCategoriesViewModel = new RaceCategory.RaceCategoriesViewModel()
                 {
                     RaceId = race.Id,
-                    RaceCategories = race.RaceCategories.Select(x => new RaceCategory.RaceCategoryViewModel(x)).ToList()
+                    RaceCategories = race.RaceCategories.Select(x => new RaceCategory.RaceCategoryViewModel(x, true)).ToList()
                 };
             }
         }

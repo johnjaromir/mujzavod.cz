@@ -11,6 +11,7 @@ namespace MujZavod.Data.Models
         public RaceSubCategory()
         {
             RaceCategoryUsers = new HashSet<RaceCategoryUser>();
+            AllowedGenders = new HashSet<Enums.EGender>();
         }
 
         public string Name { get; set; }

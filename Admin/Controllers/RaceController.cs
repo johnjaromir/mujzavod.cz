@@ -22,6 +22,13 @@ namespace MujZavod.Admin.Controllers
         private Code.Repository.RaceRoundRepository _RaceRoundRepository;
         private Code.Repository.RaceRoundRepository RaceRoundRepository => _RaceRoundRepository ?? (_RaceRoundRepository = new Code.Repository.RaceRoundRepository());
 
+        private Code.Repository.ApplicationUserRepository _ApplicationUserRepository;
+        private Code.Repository.ApplicationUserRepository ApplicationUserRepository => _ApplicationUserRepository ?? (_ApplicationUserRepository = new Code.Repository.ApplicationUserRepository());
+
+        private Code.Repository.RaceSubCategoryRepository _RaceSubCategoryRepository;
+        private Code.Repository.RaceSubCategoryRepository RaceSubCategoryRepository => _RaceSubCategoryRepository ?? (_RaceSubCategoryRepository = new Code.Repository.RaceSubCategoryRepository());
+
+
         // GET: Race
         public ActionResult Index()
         {
@@ -127,41 +134,7 @@ namespace MujZavod.Admin.Controllers
                 raceCategory.Name = model.Name;
                 raceCategory.Description = model.Description;
                 raceCategory.Start = model.Start.Value;
-                //raceCategory.AgeFrom = model.AgeFrom;
-                //raceCategory.AgeTo = model.AgeTo;
-
-
-                /*
-                if (model.SelectedGenders != null)
-                {
-                    
-                    var items = raceCategory.AllowedGenders.ToList();
-                    foreach (var item in items)
-                    {
-                        if (!model.SelectedGenders.Contains(item.Id.ToString()))
-                            raceCategory.AllowedGenders.Remove(item);
-                    }
-
-                    foreach (var item in model.SelectedGenders)
-                    {
-                        if (raceCategory.AllowedGenders.Count(x => x.Id == Convert.ToInt32(item)) == 0)
-                            raceCategory.AllowedGenders.Add(EGenderRepository.GetById(Convert.ToInt32(item)));
-                    }
-                }
-                else
-                {
-                    var items = raceCategory.AllowedGenders.ToList();
-                    foreach (var item in items)
-                    {
-                        raceCategory.AllowedGenders.Remove(item);
-                    }
-                }
-                */
-
-
-
-
-
+                
                 if (model.Id.HasValue)
                     RaceCategoryRepository.Update(raceCategory, true);
                 else
@@ -221,6 +194,91 @@ namespace MujZavod.Admin.Controllers
             }
             return PartialView("/Views/Race/Category/Edit.cshtml", model);
         }
+
+
+        public ActionResult RaceRunnersGridData(int raceSubCategoryId)
+        {
+            return Json(ApplicationUserRepository.GetAll().Where(x => x.RaceCategoryUsers.Count(y=>y.RaceSubCategoryId == raceSubCategoryId) > 0).ToGridData(x => new Models.Race.RaceCategory.RaceRunners.RaceRunnersGridRow(x)), JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public ActionResult SubCategoryEdit(int? id, int raceCategoryId)
+        {
+            Models.Race.RaceCategory.SubCategory.SubCategoryViewModel model;
+
+            if (id.HasValue)
+                model = new Models.Race.RaceCategory.SubCategory.SubCategoryViewModel(RaceSubCategoryRepository.GetById(id.Value));
+            else
+                model = new Models.Race.RaceCategory.SubCategory.SubCategoryViewModel() { RaceCategoryId = raceCategoryId };
+
+            return PartialView("/Views/Race/Category/SubCategory/Edit.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult SubCategoryEdit(Models.Race.RaceCategory.SubCategory.SubCategoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Data.Models.RaceSubCategory raceSubCategory;
+
+                if (!model.Id.HasValue)
+                {
+                    raceSubCategory = new Data.Models.RaceSubCategory();
+                    raceSubCategory.RaceCategoryId = model.RaceCategoryId;
+                }
+                else
+                    raceSubCategory = RaceSubCategoryRepository.GetById(model.Id.Value);
+
+
+                raceSubCategory.Name = model.Name;
+
+                raceSubCategory.AgeFrom = model.AgeFrom;
+                raceSubCategory.AgeTo = model.AgeTo;
+
+
+                
+                if (model.SelectedGenders != null)
+                {
+                    
+                    var items = raceSubCategory.AllowedGenders.ToList();
+                    foreach (var item in items)
+                    {
+                        if (!model.SelectedGenders.Contains(item.Id.ToString()))
+                            raceSubCategory.AllowedGenders.Remove(item);
+                    }
+
+                    foreach (var item in model.SelectedGenders)
+                    {
+                        if (raceSubCategory.AllowedGenders.Count(x => x.Id == Convert.ToInt32(item)) == 0)
+                            raceSubCategory.AllowedGenders.Add(EGenderRepository.GetById(Convert.ToInt32(item)));
+                    }
+                }
+                else
+                {
+                    var items = raceSubCategory.AllowedGenders.ToList();
+                    foreach (var item in items)
+                    {
+                        raceSubCategory.AllowedGenders.Remove(item);
+                    }
+                }
+                
+
+
+
+
+
+                if (model.Id.HasValue)
+                    RaceSubCategoryRepository.Update(raceSubCategory, true);
+                else
+                    RaceSubCategoryRepository.Create(raceSubCategory, true);
+
+                return Content("OK");
+            }
+            return PartialView("/Views/Race/Category/SubCategory/Edit.cshtml", model);
+        }
+
+
 
     }
 }
