@@ -9,12 +9,12 @@ namespace MujZavod.Data.Models
     public class RaceCategoryUser:BaseEntity
     {
         public string ApplicationUserId { get; set; }
-        public Identity.ApplicationUser ApplicationUser { get; set; }
+        public virtual Identity.ApplicationUser ApplicationUser { get; set; }
 
         public int RaceCategoryId { get; set; }
-        public RaceCategory RaceCategory { get; set; }
+        public virtual RaceCategory RaceCategory { get; set; }
 
         public int? RaceSubCategoryId { get; set; }
-        public RaceSubCategory RaceSubCategory { get; set; }
+        public virtual RaceSubCategory RaceSubCategory { get; set; }
     }
 }

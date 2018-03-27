@@ -19,5 +19,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.Round
         public string Name => "Kola závodu";
 
         public string Url => "/Race/RoundGridData/" + raceCategoryId;
+
+        public string addUrl => "";
     }
 }

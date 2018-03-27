@@ -14,5 +14,7 @@ namespace MujZavod.Admin.Models.Race
         public string Name => "Seznam závodů";
 
         public string Url => "/Race/GridData";
+
+        public string addUrl => "";
     }
 }

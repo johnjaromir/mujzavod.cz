@@ -7,18 +7,18 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
 {
     public class RaceRunnersGridRow : Helpers.Grid.IGridRow
     {
-        readonly MujZavod.Data.Identity.ApplicationUser applicationUser;
+        readonly MujZavod.Data.Models.RaceCategoryUser raceCategoryUser;
 
-        public RaceRunnersGridRow(MujZavod.Data.Identity.ApplicationUser applicationUser)
+        public RaceRunnersGridRow(MujZavod.Data.Models.RaceCategoryUser raceCategoryUser)
         {
-            this.applicationUser = applicationUser;
+            this.raceCategoryUser = raceCategoryUser;
         }
 
-        public string Id => applicationUser.Id;
-        public string FirstName => applicationUser.FirstName;
-        public string LastName => applicationUser.LastName;
+        public string Id => raceCategoryUser.ApplicationUser.Id;
+        public string FirstName => raceCategoryUser.ApplicationUser.FirstName;
+        public string LastName => raceCategoryUser.ApplicationUser.LastName;
 
-        public string Gender => applicationUser.EGender.Name;
+        public string Gender => raceCategoryUser.ApplicationUser.EGender.Name;
 
         public string Actions
         {
@@ -26,7 +26,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
             {
                 string ret = "";
 
-                ret += "<a class=\"pull-right btn btn-info\" onclick=\"new MujZavod.Modal().loadFromUrl('/Race/SubCategoryEdit?id=" + Id + "', function (modal) { location.reload(); });\">Upravit</a>";
+                ret += "<a class=\"pull-right btn btn-info\" onclick=\"new MujZavod.Modal().loadFromUrl('/Race/SubCategoryUserEdit?id=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_"+ raceCategoryUser.RaceCategoryId+ "_"+ raceCategoryUser .RaceSubCategoryId+ "'].refresh(); modal.close(); });\">Upravit</a>";
 
                 return ret;
             }

@@ -11,7 +11,9 @@ namespace MujZavod.Data.Models.Enums
         public EGender()
         {
             RaceSubCategories = new HashSet<RaceSubCategory>();
+            ApplicationUsers = new HashSet<Identity.ApplicationUser>();
         }
         public ICollection<RaceSubCategory> RaceSubCategories { get; set; }
+        public ICollection<Identity.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

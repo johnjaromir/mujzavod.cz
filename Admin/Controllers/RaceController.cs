@@ -28,6 +28,8 @@ namespace MujZavod.Admin.Controllers
         private Code.Repository.RaceSubCategoryRepository _RaceSubCategoryRepository;
         private Code.Repository.RaceSubCategoryRepository RaceSubCategoryRepository => _RaceSubCategoryRepository ?? (_RaceSubCategoryRepository = new Code.Repository.RaceSubCategoryRepository());
 
+        private Code.Repository.RaceCategoryUsersRepository _RaceCategoryUsersRepository;
+        private Code.Repository.RaceCategoryUsersRepository RaceCategoryUsersRepository => _RaceCategoryUsersRepository ?? (_RaceCategoryUsersRepository = new Code.Repository.RaceCategoryUsersRepository());
 
         // GET: Race
         public ActionResult Index()
@@ -196,9 +198,11 @@ namespace MujZavod.Admin.Controllers
         }
 
 
-        public ActionResult RaceRunnersGridData(int raceSubCategoryId)
+        public ActionResult RaceRunnersGridData(int raceCategoryId, int? raceSubCategoryId)
         {
-            return Json(ApplicationUserRepository.GetAll().Where(x => x.RaceCategoryUsers.Count(y=>y.RaceSubCategoryId == raceSubCategoryId) > 0).ToGridData(x => new Models.Race.RaceCategory.RaceRunners.RaceRunnersGridRow(x)), JsonRequestBehavior.AllowGet);
+            return Json(RaceCategoryUsersRepository.getUsers(raceCategoryId, raceSubCategoryId)
+                .ToGridData(x => new Models.Race.RaceCategory.RaceRunners.RaceRunnersGridRow(x)),
+                JsonRequestBehavior.AllowGet);
         }
 
 
@@ -279,6 +283,58 @@ namespace MujZavod.Admin.Controllers
         }
 
 
+
+        [HttpGet]
+        public ActionResult SubCategoryUserEdit(string id, int? raceCategoryId, int? raceSubCategoryId)
+        {
+            Models.User.NotRegistered.NotRegisteredViewModel model;
+            if (!string.IsNullOrWhiteSpace(id))
+                model = new Models.User.NotRegistered.NotRegisteredViewModel(ApplicationUserRepository.GetById(id));
+            else
+                model = new Models.User.NotRegistered.NotRegisteredViewModel() { RaceCategoryId = raceCategoryId, RaceSubCategoryId = raceSubCategoryId };
+            return PartialView("/Views/Race/Category/SubCategory/EditUser.cshtml", model);
+        }
+
+        public ActionResult SubCategoryUserEdit(Models.User.NotRegistered.NotRegisteredViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Data.Identity.ApplicationUser au;
+                if (!string.IsNullOrWhiteSpace(model.Id))
+                {
+                    au = ApplicationUserRepository.GetById(model.Id);
+                }
+                else
+                {
+                    au = new Data.Identity.ApplicationUser();
+                    
+                }
+
+                au.FirstName = model.FirstName;
+                au.LastName = model.LastName;
+                au.EGenderId = model.GenderId;
+                au.BirthDate = model.BirthDate.Value;
+
+                if (!string.IsNullOrWhiteSpace(model.Id))
+                {
+                    ApplicationUserRepository.Update(au, true);
+                }
+                else
+                {
+                    au.UserName = Guid.NewGuid().ToString();
+                    ApplicationUserRepository.Create(au, false);
+                    Data.Models.RaceCategoryUser raceCategoryUser = new Data.Models.RaceCategoryUser()
+                    {
+                        ApplicationUserId = au.Id,
+                        RaceCategoryId = model.RaceCategoryId.Value,
+                        RaceSubCategoryId = model.RaceSubCategoryId
+                    };
+                    RaceCategoryUsersRepository.Create(raceCategoryUser, true);
+                }
+                return Content("OK");
+            }
+            return PartialView("/Views/Race/Category/SubCategory/EditUser.cshtml", model);
+        }
 
     }
 }

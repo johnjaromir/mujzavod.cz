@@ -14,5 +14,10 @@ namespace MujZavod.Admin.Helpers.Grid
         string Url { get; }
 
         // todo, radkovani etc?
+
+        // url pro pridani
+        string addUrl { get; }
     }
+
+    
 }

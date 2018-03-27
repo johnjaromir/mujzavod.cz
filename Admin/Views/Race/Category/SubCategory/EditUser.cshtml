@@ -1,0 +1,29 @@
+﻿@model MujZavod.Admin.Models.User.NotRegistered.NotRegisteredViewModel
+
+
+@using (Html.BeginForm("SubCategoryUserEdit", "Race", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <span data-mz-modal-title="">@(string.IsNullOrWhiteSpace(Model.Id)?"Přidat závodníka":"Upravit závodníka")</span>
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.RaceCategoryId)
+    @Html.HiddenFor(x => x.RaceSubCategoryId)
+
+    @Html.MzEditLineFor(x => x.FirstName)
+
+    @Html.MzEditLineFor(x => x.LastName)
+    @Html.MzEditLineFor(x => x.BirthDate)
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.GenderId, new { @class = "col-sm-4 control-label" })
+        <div class="col-sm-8">
+            @Html.MzDropDownFor(m => m.GenderId, new MujZavod.Admin.Models.DropDown.EGenderDropDownModel(), "Pohlaví", new { @class = "form-control" })
+        </div>
+    </div>
+
+
+}
+
+

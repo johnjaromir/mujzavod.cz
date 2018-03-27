@@ -40,15 +40,31 @@ MujZavod.Grid = function (opts) {
                     "visible": false,
                     "searchable": false
                 }
-                ]
+            ],
+            //"sDom": '<"H"lfr>t<"F"<"testbutton">ip>'
         });
 
         $('#' + opts.Id + '_wrapper .table-caption').text(opts.name);
+        
+        
+
+        if (opts.addUrl != '') {
+            var $btnAdd = $('<button class="btn btn-sm btn-info pull-left "><span class="btn-label-icon left fa fa-plus"></span>Přidat</button>');
+
+            var that = this;
+            $btnAdd.on('click', function () {
+                new MujZavod.Modal().loadFromUrl(opts.addUrl, function (modal) {
+                    that.refresh();
+                    modal.close();
+                });
+            });
+            $('#' + opts.Id + '_wrapper .table-header .DT-lf-right').append($btnAdd);
+        }
 
         MujZavod.Grids[opts.Id] = this;
     }
 
-    this.refresh = function (gridId) {
+    this.refresh = function () {
         this.table.ajax.reload();
     }
 

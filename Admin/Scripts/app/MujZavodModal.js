@@ -78,7 +78,12 @@ MujZavod.Modal = function (size) {
 
     this.parseData = function (data) {
         this.setBody(data);
-        //this.setTitle(data.find('[data-modal-title]'));
+
+        var title = $(data).find('[data-mz-modal-title]');
+        if (title != null) {
+            this._title.append(title);
+            this._body.find('[data-mz-modal-title]').remove();
+        }
     }
 
     this.submit = function () {

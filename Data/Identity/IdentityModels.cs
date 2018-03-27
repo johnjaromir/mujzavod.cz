@@ -20,13 +20,19 @@ namespace MujZavod.Data.Identity
             return userIdentity;
         }
 
+        public ApplicationUser():base()
+        {
+            RaceCategoryUsers = new HashSet<Data.Models.RaceCategoryUser>();
+            RaceRounds = new HashSet<Models.RaceRoundUser>();
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
         public DateTime BirthDate { get; set; }
         
         public int EGenderId { get; set; }
-        public Models.Enums.EGender EGender { get; set; }
+        public virtual Models.Enums.EGender EGender { get; set; }
 
         public string ReadableName => $"{FirstName} {LastName}";
 
@@ -34,8 +40,8 @@ namespace MujZavod.Data.Identity
         public Models.Organizer Organizer { get; set; }
         //public ICollection<Data.Models.Organizer> UserForOrganizer { get; set; }
 
-        public ICollection<Models.RaceCategoryUser> RaceCategoryUsers { get; set; }
-        public ICollection<Models.RaceRoundUser> RaceRounds { get; set; }
+        public virtual ICollection<Models.RaceCategoryUser> RaceCategoryUsers { get; set; }
+        public virtual ICollection<Models.RaceRoundUser> RaceRounds { get; set; }
     }
 
     public class ApplicationRole : IdentityRole

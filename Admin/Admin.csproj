@@ -208,6 +208,7 @@
     <Compile Include="Helpers\Grid\IGridRow.cs" />
     <Compile Include="Helpers\Grid\GridHelper.cs" />
     <Compile Include="Helpers\Grid\IGridViewModel.cs" />
+    <Compile Include="Helpers\Button.cs" />
     <Compile Include="Helpers\ViewExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DropDown\EGenderDropDownModel.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Models\Race\RaceGridRow.cs" />
     <Compile Include="Models\Race\RaceGridViewModel.cs" />
     <Compile Include="Models\Race\RaceViewModel.cs" />
+    <Compile Include="Models\User\NotRegistered\NotRegisteredViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\ControllerActionNames.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -369,6 +371,7 @@
     <Content Include="Views\Race\Category\Edit.cshtml" />
     <Content Include="Views\Race\Category\SubCategory\Edit.cshtml" />
     <Content Include="Views\Race\Category\Round\Edit.cshtml" />
+    <Content Include="Views\Race\Category\SubCategory\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

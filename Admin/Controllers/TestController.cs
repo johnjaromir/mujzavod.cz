@@ -14,5 +14,11 @@ namespace MujZavod.Admin.Controllers
             
             return Content(Code.MailTools.Core.Instance.sendHTMLMail("johnjaromir@gmail.com", "test", "teeest").ToString());
         }
+
+        public ActionResult test()
+        {
+            var xx = new Code.Repository.RaceCategoryUsersRepository().GetAll().Where(x=>x.RaceCategoryId == 3).FirstOrDefault();
+            return Content("sd");
+        }
     }
 }

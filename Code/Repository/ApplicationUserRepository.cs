@@ -34,14 +34,7 @@ namespace MujZavod.Code.Repository
             return GetById(System.Web.HttpContext.Current.User.Identity.GetUserId());
         }
 
-        /// <summary>
-        /// Nepoužívat !!!
-        /// </summary>
-        /// <param name="entity"></param>
-        public override void Create(ApplicationUser entity,bool saveChanges)
-        {
-            throw new Exception("Nepoužívat");
-        }
+        
 
         public void Create(ApplicationUser entity, string[] roles)
         {
