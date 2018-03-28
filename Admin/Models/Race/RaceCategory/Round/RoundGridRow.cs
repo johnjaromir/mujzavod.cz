@@ -31,7 +31,14 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.Round
             {
                 string ret = string.Empty;
 
-                ret += $"<a href='#' onclick=\"new MujZavod.Modal().loadFromUrl('/Race/CategoryRoundEdit/"+Id+"?RaceCategoryId="+raceRound.RaceCategoryId+"', function (modal) { location.reload(); });\" class='btn btn-default' >Upravit</a>";
+                ret += new Helpers.MzButton()
+                {
+                     cssClass = "pull-right",
+                      innerHtml = "Upravit",
+                       mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
+                        js = "new MujZavod.Modal().loadFromUrl('/Race/CategoryRoundEdit/" + Id + "?RaceCategoryId=" + raceRound.RaceCategoryId + "', function (modal) { modal.close(); MujZavod.Grids['RoundGrid_"+raceRound.RaceCategoryId+"'].refresh() });"
+                };
+                //ret += $"<a href='#' onclick=\"new MujZavod.Modal().loadFromUrl('/Race/CategoryRoundEdit/"+Id+"?RaceCategoryId="+raceRound.RaceCategoryId+"', function (modal) { location.reload(); });\" class='btn btn-default' >Upravit</a>";
 
                 return ret;
             }

@@ -12,7 +12,8 @@
                     <li class="@(category.Id == Model.RaceCategories[0].Id ? "active" : "")"><a data-toggle="tab" href="#category-tab-@(category.Id)">@category.Name</a></li>
                     
                 }
-                <li><a class="pull-right btn btn-info" onclick="createRaceCategory();">Vytvořit</a></li>
+                @*<li><a class="pull-right btn btn-info" onclick="createRaceCategory();">Vytvořit</a></li>*@
+                <li>@Html.MzButton("Vytvořit kategorii", MzButton.MzButtonType.ADD, new { onclick= "createRaceCategory();" }, "btn-sm")</li>
             </ul>
             
         </div>

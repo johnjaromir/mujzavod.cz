@@ -1,17 +1,18 @@
 ﻿@model MujZavod.Admin.Models.Race.RaceViewModel
 
-@using (Html.BeginForm("Edit", "Race", FormMethod.Post, new { @class="form-horizontal", role = "form" }))
+@using (Html.BeginForm("Edit", "Race", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    <span data-mz-modal-title="">@(Model.Id.HasValue ? "Úprava závodu" : "Vytvoření závodu")</span>
 
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
-    @Html.HiddenFor(x=>x.Id)
+    @Html.HiddenFor(x => x.Id)
 
     @Html.MzEditLineFor(x => x.Name)
-    
+
     @Html.MzEditLineFor(x => x.Date)
     @Html.MzEditLineFor(x => x.SignToDate)
 
-    @Html.LabelFor(x=>x.RaceDescription)
-    @Html.MzTextEditorFor(x=>x.RaceDescription)
+    @Html.LabelFor(x => x.RaceDescription)
+    @Html.MzTextEditorFor(x => x.RaceDescription)
 }

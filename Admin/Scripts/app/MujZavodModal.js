@@ -81,6 +81,7 @@ MujZavod.Modal = function (size) {
 
         var title = $(data).find('[data-mz-modal-title]');
         if (title != null) {
+            this._title.html('');
             this._title.append(title);
             this._body.find('[data-mz-modal-title]').remove();
         }
@@ -97,7 +98,7 @@ MujZavod.Modal = function (size) {
                         that._callBack(that);
                     }
                 } else {
-                    that.setBody(data);
+                    that.parseData(data);
                 }
 
             });

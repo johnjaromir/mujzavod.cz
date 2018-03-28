@@ -20,6 +20,6 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.Round
 
         public string Url => "/Race/RoundGridData/" + raceCategoryId;
 
-        public string addUrl => "";
+        public string addUrl => "/Race/CategoryRoundEdit?RaceCategoryId=" + raceCategoryId;
     }
 }

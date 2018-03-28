@@ -75,8 +75,8 @@ namespace MujZavod.Admin.Controllers
 
                 race.Name = model.Name;
                 race.Description = model.RaceDescription;
-                race.Date = model.Date;
-                race.SignToDate = model.SignToDate;
+                race.Date = model.Date.Value;
+                race.SignToDate = model.SignToDate.Value;
 
                 if (model.Id.HasValue)
                     RaceRepository.Update(race, true);
@@ -194,7 +194,7 @@ namespace MujZavod.Admin.Controllers
 
                 return Content("OK");
             }
-            return PartialView("/Views/Race/Category/Edit.cshtml", model);
+            return PartialView("/Views/Race/Category/Round/Edit.cshtml", model);
         }
 
 

@@ -3,7 +3,7 @@
 
 @using (Html.BeginForm("SubCategoryEdit", "Race", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    
+    <span data-mz-modal-title="">@(Model.Id.HasValue ? "Úprava podkategorie" : "Vytvoření podkategorie")</span>
 
     @Html.ValidationSummary("", new { @class = "text-danger" })
 

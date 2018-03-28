@@ -3,6 +3,7 @@
 
 @using (Html.BeginForm("CategoryEdit", "Race", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    <span data-mz-modal-title="">@(Model.Id.HasValue ? "Úprava kategorie" : "Vytvoření kategorie")</span>
 
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
@@ -12,8 +13,8 @@
     @Html.MzEditLineFor(x => x.Name)
 
     @Html.MzEditLineFor(x => x.Start)
- 
-    
+
+
 
     @Html.LabelFor(x => x.Description)
     @Html.MzTextEditorFor(x => x.Description)

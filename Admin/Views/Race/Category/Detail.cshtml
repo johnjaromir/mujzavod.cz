@@ -2,18 +2,34 @@
 
 <div class="panel panel-transparent">
     
-    <div class="panel-title">
-        @Model.Name - @Model.Start.ToDateTime()
-        <a class="pull-right btn btn-info" onclick="new MujZavod.Modal().loadFromUrl('@Url.Action("CategoryEdit","Race", new { Id = Model.Id, RaceId = Model.RaceId })', function (modal) { location.reload(); });">Upravit</a>
-        <a class="pull-right btn btn-info" onclick="new MujZavod.Modal().loadFromUrl('@Url.Action("CategoryRoundEdit","Race", new { RaceCategoryId = Model.Id })', function (modal) { location.reload(); });">Přidat kolo</a>
-
-    </div>
+    
     <div class="panel-body">
         <div class="form-horizontal">
             <div class="row">
                 <div class="col-md-6">
-                    @Html.LabelFor(x => x.Description)
-                    @Html.Raw(Model.Description)
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Informace
+                                @Html.MzButton("Upravit", MzButton.MzButtonType.EDIT,
+                                    new { onclick= "new MujZavod.Modal().loadFromUrl('"+Url.Action("CategoryEdit","Race", new { Id = Model.Id, RaceId = Model.RaceId })+"', function (modal) { location.reload(); });" },
+                                    "pull-right")
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    @Html.LabelValueRowFor(x=>x.Name, 4, 8)
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.LabelValueRowFor(x=>x.Start, 4, 8)
+                                </div>
+                            </div>
+                            @Html.LabelFor(x => x.Description)
+                            @Html.Raw(Model.Description)
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col-md-6">
                     @Html.MzGrid(Model.RoundGridViewModel)
@@ -34,7 +50,8 @@
                                         <a data-toggle="tab" href="#subcategory-tab-@(subCategory.RaceCategoryId)-@(subCategory.Id)">@subCategory.Name</a>
                                     </li>
                                 }
-                                <li><a class="pull-right btn btn-info" onclick="new MujZavod.Modal().loadFromUrl('@Url.Action("SubCategoryEdit","Race", new {  RaceCategoryId = Model.Id })', function (modal) { location.reload(); });">Vytvořit</a></li>
+                                @*<li><a class="pull-right btn btn-info" onclick="new MujZavod.Modal().loadFromUrl('@Url.Action("SubCategoryEdit","Race", new {  RaceCategoryId = Model.Id })', function (modal) { location.reload(); });">Vytvořit</a></li>*@
+                                <li>@Html.MzButton("Vytvořit", MzButton.MzButtonType.ADD, new { onclick= "new MujZavod.Modal().loadFromUrl('"+Url.Action("SubCategoryEdit","Race", new {  RaceCategoryId = Model.Id })+"', function (modal) { location.reload(); });" }, "btn-sm")</li>
                             </ul>
                             
                         </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -13,6 +14,8 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.Round
         [DisplayName("Název")]
         public string Name { get; set; }
         [DisplayName("Vzdálenost")]
+        
+        
         public double Distance { get; set; }
 
         public RoundViewModel()

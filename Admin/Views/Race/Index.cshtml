@@ -5,7 +5,8 @@
 }
 
 @section HeaderButtons{
-<button type="button" class="btn btn-primary pull-right" onclick="createRace();">Vytvořit</button>
+@Html.MzButton("Vytvořit závod", MzButton.MzButtonType.ADD, new { onclick="createRace();" }, "pull-right")
+@*<button type="button" class="btn btn-primary pull-right" onclick="createRace();">Vytvořit</button>*@
 }
 <div>
     @Html.MzGrid(new MujZavod.Admin.Models.Race.RaceGridViewModel())

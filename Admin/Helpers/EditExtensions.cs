@@ -57,6 +57,8 @@ namespace MujZavod.Admin.Helpers
 
             if (t == typeof(DateTime) || t == typeof(DateTime?))
                 return MzDatePickerFor(htmlHelper, expression, htmlAttributes);
+            /*else if (t == typeof(double) || t == typeof(double?))
+                return MzTextBoxFor(htmlHelper, expression, new { type = "number" });*/
             else
                 return MzTextBoxFor(htmlHelper, expression, htmlAttributes);
         }

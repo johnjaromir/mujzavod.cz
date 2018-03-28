@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,11 +12,14 @@ namespace MujZavod.Admin.Models.Race
     {
         public int? Id { get; set; }
         [DisplayName("Název")]
+        [Required]
         public string Name { get; set; }
+        [Required]
         [DisplayName("Datum")]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         [DisplayName("Registrace do")]
-        public DateTime SignToDate { get; set; }
+        [Required]
+        public DateTime? SignToDate { get; set; }
         [DisplayName("Popis")]
         [AllowHtml]
         public string RaceDescription { get; set; }
