@@ -26,5 +26,9 @@ namespace MujZavod.Code.Repository
             return query;
         }
         
+        public Race getRaceByKey(string raceKey)
+        {
+            return GetAll().Where(x => x.RaceKey == raceKey).FirstOrDefault();
+        }
     }
 }

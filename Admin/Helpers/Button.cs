@@ -42,7 +42,7 @@ namespace MujZavod.Admin.Helpers
 
     public class MzButton
     {
-        public enum MzButtonType { ADD, EDIT, DELETE, DETAIL }
+        public enum MzButtonType { ADD, EDIT, DELETE, DETAIL, DEFAULT }
 
         public string innerHtml;
         public string js;
@@ -50,6 +50,8 @@ namespace MujZavod.Admin.Helpers
         public MzButtonType mzButtonType;
         public string cssClass;
         public IDictionary<string, object> htmlAttributes;
+
+        public string iconClass;
 
         public override string ToString()
         {
@@ -89,7 +91,13 @@ namespace MujZavod.Admin.Helpers
                     icon.AddCssClass("fa-sticky-note-o");
                     builder.AddCssClass("btn-default");
                     break;
+                case MzButtonType.DEFAULT:
+                    builder.AddCssClass("btn-default");
+                    break;
             }
+
+            if (!string.IsNullOrWhiteSpace(iconClass))
+                icon.AddCssClass(iconClass);
 
             builder.InnerHtml = icon.ToString() + innerHtml;
 

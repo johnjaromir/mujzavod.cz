@@ -1,0 +1,8 @@
+﻿@model MujZavod.Admin.Models.RaceRegistration.RaceRegistrationViewModel
+@{
+    ViewBag.Title = "IframeButton";
+    Layout = "~/Views/Shared/_LayoutIframe.cshtml";
+}
+
+
+@Html.MzButton("Přihlásit na závod", MzButton.MzButtonType.DEFAULT, new { onclick = "new MujZavod.Modal();" })

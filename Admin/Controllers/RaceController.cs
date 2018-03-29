@@ -336,5 +336,21 @@ namespace MujZavod.Admin.Controllers
             return PartialView("/Views/Race/Category/SubCategory/EditUser.cshtml", model);
         }
 
+
+
+        public ActionResult Publish(int raceId)
+        {
+            var race = RaceRepository.GetById(raceId);
+
+            if (race.OrganizerId == actUser.OrganizerId)
+            {
+                race.PublishDate = DateTime.Now;
+                race.RaceKey = Guid.NewGuid().ToString().Replace("-", "");
+                RaceRepository.Update(race, true);
+            }
+
+            return Content("OK");
+        }
+
     }
 }

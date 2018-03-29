@@ -95,6 +95,14 @@
     <Compile Include="Migrations\201803122157507_racecategoryusers.Designer.cs">
       <DependentUpon>201803122157507_racecategoryusers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803281949107_numbers.cs" />
+    <Compile Include="Migrations\201803281949107_numbers.Designer.cs">
+      <DependentUpon>201803281949107_numbers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803282258575_racepublish.cs" />
+    <Compile Include="Migrations\201803282258575_racepublish.Designer.cs">
+      <DependentUpon>201803282258575_racepublish.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Organizer.cs" />
     <Compile Include="Models\Enums\BaseEnum.cs" />
@@ -120,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803122157507_racecategoryusers.resx">
       <DependentUpon>201803122157507_racecategoryusers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803281949107_numbers.resx">
+      <DependentUpon>201803281949107_numbers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803282258575_racepublish.resx">
+      <DependentUpon>201803282258575_racepublish.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

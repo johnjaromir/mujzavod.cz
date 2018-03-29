@@ -22,6 +22,9 @@ namespace MujZavod.Data.Models
         public DateTime SignToDate { get; set; }
         public string Description { get; set; }
 
+        public string RaceKey { get; set; }
+        public DateTime? PublishDate { get; set; }
+
         
         public ICollection<RaceCategory> RaceCategories { get; set; }
     }

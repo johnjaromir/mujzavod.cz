@@ -43,7 +43,18 @@ namespace MujZavod.Admin.Models.Race
         }
 
         [DisplayName("Stav")]
-        public string State => "Rozpracováno";
+        public string State
+        {
+            get
+            {
+                if (!race.PublishDate.HasValue)
+                    return "Rozpracováno";
+                else if (race.Date < DateTime.Now)
+                    return "Publikováno";
+                else
+                    return "Proběhlý";
+            }
+        }
 
         [DisplayName("Počet závodníků")]
         public string RunnersCount => race.RaceCategories.Sum(x => x.RaceCategoryUsers.Sum(y => y.Id)).ToString();

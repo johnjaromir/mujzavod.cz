@@ -12,7 +12,7 @@ namespace MujZavod.Admin.Controllers
     [Authorize(Roles = "Organizer")]
     public class BaseController : Controller
     {
-        protected Data.Identity.ApplicationUser CurrentUser;
+        
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             ResourceManager rm = ControllerActionNames.ResourceManager;
@@ -26,7 +26,7 @@ namespace MujZavod.Admin.Controllers
 
 
             //Nastavení aplikace*******************************************************
-            ViewBag.AppName = "Sonus Admin";
+            ViewBag.AppName = "MujZavod Admin";
             ViewBag.AppLogo = "/Content/img/header-logo.png";
             ViewBag.AppLogoSm = "/Content/img/header-logo-sm.png";
             //*************************************************************************

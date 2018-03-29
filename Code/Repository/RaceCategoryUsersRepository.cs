@@ -22,7 +22,7 @@ namespace MujZavod.Code.Repository
         public IEnumerable<RaceCategoryUser> getUsers(int categoryId, int? subCategoryId)
         {
             return GetAll(x => x.RaceCategoryId == categoryId && x.RaceSubCategoryId == subCategoryId)
-                .Include(x=>x.ApplicationUser).Include(x=>x.ApplicationUser.EGender).AsEnumerable();
+                .Include(x=>x.ApplicationUser).Include(x=>x.ApplicationUser.EGender).Include(x=>x.ApplicationUser.Roles).AsEnumerable();
         }
             
     }

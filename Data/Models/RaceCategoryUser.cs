@@ -16,5 +16,8 @@ namespace MujZavod.Data.Models
 
         public int? RaceSubCategoryId { get; set; }
         public virtual RaceSubCategory RaceSubCategory { get; set; }
+
+        public int? RunnerNumber { get; set; }
+        public bool IsPaid { get; set; }
     }
 }

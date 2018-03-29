@@ -1,4 +1,4 @@
-﻿@model MujZavod.Admin.Models.User.NotRegistered.NotRegisteredViewModel
+﻿@model MujZavod.Admin.Models.Race.RaceCategory.RaceRunners.RaceRunnerEditViewModel
 
 
 @using (Html.BeginForm("SubCategoryUserEdit", "Race", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -11,6 +11,7 @@
     @Html.HiddenFor(x => x.RaceCategoryId)
     @Html.HiddenFor(x => x.RaceSubCategoryId)
 
+    @Html.MzEditFor(x=>x.RunnerNumber)
     @Html.MzEditLineFor(x => x.FirstName)
 
     @Html.MzEditLineFor(x => x.LastName)

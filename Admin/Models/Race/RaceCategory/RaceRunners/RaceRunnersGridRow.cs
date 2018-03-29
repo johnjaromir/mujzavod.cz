@@ -16,6 +16,9 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
         }
 
         public string Id => raceCategoryUser.ApplicationUser.Id;
+
+        [DisplayName("Číslo běžce")]
+        public string RunnerNumber => raceCategoryUser.RunnerNumber.ToString();
         [DisplayName("Jméno")]
         public string FirstName => raceCategoryUser.ApplicationUser.FirstName;
         [DisplayName("Příjmení")]
@@ -24,6 +27,8 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
         public string Gender => raceCategoryUser.ApplicationUser.EGender.Name;
         [DisplayName("Datum narození")]
         public string BirthDate => raceCategoryUser.ApplicationUser.BirthDate.ToShortDateString();
+        [DisplayName("Zaplaceno")]
+        public bool IsPaid => raceCategoryUser.IsPaid;
 
         public string Actions
         {
@@ -31,15 +36,18 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
             {
                 string ret = "";
 
-                ret += new Helpers.MzButton()
-                {
-                    innerHtml = "Upravit",
-                    cssClass = "pull-right",
-                    mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
-                    js = "new MujZavod.Modal().loadFromUrl('/Race/SubCategoryUserEdit?id=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "_" + raceCategoryUser.RaceSubCategoryId + "'].refresh(); modal.close(); });"
-                };
-                //ret += "<a class=\"pull-right btn btn-info\" onclick=\"new MujZavod.Modal().loadFromUrl('/Race/SubCategoryUserEdit?id=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_"+ raceCategoryUser.RaceCategoryId+ "_"+ raceCategoryUser .RaceSubCategoryId+ "'].refresh(); modal.close(); });\">Upravit</a>";
 
+                // editujeme jen neregistrovany
+                if (raceCategoryUser.ApplicationUser.Roles?.Count() == 0)
+                {
+                    ret += new Helpers.MzButton()
+                    {
+                        innerHtml = "Upravit",
+                        cssClass = "pull-right",
+                        mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
+                        js = "new MujZavod.Modal().loadFromUrl('/Race/SubCategoryUserEdit?id=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "_" + raceCategoryUser.RaceSubCategoryId + "'].refresh(); modal.close(); });"
+                    };
+                }
                 return ret;
             }
         }

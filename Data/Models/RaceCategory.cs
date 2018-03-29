@@ -23,6 +23,7 @@ namespace MujZavod.Data.Models
         public int RaceId { get; set; }
         public Race Race { get; set; }
 
+        public double RegistrationPrice { get; set; }
         
         
         public ICollection<RaceRound> RaceRounds { get; set; }

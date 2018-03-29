@@ -198,6 +198,7 @@
     <Compile Include="Controllers\OrganizerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RaceController.cs" />
+    <Compile Include="Controllers\RaceRegistrationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\EditExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -216,8 +217,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Organizer\CreateViewModel.cs" />
     <Compile Include="Models\Organizer\OrganizerViewModel.cs" />
+    <Compile Include="Models\RaceRegistration\RaceRegistrationViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceCategoriesViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceCategoryViewModel.cs" />
+    <Compile Include="Models\Race\RaceCategory\RaceRunners\RaceRunnerEditViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceRunners\RaceRunnersGridRow.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceRunners\RaceRunnersGridViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\Round\RoundGridRow.cs" />
@@ -331,6 +334,7 @@
     <None Include="manifest.json" />
     <Content Include="Scripts\app\MujZavodGrid.js" />
     <Content Include="Scripts\app\MujZavodModal.js" />
+    <Content Include="Scripts\app\MujZavodRegistration.js" />
     <Content Include="Scripts\js\app.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\js\pixeladmin.min.js" />
@@ -372,6 +376,8 @@
     <Content Include="Views\Race\Category\SubCategory\Edit.cshtml" />
     <Content Include="Views\Race\Category\Round\Edit.cshtml" />
     <Content Include="Views\Race\Category\SubCategory\EditUser.cshtml" />
+    <Content Include="Views\Shared\_LayoutIframe.cshtml" />
+    <Content Include="Views\RaceRegistration\IframeButton.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
