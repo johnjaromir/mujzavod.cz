@@ -15,7 +15,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
             this.raceCategoryUser = raceCategoryUser;
         }
 
-        public string Id => raceCategoryUser.ApplicationUser.Id;
+        public string Id => raceCategoryUser.Id.ToString();
 
         [DisplayName("Číslo běžce")]
         public string RunnerNumber => raceCategoryUser.RunnerNumber.ToString();

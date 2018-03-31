@@ -24,5 +24,19 @@ namespace MujZavod.Code.Repository
             return query;
         }
         
+
+        public IQueryable<RaceCategory> GetCategoryForUser(string raceKey, int genderId, DateTime birthDate)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - birthDate.Year;
+            if (birthDate > today.AddYears(-age)) age--;
+
+            return base.GetAll().Where(x => x.Race.RaceKey == raceKey
+            && (/*x.RaceSubCategories.Count == 0
+                || */(x.RaceSubCategories.Any(y => y.AllowedGenders.Any(z => z.Id == genderId)
+                    && (!y.AgeFrom.HasValue || y.AgeFrom.Value <= age)
+                    && (!y.AgeTo.HasValue || y.AgeTo.Value >= age))
+                    )));
+        }
     }
 }

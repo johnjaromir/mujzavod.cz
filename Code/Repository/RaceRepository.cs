@@ -28,7 +28,7 @@ namespace MujZavod.Code.Repository
         
         public Race getRaceByKey(string raceKey)
         {
-            return GetAll().Where(x => x.RaceKey == raceKey).FirstOrDefault();
+            return base.GetAll().Where(x => x.RaceKey == raceKey).FirstOrDefault();
         }
     }
 }

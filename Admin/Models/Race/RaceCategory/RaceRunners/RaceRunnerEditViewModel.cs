@@ -11,5 +11,18 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
     {
         [DisplayName("Číslo běžce")]
         public int? RunnerNumber { get; set; }
+
+
+        public RaceRunnerEditViewModel()
+        {
+
+        }
+
+        public RaceRunnerEditViewModel(Data.Models.RaceCategoryUser raceCategoryUser)
+            :base(raceCategoryUser.ApplicationUser)
+        {
+            RunnerNumber = raceCategoryUser.RunnerNumber;
+            Id = raceCategoryUser.Id.ToString();
+        }
     }
 }

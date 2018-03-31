@@ -40,11 +40,11 @@ namespace MujZavod.Admin.Helpers
 
 
         public static MvcHtmlString MzEditLineFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, 
-            object htmlAttributes = null, string labelFormat = "col-sm-4", string editFormat = "col-sm-8")
+            object htmlAttributes = null, string labelFormat = "col-sm-4", string editFormat = "col-sm-8", string editType = "text")
         {
             return MvcHtmlString.Create("<div class='form-group'>"
                 + htmlHelper.LabelFor(expression, new { @class=labelFormat +" control-label" }).ToString()
-                + "<div class='"+editFormat+"'>" + MzEditFor(htmlHelper, expression, new { @class="form-control" }).ToString()
+                + "<div class='"+editFormat+"'>" + MzEditFor(htmlHelper, expression, new { @class="form-control", @type=editType }).ToString()
                 + "</div></div>");
         }
 

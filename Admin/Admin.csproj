@@ -218,6 +218,7 @@
     <Compile Include="Models\Organizer\CreateViewModel.cs" />
     <Compile Include="Models\Organizer\OrganizerViewModel.cs" />
     <Compile Include="Models\RaceRegistration\RaceRegistrationViewModel.cs" />
+    <Compile Include="Models\RaceRegistration\RegisterOnRaceViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceCategoriesViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceCategoryViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceRunners\RaceRunnerEditViewModel.cs" />
@@ -378,6 +379,8 @@
     <Content Include="Views\Race\Category\SubCategory\EditUser.cshtml" />
     <Content Include="Views\Shared\_LayoutIframe.cshtml" />
     <Content Include="Views\RaceRegistration\IframeButton.cshtml" />
+    <Content Include="Views\RaceRegistration\Index.cshtml" />
+    <Content Include="Views\RaceRegistration\RegisterOnRace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

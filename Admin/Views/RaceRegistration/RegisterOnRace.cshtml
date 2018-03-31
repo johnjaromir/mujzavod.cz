@@ -1,0 +1,108 @@
+﻿@model MujZavod.Admin.Models.RaceRegistration.RegisterOnRaceViewModel
+
+
+@using (Html.BeginForm("RegisterOnRace", "RaceRegistration", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <span data-mz-modal-title="">Registrace na závod @Model.RaceName</span>
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x=> x.RegistrationTypeId)
+
+    <div id="mzWizard">
+        <div class="wizard-wrapper">
+            <ul class="wizard-steps" style="width: auto; left: 0px;">
+                <li data-target="#wizard-modal-step1" class="active" style="min-width: 200px; max-width: 200px; width: 200px;">
+                    <span class="wizard-step-number">1</span>
+                    <span class="wizard-step-complete"><i class="fa fa-check text-success"></i></span>
+                    <span class="wizard-step-caption">Výběr přihlášení</span>
+                </li>
+                <li data-target="#wizard-modal-step2" style="min-width: 200px; max-width: 200px; width: 200px;" class="">
+                    <span class="wizard-step-number">2</span>
+                    <span class="wizard-step-complete"><i class="fa fa-check text-success"></i></span>
+                    <span class="wizard-step-caption">Přihlášení/registrace</span>
+                </li>
+                <li data-target="#wizard-modal-step3" style="min-width: 200px; max-width: 200px; width: 200px;">
+                    <span class="wizard-step-number">3</span>
+                    <span class="wizard-step-complete"><i class="fa fa-check text-success"></i></span>
+                    <span class="wizard-step-caption">Výběr kategorie</span>
+                </li>
+                <li data-target="#wizard-modal-step4" style="min-width: 200px; max-width: 200px; width: 200px;">
+                    <span class="wizard-step-number">4</span>
+                    <span class="wizard-step-complete"><i class="fa fa-check text-success"></i></span>
+                    <span class="wizard-step-caption">Odeslání</span>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="wizard-content">
+            <div class="wizard-pane active" id="wizard-modal-step1">
+                <button type="button" class="btn btn-primary btn-block" data-wizard-action="next" onclick="MujZavod.Registration.setStepOne(1);">Mám účet</button>
+                <button type="button" class="btn btn-primary btn-block" data-wizard-action="next" onclick="MujZavod.Registration.setStepOne(2);">Nemám účet</button>
+            </div>
+            <div class="wizard-pane" id="wizard-modal-step2">
+                <div id="mzStepTwo-1">
+                    @Html.MzEditLineFor(x=>x.EmailLogin)
+                    @Html.MzEditLineFor(x=>x.PasswordLogin, editType:"password")
+                </div>
+                <div id="mzStepTwo-2">
+                    <div id="divUserData">
+                        @Html.MzEditLineFor(x => x.Email)
+                        @Html.MzEditLineFor(x => x.FirstName)
+                        @Html.MzEditLineFor(x => x.SurName)
+                        @Html.MzEditLineFor(x => x.BirthDate)
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.EGenderId, new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.MzDropDownFor(m => m.EGenderId, new MujZavod.Admin.Models.DropDown.EGenderDropDownModel(), htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.CreateAccount, new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.CheckBoxFor(m => m.CreateAccount)
+                        </div>
+                    </div>
+
+                    
+                    <div id="mzDivCreateAccountPassword">
+                        @Html.MzEditLineFor(x => x.Password, editType: "password")
+                        @Html.MzEditLineFor(x => x.ConfirmPassword, editType: "password")
+                    </div>
+                </div>
+                
+            </div>
+            <div class="wizard-pane" id="wizard-modal-step3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.RaceCategoryId, new { @class = "col-sm-4" })
+                    <div class="col-sm-8">
+                        <select id="RaceCategoryId" name="RaceCategoryId" class="form-control"></select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.RaceSubCategoryId, new { @class = "col-sm-4" })
+                    <div class="col-sm-8">
+                        <select id="RaceSubCategoryId" name="RaceSubCategoryId" class="form-control"></select>
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="wizard-pane" id="wizard-modal-step4">
+                Byl jste přihlášen na závod
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(function () {
+            $('#mzWizard').pxWizard();
+        });
+    </script>
+}
+

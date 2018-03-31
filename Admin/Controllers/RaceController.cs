@@ -289,25 +289,27 @@ namespace MujZavod.Admin.Controllers
         {
             Models.User.NotRegistered.NotRegisteredViewModel model;
             if (!string.IsNullOrWhiteSpace(id))
-                model = new Models.User.NotRegistered.NotRegisteredViewModel(ApplicationUserRepository.GetById(id));
+                model = new Models.Race.RaceCategory.RaceRunners.RaceRunnerEditViewModel(RaceCategoryUsersRepository.GetById(Convert.ToInt32(id)));
             else
-                model = new Models.User.NotRegistered.NotRegisteredViewModel() { RaceCategoryId = raceCategoryId, RaceSubCategoryId = raceSubCategoryId };
+                model = new Models.Race.RaceCategory.RaceRunners.RaceRunnerEditViewModel() { RaceCategoryId = raceCategoryId, RaceSubCategoryId = raceSubCategoryId };
             return PartialView("/Views/Race/Category/SubCategory/EditUser.cshtml", model);
         }
 
-        public ActionResult SubCategoryUserEdit(Models.User.NotRegistered.NotRegisteredViewModel model)
+        public ActionResult SubCategoryUserEdit(Models.Race.RaceCategory.RaceRunners.RaceRunnerEditViewModel model)
         {
             if (ModelState.IsValid)
             {
+                Data.Models.RaceCategoryUser raceCategoryUser;
                 Data.Identity.ApplicationUser au;
                 if (!string.IsNullOrWhiteSpace(model.Id))
                 {
-                    au = ApplicationUserRepository.GetById(model.Id);
+                    raceCategoryUser = RaceCategoryUsersRepository.GetById(Convert.ToInt32(model.Id));
+                    au = raceCategoryUser.ApplicationUser;
                 }
                 else
                 {
+                    raceCategoryUser = new Data.Models.RaceCategoryUser();
                     au = new Data.Identity.ApplicationUser();
-                    
                 }
 
                 au.FirstName = model.FirstName;
@@ -315,20 +317,22 @@ namespace MujZavod.Admin.Controllers
                 au.EGenderId = model.GenderId;
                 au.BirthDate = model.BirthDate.Value;
 
+                raceCategoryUser.RunnerNumber = model.RunnerNumber;
+
                 if (!string.IsNullOrWhiteSpace(model.Id))
                 {
-                    ApplicationUserRepository.Update(au, true);
+                    ApplicationUserRepository.Update(au, false);
+                    RaceCategoryUsersRepository.Update(raceCategoryUser, true);
                 }
                 else
                 {
                     au.UserName = Guid.NewGuid().ToString();
                     ApplicationUserRepository.Create(au, false);
-                    Data.Models.RaceCategoryUser raceCategoryUser = new Data.Models.RaceCategoryUser()
-                    {
-                        ApplicationUserId = au.Id,
-                        RaceCategoryId = model.RaceCategoryId.Value,
-                        RaceSubCategoryId = model.RaceSubCategoryId
-                    };
+
+                    raceCategoryUser.ApplicationUserId = au.Id;
+                    raceCategoryUser.RaceCategoryId = model.RaceCategoryId.Value;
+                    raceCategoryUser.RaceSubCategoryId = model.RaceSubCategoryId;
+                    
                     RaceCategoryUsersRepository.Create(raceCategoryUser, true);
                 }
                 return Content("OK");

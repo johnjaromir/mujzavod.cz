@@ -69,7 +69,8 @@ MujZavod.Modal = function (size) {
 
         $.get(url, function (data) {
             that.parseData(data);
-            that.setFooterSubmit();
+            if ($.isFunction(callBack))
+                that.setFooterSubmit();
         });
 
         
@@ -87,7 +88,10 @@ MujZavod.Modal = function (size) {
         }
     }
 
-    this.submit = function () {
+    this.submit = function (callBack) {
+        if ($.isFunction(callBack))
+            this._callBack = callBack;
+
         var that = this;
         var form = $(this._body).find("form")[0];
 
