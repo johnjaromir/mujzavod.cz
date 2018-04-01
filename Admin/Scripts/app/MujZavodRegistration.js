@@ -2,8 +2,8 @@
 
 MujZavod.Registration = function (opts) {
     this._opts = opts;
-    this._wrapper = $('#'+opts.wrapper);
-    this._btn;
+    this._wrapper = $(opts.wrapper);
+    
     this._modal;
 
     this._registrationType;
@@ -11,11 +11,9 @@ MujZavod.Registration = function (opts) {
     
 
     this.show = function () {
-        this._wrapper.append($('<button>Přihlásit</button>'));
-        this._btn = this._wrapper.find('button');
-
+        
         var that = this;
-        $(this._btn).on('click', function () {
+        $(this._wrapper).on('click', function () {
             that._modal = new MujZavod.Modal();
             that._modal.loadFromUrl(that._opts.url + '/RaceRegistration/RegisterOnRace?raceKey=' + that._opts.raceKey);
             that._modal._footer.html('');

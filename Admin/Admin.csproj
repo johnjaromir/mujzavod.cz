@@ -217,7 +217,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Organizer\CreateViewModel.cs" />
     <Compile Include="Models\Organizer\OrganizerViewModel.cs" />
+    <Compile Include="Models\RaceRegistration\RaceCategoryResult.cs" />
     <Compile Include="Models\RaceRegistration\RaceRegistrationViewModel.cs" />
+    <Compile Include="Models\RaceRegistration\RaceRunnerRoundResult.cs" />
+    <Compile Include="Models\RaceRegistration\RaceSubCategoryResult.cs" />
     <Compile Include="Models\RaceRegistration\RegisterOnRaceViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceCategoriesViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceCategoryViewModel.cs" />

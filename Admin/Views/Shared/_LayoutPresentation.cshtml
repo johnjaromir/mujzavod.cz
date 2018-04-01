@@ -52,12 +52,14 @@
     <!-- Your scripts -->
     <script src="/scripts/js/app.js"></script>
 
+    @Scripts.Render("~/Scripts/MujZavod/js")
+
     @RenderSection("scripts", required: false)
 
     <!-- Content -->
     <div class="px-content">
 
-        <div class="account-container">@RenderBody()</div>
+        @RenderBody()
     </div>
 
 

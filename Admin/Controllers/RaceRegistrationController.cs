@@ -42,16 +42,11 @@ namespace MujZavod.Admin.Controllers
 
 
         
-        public ActionResult IframeButton(string raceKey)
-        {
-            var race = RaceRepository.getRaceByKey(raceKey);
-            return View(new Models.RaceRegistration.RaceRegistrationViewModel(race));
-        }
-
+       
         
-        public ActionResult Index(string raceKey)
+        public ActionResult Index(string id)
         {
-            var race = RaceRepository.getRaceByKey(raceKey);
+            var race = RaceRepository.getRaceByKey(id);
             return View(new Models.RaceRegistration.RaceRegistrationViewModel(race));
         }
 
@@ -136,6 +131,17 @@ namespace MujZavod.Admin.Controllers
             var categories = RaceSubCategoryRepository.GetSubCategoryForUser(genderId, Convert.ToDateTime(birthDate), raceCategoryId);
             return Json(categories.Select(x => new { key = x.Id, value = x.Name }), JsonRequestBehavior.AllowGet);
         }
+
+
+
+        public ActionResult Detail(string raceKey)
+        {
+            var race = RaceRepository.getRaceByKey(raceKey);
+            return View(new Models.RaceRegistration.RaceRegistrationViewModel(race));
+        }
+
+
+
 
 
         private ApplicationUserManager _userManager;

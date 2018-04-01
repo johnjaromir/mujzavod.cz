@@ -8,6 +8,11 @@ namespace MujZavod.Data.Models
 {
     public class RaceCategoryUser:BaseEntity
     {
+        public RaceCategoryUser()
+        {
+            RaceRoundUsers = new HashSet<RaceRoundUser>();
+        }
+
         public string ApplicationUserId { get; set; }
         public virtual Identity.ApplicationUser ApplicationUser { get; set; }
 
@@ -19,5 +24,7 @@ namespace MujZavod.Data.Models
 
         public int? RunnerNumber { get; set; }
         public bool IsPaid { get; set; }
+
+        public virtual ICollection<Models.RaceRoundUser> RaceRoundUsers { get; set; }
     }
 }

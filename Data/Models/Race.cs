@@ -25,6 +25,8 @@ namespace MujZavod.Data.Models
         public string RaceKey { get; set; }
         public DateTime? PublishDate { get; set; }
 
+        public DateTime? EndDate { get; set; }
+
         
         public ICollection<RaceCategory> RaceCategories { get; set; }
     }

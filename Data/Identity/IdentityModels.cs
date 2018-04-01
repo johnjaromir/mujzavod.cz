@@ -23,7 +23,7 @@ namespace MujZavod.Data.Identity
         public ApplicationUser():base()
         {
             RaceCategoryUsers = new HashSet<Data.Models.RaceCategoryUser>();
-            RaceRounds = new HashSet<Models.RaceRoundUser>();
+            
         }
 
         public string FirstName { get; set; }
@@ -41,7 +41,7 @@ namespace MujZavod.Data.Identity
         //public ICollection<Data.Models.Organizer> UserForOrganizer { get; set; }
 
         public virtual ICollection<Models.RaceCategoryUser> RaceCategoryUsers { get; set; }
-        public virtual ICollection<Models.RaceRoundUser> RaceRounds { get; set; }
+        
     }
 
     public class ApplicationRole : IdentityRole

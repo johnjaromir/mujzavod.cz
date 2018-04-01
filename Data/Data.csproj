@@ -103,6 +103,18 @@
     <Compile Include="Migrations\201803282258575_racepublish.Designer.cs">
       <DependentUpon>201803282258575_racepublish.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804010040519_race-end-date.cs" />
+    <Compile Include="Migrations\201804010040519_race-end-date.Designer.cs">
+      <DependentUpon>201804010040519_race-end-date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804010251350_raceroundusers.cs" />
+    <Compile Include="Migrations\201804010251350_raceroundusers.Designer.cs">
+      <DependentUpon>201804010251350_raceroundusers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804010253151_raceroundusers1.cs" />
+    <Compile Include="Migrations\201804010253151_raceroundusers1.Designer.cs">
+      <DependentUpon>201804010253151_raceroundusers1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Organizer.cs" />
     <Compile Include="Models\Enums\BaseEnum.cs" />
@@ -134,6 +146,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803282258575_racepublish.resx">
       <DependentUpon>201803282258575_racepublish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804010040519_race-end-date.resx">
+      <DependentUpon>201804010040519_race-end-date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804010251350_raceroundusers.resx">
+      <DependentUpon>201804010251350_raceroundusers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804010253151_raceroundusers1.resx">
+      <DependentUpon>201804010253151_raceroundusers1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

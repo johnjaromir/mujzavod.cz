@@ -26,6 +26,6 @@ namespace MujZavod.Data.Models
         public int RaceCategoryId { get; set; }
         public RaceCategory RaceCategory { get; set; }
 
-        ICollection<RaceCategoryUser> RaceCategoryUsers { get; set; }
+        public ICollection<RaceCategoryUser> RaceCategoryUsers { get; set; }
     }
 }

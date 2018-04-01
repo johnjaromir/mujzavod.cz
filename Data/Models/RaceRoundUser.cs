@@ -8,8 +8,8 @@ namespace MujZavod.Data.Models
 {
     public class RaceRoundUser:BaseEntity
     {
-        public string UserId { get; set; }
-        public Identity.ApplicationUser User { get; set; }
+        public int RaceCategoryUserId { get; set; }
+        public RaceCategoryUser RaceCategoryUser { get; set; }
         public int RaceRoundId { get; set; }
         public RaceRound RaceRound { get; set; }
 
