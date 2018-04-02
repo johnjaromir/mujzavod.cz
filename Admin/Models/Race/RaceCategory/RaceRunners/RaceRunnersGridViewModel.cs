@@ -7,20 +7,19 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
 {
     public class RaceRunnersGridViewModel : Helpers.Grid.IGridViewModel<RaceRunnersGridRow>
     {
-        protected readonly int? raceSubCategoryId;
         protected readonly int raceCategoryId;
-        public RaceRunnersGridViewModel(int raceCategoryId, int? raceSubCategoryId)
+        public RaceRunnersGridViewModel(int raceCategoryId)
         {
-            this.raceSubCategoryId = raceSubCategoryId;
+            
             this.raceCategoryId = raceCategoryId;
         }
 
-        public string Id => "RaceRunnersGrid_" + raceCategoryId + "_" + raceSubCategoryId;
+        public string Id => "RaceRunnersGrid_" + raceCategoryId;
 
         public string Name => "Seznam závodníků";
 
-        public string Url => "/Race/RaceRunnersGridData?raceCategoryId=" + raceCategoryId + "&raceSubCategoryId=" + raceSubCategoryId;
+        public string Url => "/Race/RaceRunnersGridData?raceCategoryId=" + raceCategoryId;
 
-        public string addUrl => $"/Race/SubCategoryUserEdit?RaceCategoryId={raceCategoryId}&RaceSubCategoryId={raceSubCategoryId}";
+        public string addUrl => $"/Race/SubCategoryUserEdit?RaceCategoryId={raceCategoryId}";
     }
 }

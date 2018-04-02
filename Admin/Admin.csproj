@@ -212,6 +212,7 @@
     <Compile Include="Helpers\Button.cs" />
     <Compile Include="Helpers\ViewExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DropDown\RaceSubCategoryDropDownModel.cs" />
     <Compile Include="Models\DropDown\EGenderDropDownModel.cs" />
     <Compile Include="Models\DropDown\IDropDownModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -227,9 +228,12 @@
     <Compile Include="Models\Race\RaceCategory\RaceRunners\RaceRunnerEditViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceRunners\RaceRunnersGridRow.cs" />
     <Compile Include="Models\Race\RaceCategory\RaceRunners\RaceRunnersGridViewModel.cs" />
+    <Compile Include="Models\Race\RaceCategory\RaceRunners\RaceRunnerTimes.cs" />
     <Compile Include="Models\Race\RaceCategory\Round\RoundGridRow.cs" />
     <Compile Include="Models\Race\RaceCategory\Round\RoundGridViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\Round\RoundViewModel.cs" />
+    <Compile Include="Models\Race\RaceCategory\SubCategory\SubCategoryGridRow.cs" />
+    <Compile Include="Models\Race\RaceCategory\SubCategory\SubCategoryGridViewModel.cs" />
     <Compile Include="Models\Race\RaceCategory\SubCategory\SubCategoryViewModel.cs" />
     <Compile Include="Models\Race\RaceDetailModel.cs" />
     <Compile Include="Models\Race\RaceGridRow.cs" />
@@ -384,6 +388,7 @@
     <Content Include="Views\RaceRegistration\IframeButton.cshtml" />
     <Content Include="Views\RaceRegistration\Index.cshtml" />
     <Content Include="Views\RaceRegistration\RegisterOnRace.cshtml" />
+    <Content Include="Views\Race\Category\SubCategory\EditUserTimes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

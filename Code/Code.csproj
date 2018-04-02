@@ -75,6 +75,7 @@
     <Compile Include="Repository\RaceRepository.cs" />
     <Compile Include="Repository\RaceRoundRepository.cs" />
     <Compile Include="Repository\RaceCategoryUsersRepository.cs" />
+    <Compile Include="Repository\RaceRoundUsersRepository.cs" />
     <Compile Include="Repository\RaceSubCategoryRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,8 +11,9 @@ namespace MujZavod.Admin.Models.User.NotRegistered
     {
         public string Id { get; set; }
 
+        
         public int? RaceCategoryId { get; set; }
-        public int? RaceSubCategoryId { get; set; }
+        
 
         [Required]
         [DisplayName("Jméno")]

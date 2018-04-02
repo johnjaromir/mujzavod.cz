@@ -19,11 +19,27 @@ namespace MujZavod.Code.Repository
         }
         */
 
-        public IEnumerable<RaceCategoryUser> getUsers(int categoryId, int? subCategoryId)
+        public IEnumerable<RaceCategoryUser> getUsers(int categoryId)
         {
-            return GetAll(x => x.RaceCategoryId == categoryId && x.RaceSubCategoryId == subCategoryId)
-                .Include(x=>x.ApplicationUser).Include(x=>x.ApplicationUser.EGender).Include(x=>x.ApplicationUser.Roles).AsEnumerable();
+            return GetAll(x => x.RaceCategoryId == categoryId)
+                .Include(x=>x.ApplicationUser)
+                .Include(x=>x.ApplicationUser.EGender)
+                .Include(x=>x.ApplicationUser.Roles)
+                .Include(x=>x.RaceSubCategory)
+                .Include(x=>x.RaceCategory)
+                .Include(x=>x.RaceCategory.Race)
+                .Include(x=>x.RaceRoundUsers)
+                .AsEnumerable();
         }
             
+
+        public RaceCategoryUser getUserWithRounds(int userId)
+        {
+            return GetAll().
+                Include(x => x.RaceCategory)
+                .Include(x => x.RaceCategory.RaceRounds)
+                .Include(x => x.RaceRoundUsers)
+                .FirstOrDefault(x => x.Id == userId);
+        }
     }
 }

@@ -27,7 +27,10 @@ namespace MujZavod.Admin.Models.Race.RaceCategory
         
         public Round.RoundGridViewModel RoundGridViewModel { get; set; }
 
-        public List<SubCategory.SubCategoryViewModel> SubCategories { get; set; }
+        public SubCategory.SubCategoryGridViewModel SubCategoryGridViewModel { get; set; }
+
+        public RaceRunners.RaceRunnersGridViewModel RaceRunnersGridViewModel { get; set; }
+
 
 
         public RaceCategoryViewModel()
@@ -50,7 +53,8 @@ namespace MujZavod.Admin.Models.Race.RaceCategory
                 if (inDetail)
                 {
                     RoundGridViewModel = new Round.RoundGridViewModel(raceCategory.Id);
-                    SubCategories = raceCategory.RaceSubCategories.Select(x => new SubCategory.SubCategoryViewModel(x)).ToList();
+                    SubCategoryGridViewModel = new SubCategory.SubCategoryGridViewModel(raceCategory.Id);
+                    RaceRunnersGridViewModel = new RaceRunners.RaceRunnersGridViewModel(raceCategory.Id);
                 }
             }
         }

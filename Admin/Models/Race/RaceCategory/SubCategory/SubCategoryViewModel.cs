@@ -26,7 +26,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.SubCategory
 
         public string GendersText { get; set; }
 
-        public RaceRunners.RaceRunnersGridViewModel RaceRunnersGridViewModel { get; set; }
+        
 
         public SubCategoryViewModel()
         {
@@ -47,7 +47,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.SubCategory
 
                 GendersText = string.Join(",", raceSubCategory.AllowedGenders.Select(x => x.Name));
 
-                RaceRunnersGridViewModel = new RaceRunners.RaceRunnersGridViewModel(RaceCategoryId, Id);
+                
             }
         }
     }

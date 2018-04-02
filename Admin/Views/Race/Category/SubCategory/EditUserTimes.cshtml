@@ -1,0 +1,28 @@
+﻿@model MujZavod.Admin.Models.Race.RaceCategory.RaceRunners.RaceRunnerTimes
+
+
+@using (Html.BeginForm("EditUserTimes", "Race", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <span data-mz-modal-title="">Zadání časů</span>
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.HiddenFor(x => x.RaceRunnerId)
+
+    for (int i = 0; i < Model.RaceRunnersTimeRounds.Count; i++)
+    {
+        @Html.HiddenFor(x=>x.RaceRunnersTimeRounds[i].RoundId)
+        <div class="form-group">
+            <label class="control-label col-sm-4">
+                @Model.RaceRunnersTimeRounds[i].Name
+            </label>
+            <div class="col-sm-8">
+                @Html.MzTimePickerFor(x=>x.RaceRunnersTimeRounds[i].Time)
+            </div>
+        </div>
+        
+    }
+}
+
+
+

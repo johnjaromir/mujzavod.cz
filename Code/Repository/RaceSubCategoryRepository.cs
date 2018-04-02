@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace MujZavod.Code.Repository
 {
@@ -12,6 +13,10 @@ namespace MujZavod.Code.Repository
         protected override string dbSetContextName => "RaceSubCategories";
 
 
+        public override IQueryable<RaceSubCategory> GetAll()
+        {
+            return base.GetAll().Include(x=>x.AllowedGenders);
+        }
 
         public IQueryable<RaceSubCategory> GetSubCategoryForUser(int genderId, DateTime birthDate, int raceCategoryId)
         {

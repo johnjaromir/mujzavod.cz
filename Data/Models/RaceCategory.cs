@@ -26,7 +26,7 @@ namespace MujZavod.Data.Models
         public double RegistrationPrice { get; set; }
         
         
-        public ICollection<RaceRound> RaceRounds { get; set; }
+        public virtual ICollection<RaceRound> RaceRounds { get; set; }
 
         public ICollection<RaceCategoryUser> RaceCategoryUsers { get; set; }
         public ICollection<RaceSubCategory> RaceSubCategories { get; set; }

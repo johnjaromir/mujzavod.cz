@@ -12,6 +12,11 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
         [DisplayName("Číslo běžce")]
         public int? RunnerNumber { get; set; }
 
+        [DisplayName("Podkategorie")]
+        public int RaceSubCategoryId { get; set; }
+
+
+        public DropDown.RaceSubCategoryDropDownModel RaceSubCategoryDropDownModel;
 
         public RaceRunnerEditViewModel()
         {
@@ -23,6 +28,8 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
         {
             RunnerNumber = raceCategoryUser.RunnerNumber;
             Id = raceCategoryUser.Id.ToString();
+            RaceSubCategoryId = raceCategoryUser.RaceSubCategoryId ?? 0;
+            RaceSubCategoryDropDownModel = new DropDown.RaceSubCategoryDropDownModel(raceCategoryUser.RaceCategoryId);
         }
     }
 }

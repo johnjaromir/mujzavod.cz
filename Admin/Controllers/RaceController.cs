@@ -198,10 +198,18 @@ namespace MujZavod.Admin.Controllers
         }
 
 
-        public ActionResult RaceRunnersGridData(int raceCategoryId, int? raceSubCategoryId)
+        public ActionResult RaceRunnersGridData(int raceCategoryId)
         {
-            return Json(RaceCategoryUsersRepository.getUsers(raceCategoryId, raceSubCategoryId)
+            return Json(RaceCategoryUsersRepository.getUsers(raceCategoryId)
                 .ToGridData(x => new Models.Race.RaceCategory.RaceRunners.RaceRunnersGridRow(x)),
+                JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult SubCategoryGridData(int raceCategoryId)
+        {
+            return Json(RaceSubCategoryRepository.GetAll().Where(x=>x.RaceCategoryId == raceCategoryId)
+                .ToGridData(x => new Models.Race.RaceCategory.SubCategory.SubCategoryGridRow(x)),
                 JsonRequestBehavior.AllowGet);
         }
 
@@ -285,13 +293,18 @@ namespace MujZavod.Admin.Controllers
 
 
         [HttpGet]
-        public ActionResult SubCategoryUserEdit(string id, int? raceCategoryId, int? raceSubCategoryId)
+        public ActionResult SubCategoryUserEdit(string id, int? raceCategoryId)
         {
             Models.User.NotRegistered.NotRegisteredViewModel model;
             if (!string.IsNullOrWhiteSpace(id))
                 model = new Models.Race.RaceCategory.RaceRunners.RaceRunnerEditViewModel(RaceCategoryUsersRepository.GetById(Convert.ToInt32(id)));
             else
-                model = new Models.Race.RaceCategory.RaceRunners.RaceRunnerEditViewModel() { RaceCategoryId = raceCategoryId, RaceSubCategoryId = raceSubCategoryId };
+                model = new Models.Race.RaceCategory.RaceRunners.RaceRunnerEditViewModel()
+                {
+                    RaceCategoryId = raceCategoryId,
+                    RaceSubCategoryDropDownModel = new Models.DropDown.RaceSubCategoryDropDownModel(raceCategoryId.Value)
+                };
+        
             return PartialView("/Views/Race/Category/SubCategory/EditUser.cshtml", model);
         }
 
@@ -318,6 +331,7 @@ namespace MujZavod.Admin.Controllers
                 au.BirthDate = model.BirthDate.Value;
 
                 raceCategoryUser.RunnerNumber = model.RunnerNumber;
+                raceCategoryUser.RaceSubCategoryId = model.RaceSubCategoryId;
 
                 if (!string.IsNullOrWhiteSpace(model.Id))
                 {
@@ -331,7 +345,7 @@ namespace MujZavod.Admin.Controllers
 
                     raceCategoryUser.ApplicationUserId = au.Id;
                     raceCategoryUser.RaceCategoryId = model.RaceCategoryId.Value;
-                    raceCategoryUser.RaceSubCategoryId = model.RaceSubCategoryId;
+                   
                     
                     RaceCategoryUsersRepository.Create(raceCategoryUser, true);
                 }
@@ -356,5 +370,44 @@ namespace MujZavod.Admin.Controllers
             return Content("OK");
         }
 
+
+
+        [HttpGet]
+        public ActionResult EditUserTimes(int runnerId)
+        {
+            var model = new Models.Race.RaceCategory.RaceRunners.RaceRunnerTimes(RaceCategoryUsersRepository.GetById(runnerId));
+            return PartialView("/Views/Race/Category/SubCategory/EditUserTimes.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult EditUserTimes(Models.Race.RaceCategory.RaceRunners.RaceRunnerTimes model)
+        {
+            var runner = RaceCategoryUsersRepository.GetById(model.RaceRunnerId);
+
+            var repo = new Code.Repository.RaceRoundUsersRepository();
+
+            foreach(var roundTime in model.RaceRunnersTimeRounds)
+            {
+                var round = runner.RaceRoundUsers.Where(x => x.RaceRoundId == roundTime.RoundId).FirstOrDefault();
+
+                if (round == null)
+                {
+                    round = new Data.Models.RaceRoundUser()
+                    {
+                        RaceCategoryUserId = runner.Id,
+                        RaceRoundId = roundTime.RoundId,
+                        Time = roundTime.Time.Value
+                    };
+                    repo.Create(round, true);
+                }
+                else
+                {
+                    round.Time = roundTime.Time.Value;
+                    repo.Update(round, true);
+                }
+            }
+
+            return Content("OK");
+        }
     }
 }

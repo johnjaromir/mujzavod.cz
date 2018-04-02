@@ -73,58 +73,11 @@ namespace MujZavod.Admin.Helpers
                 + htmlHelper.ValidationMessageFor(expression, "", new { @class = "text-danger" }));
         }
 
-
-
-        public static object _mergeHtmlAttributes(object htmlAttributesObject, object defaultHtmlAttributesObject)
+        public static MvcHtmlString MzTimePickerFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
         {
-            var concatKeys = new string[] { "@class" };
-
-            var htmlAttributesDict = htmlAttributesObject as IDictionary<string, object>;
-            var defaultHtmlAttributesDict = defaultHtmlAttributesObject as IDictionary<string, object>;
-
-            RouteValueDictionary htmlAttributes = (htmlAttributesDict != null)
-                ? new RouteValueDictionary(htmlAttributesDict)
-                : HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributesObject);
-            RouteValueDictionary defaultHtmlAttributes = (defaultHtmlAttributesDict != null)
-                ? new RouteValueDictionary(defaultHtmlAttributesDict)
-                : HtmlHelper.AnonymousObjectToHtmlAttributes(defaultHtmlAttributesObject);
-
-            foreach (var item in htmlAttributes)
-            {
-                if (concatKeys.Contains(item.Key))
-                {
-                    defaultHtmlAttributes[item.Key] = (defaultHtmlAttributes[item.Key] != null)
-                        ? string.Format("{0} {1}", defaultHtmlAttributes[item.Key], item.Value)
-                        : item.Value;
-                }
-                else
-                {
-                    defaultHtmlAttributes[item.Key] = item.Value;
-                }
-            }
-
-            return defaultHtmlAttributes.Select(t => new { t.Key, t.Value })
-                   .ToDictionary(t => t.Key, t => t.Value);
-        }
-
-
-        private static object Merge(object item1, object item2)
-        {
-            IDictionary<string, object> result = new ExpandoObject();
-
-            foreach (var property in item1.GetType().GetProperties())
-            {
-                if (property.CanRead)
-                    result[property.Name] = property.GetValue(item1);
-            }
-
-            foreach (var property in item2.GetType().GetProperties())
-            {
-                if (property.CanRead)
-                    result[property.Name] = property.GetValue(item2);
-            }
-
-            return result;
+            var id = htmlHelper.IdFor(expression);
+            string script = "<script>$('#" + id + "').timepicker({showMeridian:false, showSeconds:true, defaultTime:false, minuteStep:1, secondStep:1});</script>";
+            return MvcHtmlString.Create(htmlHelper.MzTextBoxFor(expression, htmlAttributes).ToString() + script);
         }
 
 
