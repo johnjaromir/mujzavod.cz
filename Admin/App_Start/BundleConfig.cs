@@ -42,8 +42,21 @@ namespace MujZavod.Admin
 
 
 
+            // public registration
+            bundles.Add(new ScriptBundle("~/Scripts/MujZavod/Registration").Include(
+                      "~/scripts/js/jquery.min.js",
+                      "~/scripts/js/bootstrap.min.js",
+                      "~/scripts/js/pixeladmin.min.js",
+                      "~/Scripts/app/MujZavodModal.js",
+                      "~/Scripts/app/MujZavodRegistration.js"
+                      ));
 
+            bundles.Add(new StyleBundle("~/Content/MujZavod/Registration").Include(
+               "~/content/css/bootstrap.min.css",
+               "~/content/css/pixeladmin.min.css"
+               ));
 
+            
         }
     }
 }

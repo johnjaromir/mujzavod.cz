@@ -27,6 +27,10 @@ namespace MujZavod.Admin.Models.Race
         [DisplayName("Datum zveřejnění")]
         public DateTime? PublishDate { get; set; }
 
+        public DateTime? EndDtae { get; set; }
+
+        public string RaceKey { get; set; }
+
         public RaceViewModel()
         {
 
@@ -42,6 +46,8 @@ namespace MujZavod.Admin.Models.Race
                 SignToDate = race.SignToDate;
                 RaceDescription = race.Description;
                 PublishDate = race.PublishDate;
+                RaceKey = race.RaceKey;
+                EndDtae = race.EndDate;
             }
         }
     }

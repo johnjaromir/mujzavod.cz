@@ -30,5 +30,14 @@ namespace MujZavod.Code.Repository
         {
             return base.GetAll().Where(x => x.RaceKey == raceKey).FirstOrDefault();
         }
+
+        public Race getRaceByKeyDetail(string raceKey)
+        {
+            return base.GetAll().Where(x => x.RaceKey == raceKey)
+                .Include(x => x.RaceCategories)
+                .Include(x => x.RaceCategories.Select(y => y.RaceSubCategories.Select(z => z.RaceCategoryUsers.Select(u => u.RaceRoundUsers))))
+                .Include(x => x.RaceCategories.Select(y => y.RaceRounds.Select(z => z.RaceRoundUsers)))
+                .FirstOrDefault();
+        }
     }
 }

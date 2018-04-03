@@ -44,9 +44,9 @@ namespace MujZavod.Admin.Controllers
         
        
         
-        public ActionResult Index(string id)
+        public ActionResult Index(string Id)
         {
-            var race = RaceRepository.getRaceByKey(id);
+            var race = RaceRepository.getRaceByKeyDetail(Id);
             return View(new Models.RaceRegistration.RaceRegistrationViewModel(race));
         }
 

@@ -1,0 +1,42 @@
+﻿@model MujZavod.Admin.Models.RaceRegistration.RaceCategoryResult
+
+<ul class="nav nav-tabs tab-resize-nav nav-xs" id="tab-resize-tabs">
+    @foreach (var category in Model.SubCategoriesResults)
+    {
+        <li class="@(category.Id == Model.SubCategoriesResults[0].Id ? "active" : "")"><a data-toggle="tab" href="#subcategory-tab-@(category.Id)">@category.Name</a></li>
+    }
+</ul>
+<div id="divRaceCategoryContent" class="tab-content">
+    @foreach (var category in Model.SubCategoriesResults)
+    {
+        <div class="tab-pane @(category.Id == Model.SubCategoriesResults[0].Id ? "active" : "")" id="subcategory-tab-@(category.Id)">
+            
+            <table class="table">
+                <tr>
+                    <th>Pořadí</th>
+                    <th>Číslo závodníka</th>
+                    <th>Jméno</th>
+                    <th>Příjmení</th>
+                    @foreach(var round in category.Rounds)
+                    {
+                        <th>@round</th>
+                    }
+                </tr>
+                @foreach(var runner in category.Runners)
+                {
+                    <tr>
+                        <td>@runner.SubCategoryOrder</td>
+                        <td>@runner.RunnerNumber</td>
+                        <td>@runner.FirstName</td>
+                        <td>@runner.LastName</td>
+                        @foreach(var time in runner.Times)
+                        {
+                            <td>@time</td>
+                        }
+                    </tr>
+                }
+            </table>
+
+        </div>
+    }
+</div>

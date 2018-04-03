@@ -22,6 +22,8 @@ namespace MujZavod.Admin.Models.RaceRegistration
 
         public string RaceKey { get; set; }
 
+        public List<RaceCategoryResult> Categories { get; set; }
+
 
         public RaceRegistrationViewModel(Data.Models.Race race)
         {
@@ -35,6 +37,8 @@ namespace MujZavod.Admin.Models.RaceRegistration
                 PublishDate = race.PublishDate;
                 EndDate = race.EndDate;
                 RaceKey = race.RaceKey;
+
+                Categories = race.RaceCategories.Select(x => new RaceCategoryResult(x)).ToList();
             }
         }
     }

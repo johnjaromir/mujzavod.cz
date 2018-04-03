@@ -7,13 +7,14 @@
 }
 
 @section HeaderButtons{
-    @Html.MzButton("Zveřejnit závod", MzButton.MzButtonType.DEFAULT, new { onclick = "MujZavod.PublishRace(); return false;" }, "pull-right")
-
+    
 }
+
 
 <div id="raceHead">
     @Html.Partial("Head", Model.RaceViewModel)
 </div>
+
 
 
 <div id="raceCategories">
@@ -23,7 +24,7 @@
 
 @section head {
 
-    <script>
+<script>
         var MujZavod = MujZavod || {};
         MujZavod.PublishRace = function () {
             bootbox.confirm({
@@ -42,6 +43,24 @@
                 },
             });
         }
-    </script>
+
+        MujZavod.EndRace = function () {
+            bootbox.confirm({
+                message: 'Přejete si zveřejnit výsledky závodu?',
+                className: 'bootbox-xs',
+
+                callback: function (result) {
+                    if (result) {
+                        $.get('@Url.Action("EndRace", "Race", new { RaceId = Model.RaceViewModel.Id })', function (data) {
+                            if (data == "OK") {
+                                $('#raceHead').load('@Url.Action("Head", "Race", new { id = Model.RaceViewModel.Id })');
+
+                            }
+                        })
+                    }
+                },
+            });
+        }
+</script>
 
 }

@@ -37,9 +37,26 @@
             </div>
         </div>
     </div>
-    @if (Model.SignToDate < DateTime.Now)
+    @if (Model.PublishDate.HasValue && !Model.EndDate.HasValue)
     {
         <button id="btnRegister" class="btn btn-block">Přihlásit na závod</button>
+    }
+    @if (Model.EndDate.HasValue)
+    {
+        <ul class="nav nav-tabs tab-resize-nav nav-xs" id="tab-resize-tabs">
+            @foreach (var category in Model.Categories)
+            {
+                <li class="@(category.Id == Model.Categories[0].Id ? "active" : "")"><a data-toggle="tab" href="#category-tab-@(category.Id)">@category.Name</a></li>
+            }
+        </ul>
+        <div id="divRaceCategoryContent" class="tab-content">
+            @foreach(var category in Model.Categories)
+            {
+                <div class="tab-pane @(category.Id == Model.Categories[0].Id ? "active" : "")" id="category-tab-@(category.Id)">
+                    @Html.Partial("/Views/RaceRegistration/RaceCategory.cshtml", category)
+                </div>
+            }
+        </div>
     }
 </div>
 

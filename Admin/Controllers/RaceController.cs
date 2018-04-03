@@ -409,5 +409,13 @@ namespace MujZavod.Admin.Controllers
 
             return Content("OK");
         }
+
+        public ActionResult EndRace(int RaceId)
+        {
+            var race = RaceRepository.GetById(RaceId);
+            race.EndDate = DateTime.Now;
+            RaceRepository.Update(race, true);
+            return Content("OK");
+        }
     }
 }

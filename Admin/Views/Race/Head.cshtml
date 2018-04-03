@@ -1,42 +1,109 @@
 ﻿@model MujZavod.Admin.Models.Race.RaceViewModel
 
+@{ 
+    string webUrl = System.Web.Configuration.WebConfigurationManager.AppSettings.Get("webUrl");
+}
 
-<div class="panel">
-    <div class="panel-heading">
-        <div class="panel-title">
-            Základní informace
-            @Html.MzButton("Upravit", MzButton.MzButtonType.EDIT, 
-           new { onclick = "new MujZavod.Modal('md').loadFromUrl('"+Url.Action("Edit","Race", new { Id = Model.Id })+"', function (raceModal) { raceModal.close(); $('#raceHead').load('"+Url.Action("Head", "Race", new { id = Model.Id })+"'); });" }, "pull-right")
+<style>
+    mz-code {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        padding: 0px;
+        margin: 0px;
+    }
+
+
+</style>
+
+<div class="row">
+    <div class="col-sm-12 col-lg-6">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Základní informace
+                    @Html.MzButton("Upravit", MzButton.MzButtonType.EDIT, 
+                   new { onclick = "new MujZavod.Modal('md').loadFromUrl('"+Url.Action("Edit","Race", new { Id = Model.Id })+"', function (raceModal) { raceModal.close(); $('#raceHead').load('"+Url.Action("Head", "Race", new { id = Model.Id })+"'); });" }, "pull-right")
             
+                </div>
+            </div>
+            <div class="panel-body form-horizontal">
+                <div class="row">
+                    <div class="col-sm-4">
+                        @Html.LabelValueRowFor(x => x.Name, 4, 8)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.LabelValueRowFor(x => x.Date, 4, 8)
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.LabelValueRowFor(x => x.SignToDate, 4, 8)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        @Html.LabelFor(x=>x.RaceDescription)
+                        <div>
+                            @Html.Raw(Model.RaceDescription)
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
         </div>
+
     </div>
-    <div class="panel-body form-horizontal">
-        <div class="row">
-            <div class="col-sm-4">
-                @Html.LabelValueRowFor(x => x.Name, 4, 8)
-            </div>
-            <div class="col-sm-4">
-                @Html.LabelValueRowFor(x => x.Date, 4, 8)
-            </div>
-            <div class="col-sm-4">
-                @Html.LabelValueRowFor(x => x.SignToDate, 4, 8)
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                Popis
-                <div>
-                    @Html.Raw(Model.RaceDescription)
+    <div class="col-sm-12 col-lg-6">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Zveřejnění závodu
+                    @if (!Model.PublishDate.HasValue)
+                    {
+                        @Html.MzButton("Zveřejnit závod", MzButton.MzButtonType.DEFAULT, new { onclick = "MujZavod.PublishRace(); return false;" }, "pull-right")
+                    }
+                    else if (!Model.EndDtae.HasValue)
+                    {
+                        @Html.MzButton("Zveřejnit výsledky", MzButton.MzButtonType.DEFAULT, new { onclick = "MujZavod.EndRace(); return false;" }, "pull-right")
+                    }
                 </div>
             </div>
-        </div>
-        @if (Model.PublishDate.HasValue)
-        {
-            <div class="row">
-                <div class="col-sm-4">
+            <div class="panel-body form-horizontal">
+                @if (Model.PublishDate.HasValue)
+                {
+                    
                     @Html.LabelValueRowFor(x => x.PublishDate, 4, 8)
-                </div>
+
+                    <h5>Možnosti přihlášení na závod:</h5>
+                    <small>Na své stránky můžete vložit jednu z následujících forem přihlášení</small>
+
+                    if (!Model.EndDtae.HasValue)
+                    {
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading"><div class="panel-title"><b>Kód pro vložení tlačítka na stránku</b></div></div>
+                        Do sekce "head" vložte následující kód
+                        <pre>
+<xmp class="mz-code"><script src="@(webUrl)/Scripts/MujZavod/Registration"></script>
+<link href="@(webUrl)/Content/MujZavod/Registration" rel="stylesheet" type="text/css">
+<script>$(function () { new MujZavod.Registration({ wrapper: '#btnMujZavodRegister', url: '@(webUrl)', raceKey: '@Model.RaceKey' }); });</script></xmp></pre>
+
+                        Kamkoliv na stránku vložte tlačítko <small>(případně ve scriptu upravte selector pro wrapper, na kterém se bude registrační průvodce volat)</small>
+                        <pre><xmp><button id="btnMujZavodRegister">Přihlásit</button></xmp></pre>
+                    </div>
+                    }
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading"><div class="panel-title"><b>Kód pro vložení detailu závodu na stránku</b></div></div>
+                        <pre><xmp class="mz-code"><iframe width="100%" height="100%" src="@(webUrl)/RaceRegistration/Index/@(Model.RaceKey)" /></xmp></pre>
+                    </div>
+
+                    <div class="panel panel-transparent">
+                        <div class="panel-heading"><div class="panel-title"><b>Odkaz na detail</b></div></div>
+                        <pre><xmp class="mz-code">@(webUrl)/RaceRegistration/Index/@(Model.RaceKey)</xmp></pre>
+                    </div>
+
+                    
+
+                    
+                }
             </div>
-        }
+        </div>
     </div>
 </div>

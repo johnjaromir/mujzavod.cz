@@ -16,7 +16,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.Round
 
         public string Id => "RoundGrid_"+raceCategoryId;
 
-        public string Name => "Kola závodu";
+        public string Name => "Měřené úseky";
 
         public string Url => "/Race/RoundGridData/" + raceCategoryId;
 
