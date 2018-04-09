@@ -343,6 +343,7 @@
     <Content Include="Scripts\app\MujZavodGrid.js" />
     <Content Include="Scripts\app\MujZavodModal.js" />
     <Content Include="Scripts\app\MujZavodRegistration.js" />
+    <Content Include="Scripts\app\MujZavodTools.js" />
     <Content Include="Scripts\js\app.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\js\pixeladmin.min.js" />

@@ -38,7 +38,7 @@ namespace MujZavod.Admin.Models.RaceRegistration
                 {
                     FirstName = y.ApplicationUser.FirstName,
                     LastName = y.ApplicationUser.LastName,
-                    Times = y.RaceRoundUsers.Where(z => z.RaceCategoryUserId == x.Id).Select(z => z.Time).ToList(),
+                    Times = y.RaceRoundUsers.Where(z => z.RaceCategoryUserId == y.Id).Select(z => z.Time).ToList(),
                     RunnerNumber = y.RunnerNumber,
                     CategoryOrder = orderedRunners.First(ou => ou.userId == y.Id).order + 1,
                     SubCategoryOrder = orderedSubCategoryRunners.First(ou => ou.Key == x.Id).Value.First(ou => ou.userId == y.Id).order + 1

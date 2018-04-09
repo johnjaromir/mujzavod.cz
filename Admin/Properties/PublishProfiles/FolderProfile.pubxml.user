@@ -99,28 +99,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/26/2018 15:41:15</publishTime>
     </File>
     <File Include="bin/MujZavod.Admin.dll">
-      <publishTime>03/28/2018 18:45:39</publishTime>
+      <publishTime>04/06/2018 01:10:31</publishTime>
     </File>
     <File Include="bin/MujZavod.Admin.pdb">
-      <publishTime>03/28/2018 18:45:39</publishTime>
+      <publishTime>04/06/2018 01:10:31</publishTime>
     </File>
     <File Include="bin/MujZavod.Code.dll">
-      <publishTime>03/28/2018 18:45:33</publishTime>
+      <publishTime>04/06/2018 00:50:28</publishTime>
     </File>
     <File Include="bin/MujZavod.Code.dll.config">
       <publishTime>02/26/2018 22:44:41</publishTime>
     </File>
     <File Include="bin/MujZavod.Code.pdb">
-      <publishTime>03/28/2018 18:45:33</publishTime>
+      <publishTime>04/06/2018 00:50:28</publishTime>
     </File>
     <File Include="bin/MujZavod.Data.dll">
-      <publishTime>03/28/2018 18:45:33</publishTime>
+      <publishTime>04/06/2018 00:50:28</publishTime>
     </File>
     <File Include="bin/MujZavod.Data.dll.config">
       <publishTime>03/01/2018 22:57:39</publishTime>
     </File>
     <File Include="bin/MujZavod.Data.pdb">
-      <publishTime>03/28/2018 18:45:33</publishTime>
+      <publishTime>04/06/2018 00:50:28</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>02/18/2018 09:44:54</publishTime>
@@ -543,10 +543,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/26/2018 22:44:43</publishTime>
     </File>
     <File Include="Scripts/app/MujZavodGrid.js">
-      <publishTime>03/27/2018 03:39:06</publishTime>
+      <publishTime>01/04/2018 04:05:53</publishTime>
     </File>
     <File Include="Scripts/app/MujZavodModal.js">
-      <publishTime>03/28/2018 02:43:12</publishTime>
+      <publishTime>03/31/2018 04:00:45</publishTime>
+    </File>
+    <File Include="Scripts/app/MujZavodRegistration.js">
+      <publishTime>01/04/2018 02:56:39</publishTime>
     </File>
     <File Include="Scripts/js/app.js">
       <publishTime>10/22/2017 13:20:56</publishTime>
@@ -603,31 +606,46 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/28/2018 03:08:22</publishTime>
     </File>
     <File Include="Views/Race/Category/Detail.cshtml">
-      <publishTime>03/28/2018 03:09:21</publishTime>
+      <publishTime>02/04/2018 01:56:22</publishTime>
     </File>
     <File Include="Views/Race/Category/Edit.cshtml">
       <publishTime>03/28/2018 03:40:51</publishTime>
     </File>
     <File Include="Views/Race/Category/Round/Edit.cshtml">
-      <publishTime>03/28/2018 03:39:37</publishTime>
+      <publishTime>04/04/2018 00:09:56</publishTime>
     </File>
     <File Include="Views/Race/Category/SubCategory/Edit.cshtml">
       <publishTime>03/28/2018 03:40:36</publishTime>
     </File>
     <File Include="Views/Race/Category/SubCategory/EditUser.cshtml">
-      <publishTime>03/27/2018 03:16:36</publishTime>
+      <publishTime>02/04/2018 02:53:48</publishTime>
+    </File>
+    <File Include="Views/Race/Category/SubCategory/EditUserTimes.cshtml">
+      <publishTime>02/04/2018 04:13:57</publishTime>
     </File>
     <File Include="Views/Race/Detail.cshtml">
-      <publishTime>03/11/2018 00:55:13</publishTime>
+      <publishTime>04/06/2018 01:09:50</publishTime>
     </File>
     <File Include="Views/Race/Edit.cshtml">
       <publishTime>03/28/2018 02:39:10</publishTime>
     </File>
     <File Include="Views/Race/Head.cshtml">
-      <publishTime>03/28/2018 03:04:14</publishTime>
+      <publishTime>04/06/2018 01:02:31</publishTime>
     </File>
     <File Include="Views/Race/Index.cshtml">
       <publishTime>03/28/2018 02:37:36</publishTime>
+    </File>
+    <File Include="Views/RaceRegistration/IframeButton.cshtml">
+      <publishTime>03/29/2018 03:16:22</publishTime>
+    </File>
+    <File Include="Views/RaceRegistration/Index.cshtml">
+      <publishTime>04/04/2018 01:01:54</publishTime>
+    </File>
+    <File Include="Views/RaceRegistration/RaceCategory.cshtml">
+      <publishTime>04/04/2018 00:48:17</publishTime>
+    </File>
+    <File Include="Views/RaceRegistration/RegisterOnRace.cshtml">
+      <publishTime>03/31/2018 04:46:31</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>01/26/2018 15:42:03</publishTime>
@@ -636,16 +654,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/26/2018 15:42:04</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/27/2018 02:51:10</publishTime>
+      <publishTime>01/04/2018 04:06:06</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutBreadcrumb.cshtml">
       <publishTime>01/26/2018 15:42:04</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutIframe.cshtml">
+      <publishTime>03/29/2018 03:07:15</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutMenu.cshtml">
       <publishTime>03/03/2018 09:28:59</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutPresentation.cshtml">
-      <publishTime>03/06/2018 01:09:30</publishTime>
+      <publishTime>01/04/2018 02:55:56</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutUser.cshtml">
       <publishTime>01/03/2018 23:54:03</publishTime>
@@ -657,7 +678,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/01/2018 22:36:05</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/28/2018 18:45:40</publishTime>
+      <publishTime>04/06/2018 00:50:36</publishTime>
     </File>
   </ItemGroup>
 </Project>

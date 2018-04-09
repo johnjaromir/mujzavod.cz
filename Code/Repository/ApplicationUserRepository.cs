@@ -66,8 +66,12 @@ namespace MujZavod.Code.Repository
             var userManager = new MujZavod.Data.Identity.ApplicationUserManager(
                 new Microsoft.AspNet.Identity.EntityFramework.UserStore<MujZavod.Data.Identity.ApplicationUser>(Context));
 
+            /*
             userManager.SetLockoutEnabled(entity.Id, true);
             userManager.SetLockoutEndDate(entity.Id, new DateTime(3000, 1, 1));
+            */
+
+            userManager.Delete(entity);
         }
 
         public override IQueryable<ApplicationUser> GetAll()

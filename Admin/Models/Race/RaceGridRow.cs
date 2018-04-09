@@ -38,7 +38,9 @@ namespace MujZavod.Admin.Models.Race
             {
                 if (race.RaceCategories == null)
                     return string.Empty;
-                return race.RaceCategories.Min(x => x.RaceRounds?.Min(y => (double?)y.Distance)) + " - " + race.RaceCategories.Max(a => a.RaceRounds?.Max(b => (double?)b.Distance));
+                double? min = race.RaceCategories.Where(x => x.RaceRounds.Count > 0).Min(x => x.RaceRounds?.Max(y => (double?)y.Distance));
+                double? max = race.RaceCategories.Where(x => x.RaceRounds.Count > 0).Max(a => a.RaceRounds?.Max(b => (double?)b.Distance));
+                return min == max ? min.ToString() : (min + " - " + max);
             }
         }
 

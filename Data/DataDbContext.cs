@@ -8,6 +8,8 @@ using System.Data.Entity.Infrastructure.DependencyResolution;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Collections;
 
 namespace MujZavod.Data
 {
@@ -20,7 +22,25 @@ namespace MujZavod.Data
 
         public static DataDbContext Create()
         {
-            return new DataDbContext();
+            return Instance;
+        }
+
+        public static DataDbContext Instance
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                    return new DataDbContext();
+
+                DataDbContext dt = null;
+                IDictionary items = HttpContext.Current.Items;
+                if (!items.Contains("DataDbContext"))
+                {
+                    items["DataDbContext"] = new DataDbContext();
+                }
+                dt = items["DataDbContext"] as DataDbContext;
+                return dt;
+            }
         }
 
         public DbSet<Models.Organizer> Organizers { get; set; }

@@ -18,7 +18,9 @@ namespace MujZavod.Code.Repository
         {
             var query = base.GetAll()
                 .Include(x => x.RaceCategories)
-                .Include(x => x.RaceCategories.Select(y => y.RaceSubCategories));
+                .Include(x => x.RaceCategories.Select(y => y.RaceSubCategories))
+                .Include(x => x.RaceCategories.Select(y => y.RaceRounds))
+                .Include(x => x.RaceCategories.Select(y => y.RaceCategoryUsers.Select(z => z.ApplicationUser)));
 
             var actUser = new ApplicationUserRepository().GetActAu();
             query = query.Where(x => x.OrganizerId == actUser.OrganizerId);
@@ -38,6 +40,14 @@ namespace MujZavod.Code.Repository
                 .Include(x => x.RaceCategories.Select(y => y.RaceSubCategories.Select(z => z.RaceCategoryUsers.Select(u => u.RaceRoundUsers))))
                 .Include(x => x.RaceCategories.Select(y => y.RaceRounds.Select(z => z.RaceRoundUsers)))
                 .FirstOrDefault();
+        }
+
+
+        public override void Remove(Race entity, bool saveChanges)
+        {
+            var raceCategoryRepo = new RaceCategoryRepository();
+            entity.RaceCategories.ToList().ForEach(x => raceCategoryRepo.Remove(x, false));
+            base.Remove(entity, saveChanges);
         }
     }
 }

@@ -40,25 +40,25 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
             {
                 string ret = "";
 
+                
 
-                // editujeme jen neregistrovany
-                if (raceCategoryUser.ApplicationUser.Roles?.Count() == 0)
+                ret += new Helpers.MzButton()
                 {
-                    ret += new Helpers.MzButton()
-                    {
-                        innerHtml = "Upravit",
-                        cssClass = "pull-right",
-                        mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
-                        js = "new MujZavod.Modal().loadFromUrl('/Race/SubCategoryUserEdit?id=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); modal.close(); });"
-                    };
-                }
+                    innerHtml = "Smazat",
+                    cssClass = "pull-right btn-sm m-l-1",
+                    mzButtonType = Helpers.MzButton.MzButtonType.DELETE,
+                    js = "MujZavod.Confirm('Opravdu si přejete smazat zvodníka?', function() { MujZavod.DoAction('/Race/RemoveRaceCategoryUser?id=" + Id + "', function () { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); }); } );"
+                };
+
+
+                
 
                 if (raceCategoryUser.RaceCategory.Race.Date < DateTime.Now)
                 {
                     ret += new Helpers.MzButton()
                     {
                         innerHtml = "Upravit časy",
-                        cssClass = "pull-right",
+                        cssClass = "pull-right btn-sm m-l-1",
                         mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
                         js = "new MujZavod.Modal().loadFromUrl('/Race/EditUserTimes?runnerId=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); modal.close(); });"
 
@@ -66,6 +66,20 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
                     };
                 }
 
+
+                // editujeme jen neregistrovany
+                if (raceCategoryUser.ApplicationUser.Roles?.Count() == 0)
+                {
+                    ret += new Helpers.MzButton()
+                    {
+                        innerHtml = "Upravit",
+                        cssClass = "pull-right btn-sm m-l-1",
+                        mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
+                        js = "new MujZavod.Modal().loadFromUrl('/Race/SubCategoryUserEdit?id=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); modal.close(); });"
+                    };
+                }
+
+                
                 return ret;
             }
         }

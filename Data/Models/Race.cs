@@ -15,7 +15,7 @@ namespace MujZavod.Data.Models
         }
 
         public int OrganizerId { get; set; }
-        public Organizer Organizer { get; set; }
+        public virtual Organizer Organizer { get; set; }
 
         public string Name { get; set; }
         public DateTime Date { get; set; }
@@ -28,6 +28,6 @@ namespace MujZavod.Data.Models
         public DateTime? EndDate { get; set; }
 
         
-        public ICollection<RaceCategory> RaceCategories { get; set; }
+        public virtual ICollection<RaceCategory> RaceCategories { get; set; }
     }
 }

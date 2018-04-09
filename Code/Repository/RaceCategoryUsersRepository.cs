@@ -41,5 +41,14 @@ namespace MujZavod.Code.Repository
                 .Include(x => x.RaceRoundUsers)
                 .FirstOrDefault(x => x.Id == userId);
         }
+
+
+        public override void Remove(RaceCategoryUser entity, bool saveChanges)
+        {
+            if (entity.ApplicationUser.Roles.Count == 0)
+                new ApplicationUserRepository().Remove(entity.ApplicationUser, false);
+
+            base.Remove(entity, saveChanges);
+        }
     }
 }

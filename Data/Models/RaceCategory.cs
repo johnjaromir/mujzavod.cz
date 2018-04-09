@@ -28,7 +28,7 @@ namespace MujZavod.Data.Models
         
         public virtual ICollection<RaceRound> RaceRounds { get; set; }
 
-        public ICollection<RaceCategoryUser> RaceCategoryUsers { get; set; }
-        public ICollection<RaceSubCategory> RaceSubCategories { get; set; }
+        public virtual ICollection<RaceCategoryUser> RaceCategoryUsers { get; set; }
+        public virtual ICollection<RaceSubCategory> RaceSubCategories { get; set; }
     }
 }

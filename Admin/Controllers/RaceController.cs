@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MujZavod.Admin.Helpers;
+using MujZavod.Code.Extensions;
 
 
 namespace MujZavod.Admin.Controllers
@@ -360,14 +361,20 @@ namespace MujZavod.Admin.Controllers
         {
             var race = RaceRepository.GetById(raceId);
 
-            if (race.OrganizerId == actUser.OrganizerId)
+            List<string> err;
+            if (race.CanPublish(out err))
             {
-                race.PublishDate = DateTime.Now;
-                race.RaceKey = Guid.NewGuid().ToString().Replace("-", "");
-                RaceRepository.Update(race, true);
-            }
+                if (race.OrganizerId == actUser.OrganizerId)
+                {
+                    race.PublishDate = DateTime.Now;
+                    race.RaceKey = Guid.NewGuid().ToString().Replace("-", "");
+                    RaceRepository.Update(race, true);
+                }
 
-            return Content("OK");
+                return Content("OK");
+            }
+            else
+                return Content(string.Join("<br/>", err));
         }
 
 
@@ -415,6 +422,44 @@ namespace MujZavod.Admin.Controllers
             var race = RaceRepository.GetById(RaceId);
             race.EndDate = DateTime.Now;
             RaceRepository.Update(race, true);
+            return Content("OK");
+        }
+
+        public ActionResult RemoveCategory(int id)
+        {
+
+            var raceCategory = RaceCategoryRepository.GetById(id);
+            if (!User.Can().EditCategory(raceCategory))
+                throw new Code.Exceptions.MzSecurityException();
+
+            RaceCategoryRepository.Remove(raceCategory, true);
+
+            return Content("OK");
+        }
+
+
+        public ActionResult RemoveSubCategory(int id)
+        {
+
+            var raceSubCategory = RaceSubCategoryRepository.GetById(id);
+            if (!User.Can().EditSubCategory(raceSubCategory))
+                throw new Code.Exceptions.MzSecurityException();
+
+            RaceSubCategoryRepository.Remove(raceSubCategory, true);
+
+            return Content("OK");
+        }
+
+
+        public ActionResult RemoveRaceCategoryUser(int id)
+        {
+
+            var raceCategoryUser = RaceCategoryUsersRepository.GetById(id);
+            if (!User.Can().EditCategory(raceCategoryUser.RaceCategory))
+                throw new Code.Exceptions.MzSecurityException();
+
+            RaceCategoryUsersRepository.Remove(raceCategoryUser, true);
+
             return Content("OK");
         }
     }

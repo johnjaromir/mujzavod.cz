@@ -38,6 +38,9 @@
                                 $('#raceHead').load('@Url.Action("Head", "Race", new { id = Model.RaceViewModel.Id })');
 
                             }
+                            else {
+                                bootbox.alert({ message: data });
+                            }
                         })
                     }
                 },

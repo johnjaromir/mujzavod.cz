@@ -21,6 +21,8 @@ namespace MujZavod.Code.Repository
             var actUser = new ApplicationUserRepository().GetActAu();
             query = query.Where(x => x.Race.OrganizerId == actUser.OrganizerId);
 
+            query = query.Include(x => x.RaceCategoryUsers.Select(y => y.ApplicationUser));
+
             return query;
         }
         
@@ -37,6 +39,19 @@ namespace MujZavod.Code.Repository
                     && (!y.AgeFrom.HasValue || y.AgeFrom.Value <= age)
                     && (!y.AgeTo.HasValue || y.AgeTo.Value >= age))
                     )));
+        }
+
+
+
+        public override void Remove(RaceCategory entity, bool saveChanges)
+        {
+            // smazeme navíc všechny závodníky co nejsou registrovaní
+            var auRepo = new ApplicationUserRepository();
+            //entity.RaceCategoryUsers.Where(x => x.RaceSubCategory.RaceCategoryUsers.Any(y => y.ApplicationUser.Roles.Count() > 0))
+            entity.RaceCategoryUsers.Where(x => x.ApplicationUser.Roles.Count() > 0).ToList().ForEach(x =>
+                auRepo.Remove(x.ApplicationUser, false)
+            );
+            base.Remove(entity, saveChanges);
         }
     }
 }

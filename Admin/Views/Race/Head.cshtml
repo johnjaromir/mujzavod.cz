@@ -58,7 +58,8 @@
                     Zveřejnění závodu
                     @if (!Model.PublishDate.HasValue)
                     {
-                        @Html.MzButton("Zveřejnit závod", MzButton.MzButtonType.DEFAULT, new { onclick = "MujZavod.PublishRace(); return false;" }, "pull-right")
+                        @Html.MzButton("Zveřejnit závod", MzButton.MzButtonType.DEFAULT, 
+                            new { onclick = "MujZavod.PublishRace(); return false;"  }, "pull-right")
                     }
                     else if (!Model.EndDtae.HasValue)
                     {

@@ -63,6 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\MzSecurityException.cs" />
+    <Compile Include="Extensions\AuthoriseExtensions.cs" />
+    <Compile Include="Extensions\RaceExtensions.cs" />
     <Compile Include="MailTools\Core.cs" />
     <Compile Include="MailTools\MailConfig.cs" />
     <Compile Include="MailTools\SmtpPipe.cs" />

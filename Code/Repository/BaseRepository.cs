@@ -36,14 +36,14 @@ namespace MujZavod.Code.Repository
 
         
 
-        protected DbSet<T2> _getAll<T2>(string dbSetContextName) where T2 : class
+        protected DbSet<T2> _getAll<T2>() where T2 : class
         {
             return (DbSet<T2>)Context.GetType().GetProperty(dbSetContextName).GetValue(Context);
         }
 
         public virtual IQueryable<T> GetAll()
         {
-            return _getAll<T>(dbSetContextName);
+            return _getAll<T>();
         }
         public virtual IQueryable<T> GetAll(Expression<Func<T, bool>> expression)
         {
@@ -121,7 +121,7 @@ namespace MujZavod.Code.Repository
 
         public virtual void Remove(T entity, bool saveChanges)
         {
-            ((DbSet<T>)GetAll()).Remove(entity);
+            _getAll<T>().Remove(entity);
 
             if (saveChanges)
             {

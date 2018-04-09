@@ -35,5 +35,17 @@ namespace MujZavod.Admin.Controllers
 
             base.OnActionExecuting(filterContext);
         }
+
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if (filterContext.Exception is Code.Exceptions.MzSecurityException)
+            {
+                filterContext.Result = new ContentResult() { Content = "Pro akci nemáte potřebná oprávnění" };
+                filterContext.HttpContext.Response.StatusCode = 401;
+                filterContext.ExceptionHandled = true;
+            }
+            base.OnException(filterContext);
+        }
     }
 }

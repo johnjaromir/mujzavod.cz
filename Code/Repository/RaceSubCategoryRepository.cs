@@ -15,7 +15,8 @@ namespace MujZavod.Code.Repository
 
         public override IQueryable<RaceSubCategory> GetAll()
         {
-            return base.GetAll().Include(x=>x.AllowedGenders);
+            return base.GetAll().Include(x => x.AllowedGenders).Include(x => x.RaceCategory)
+                .Include(x => x.RaceCategoryUsers.Select(y => y.ApplicationUser));
         }
 
         public IQueryable<RaceSubCategory> GetSubCategoryForUser(int genderId, DateTime birthDate, int raceCategoryId)
@@ -30,6 +31,20 @@ namespace MujZavod.Code.Repository
                     && (!x.AgeFrom.HasValue || x.AgeFrom.Value <= age)
                     && (!x.AgeTo.HasValue || x.AgeTo.Value >= age))
                     ;
+        }
+
+
+        public override void Remove(RaceSubCategory entity, bool saveChanges)
+        {
+            // smazeme navíc všechny závodníky co nejsou registrovaní
+            var auRepo = new ApplicationUserRepository();
+            var raceCategoryUsersRepo = new RaceCategoryUsersRepository();
+            //entity.RaceCategoryUsers.Where(x => x.RaceSubCategory.RaceCategoryUsers.Any(y => y.ApplicationUser.Roles.Count() > 0))
+            entity.RaceCategoryUsers.ToList().ForEach(x =>
+            {
+                raceCategoryUsersRepo.Remove(x, false);
+            });
+            base.Remove(entity, saveChanges);
         }
     }
 }
