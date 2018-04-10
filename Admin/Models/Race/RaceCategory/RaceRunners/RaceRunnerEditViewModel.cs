@@ -15,6 +15,8 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
         [DisplayName("Podkategorie")]
         public int RaceSubCategoryId { get; set; }
 
+        public bool isRegistered { get; set; }
+
 
         public DropDown.RaceSubCategoryDropDownModel RaceSubCategoryDropDownModel;
 
@@ -30,6 +32,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
             Id = raceCategoryUser.Id.ToString();
             RaceSubCategoryId = raceCategoryUser.RaceSubCategoryId ?? 0;
             RaceSubCategoryDropDownModel = new DropDown.RaceSubCategoryDropDownModel(raceCategoryUser.RaceCategoryId);
+            isRegistered = raceCategoryUser.ApplicationUser.Roles.Count > 0;
         }
     }
 }

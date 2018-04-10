@@ -11,9 +11,17 @@
                         <div class="panel-heading">
                             <div class="panel-title">
                                 Informace
-                                @Html.MzButton("Upravit", MzButton.MzButtonType.EDIT,
-                                 new { onclick = "new MujZavod.Modal().loadFromUrl('" + Url.Action("CategoryEdit", "Race", new { Id = Model.Id, RaceId = Model.RaceId }) + "', function (modal) { location.reload(); });" },
-                                 "pull-right")
+                                @if (Model.canEdit)
+                                {
+                                <span class="pull-right">
+                                    @Html.MzButton("Upravit", MzButton.MzButtonType.EDIT,
+                                           new { onclick = "new MujZavod.Modal().loadFromUrl('" + Url.Action("CategoryEdit", "Race", new { Id = Model.Id, RaceId = Model.RaceId }) + "', function (modal) { location.reload(); });" },
+                                           "")
+
+                                    @Html.MzButton("Smazat", MzButton.MzButtonType.DELETE,
+                                        new { onclick = "MujZavod.Confirm('Přejete si smazat kategorii?', function() { MujZavod.DoAction('" + Url.Action("RemoveCategory", "Race", new { id = Model.Id }) + "', function() { location.reload(); }) }); return false;" })
+                                </span>
+                                }
                             </div>
                         </div>
                         <div class="panel-body">

@@ -7,12 +7,14 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.Round
 {
     public class RoundGridViewModel : Helpers.Grid.IGridViewModel<RoundGridRow>
     {
-        public RoundGridViewModel(int raceCategoryId)
+        public RoundGridViewModel(int raceCategoryId, bool canEdit)
         {
             this.raceCategoryId = raceCategoryId;
+            this.canEdit = canEdit;
         }
 
         private int raceCategoryId;
+        private bool canEdit;
 
         public string Id => "RoundGrid_"+raceCategoryId;
 
@@ -20,6 +22,6 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.Round
 
         public string Url => "/Race/RoundGridData/" + raceCategoryId;
 
-        public string addUrl => "/Race/CategoryRoundEdit?RaceCategoryId=" + raceCategoryId;
+        public string addUrl => canEdit ? ("/Race/CategoryRoundEdit?RaceCategoryId=" + raceCategoryId) : string.Empty;
     }
 }

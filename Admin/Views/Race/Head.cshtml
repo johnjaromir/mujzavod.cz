@@ -21,9 +21,13 @@
             <div class="panel-heading">
                 <div class="panel-title">
                     Základní informace
-                    @Html.MzButton("Upravit", MzButton.MzButtonType.EDIT, 
-                   new { onclick = "new MujZavod.Modal('md').loadFromUrl('"+Url.Action("Edit","Race", new { Id = Model.Id })+"', function (raceModal) { raceModal.close(); $('#raceHead').load('"+Url.Action("Head", "Race", new { id = Model.Id })+"'); });" }, "pull-right")
-            
+                    <span class="pull-right">
+                        @Html.MzButton("Upravit", MzButton.MzButtonType.EDIT,
+new { onclick = "new MujZavod.Modal('md').loadFromUrl('" + Url.Action("Edit", "Race", new { Id = Model.Id }) + "', function (raceModal) { raceModal.close(); $('#raceHead').load('" + Url.Action("Head", "Race", new { id = Model.Id }) + "'); });" }, "")
+
+                        @Html.MzButton("Smazat", MzButton.MzButtonType.DELETE,
+new { onclick = "MujZavod.RemoveRace(); return false;" }, "")
+                    </span>
                 </div>
             </div>
             <div class="panel-body form-horizontal">
@@ -92,7 +96,7 @@
                     }
                     <div class="panel panel-transparent">
                         <div class="panel-heading"><div class="panel-title"><b>Kód pro vložení detailu závodu na stránku</b></div></div>
-                        <pre><xmp class="mz-code"><iframe width="100%" height="100%" src="@(webUrl)/RaceRegistration/Index/@(Model.RaceKey)" /></xmp></pre>
+                        <pre><xmp class="mz-code"><iframe width="100%" height="100%" src="@(webUrl)/RaceRegistration/Index/@(Model.RaceKey)?iframe=true" /></xmp></pre>
                     </div>
 
                     <div class="panel panel-transparent">

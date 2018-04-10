@@ -24,6 +24,7 @@ namespace MujZavod.Admin.Models.RaceRegistration
 
         public List<RaceCategoryResult> Categories { get; set; }
 
+        public bool inIframe { get; set; }
 
         public RaceRegistrationViewModel(Data.Models.Race race)
         {

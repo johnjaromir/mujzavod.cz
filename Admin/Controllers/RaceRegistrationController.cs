@@ -44,10 +44,10 @@ namespace MujZavod.Admin.Controllers
         
        
         
-        public ActionResult Index(string Id)
+        public ActionResult Index(string Id, bool? iframe)
         {
             var race = RaceRepository.getRaceByKeyDetail(Id);
-            return View(new Models.RaceRegistration.RaceRegistrationViewModel(race));
+            return View(new Models.RaceRegistration.RaceRegistrationViewModel(race) { inIframe = iframe ?? false });
         }
 
         [HttpGet]
@@ -82,7 +82,7 @@ namespace MujZavod.Admin.Controllers
                     au.UserName = model.Email;
                     UserManager.Create(au, model.Password);
                     UserManager.SetLockoutEnabled(au.Id, false);
-                    UserManager.AddToRoleAsync(au.Id, "User");
+                    UserManager.AddToRole(au.Id, "User");
                 }
                 else
                 {

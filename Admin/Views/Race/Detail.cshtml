@@ -28,15 +28,15 @@
         var MujZavod = MujZavod || {};
         MujZavod.PublishRace = function () {
             bootbox.confirm({
-                message: 'Přejete si zveřejnit závod?',
+                message: 'Přejete si zveřejnit závod? Po zveřejnění, nebudete moci závod editovat.',
                 className: 'bootbox-xs',
 
                 callback: function (result) {
                     if (result) {
                         $.get('@Url.Action("Publish", "Race", new { RaceId = Model.RaceViewModel.Id })', function (data) {
                             if (data == "OK") {
-                                $('#raceHead').load('@Url.Action("Head", "Race", new { id = Model.RaceViewModel.Id })');
-
+                                //$('#raceHead').load('@Url.Action("Head", "Race", new { id = Model.RaceViewModel.Id })');
+                                location.reload();
                             }
                             else {
                                 bootbox.alert({ message: data });
@@ -62,6 +62,14 @@
                         })
                     }
                 },
+            });
+        }
+
+        MujZavod.RemoveRace = function () {
+            MujZavod.Confirm('Opravdu si přejete smazat závod? O veškeré údaje přijdete.', function () {
+                MujZavod.DoAction('@Url.Action("RemoveRace", "Race", new { id = Model.RaceViewModel.Id })', function () {
+                    location.href = '@Url.Action("Index", "Race")';
+                });
             });
         }
 </script>

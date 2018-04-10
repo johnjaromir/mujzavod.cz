@@ -9,9 +9,12 @@
 
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.RaceCategoryId)
-    
+    @Html.HiddenFor(x=>x.isRegistered)
 
     @Html.MzEditLineFor(x => x.RunnerNumber)
+
+    if (!Model.isRegistered)
+    {
     @Html.MzEditLineFor(x => x.FirstName)
 
     @Html.MzEditLineFor(x => x.LastName)
@@ -26,7 +29,14 @@
             @Html.MzDropDownFor(m => m.GenderId, new MujZavod.Admin.Models.DropDown.EGenderDropDownModel(), "Pohlaví", new { @class = "form-control" })
         </div>
     </div>
-
+    }
+    else
+    {
+        @Html.HiddenFor(x=>x.FirstName)
+        @Html.HiddenFor(x=>x.LastName)
+        @Html.HiddenFor(x=>x.BirthDate)
+        @Html.HiddenFor(x=>x.GenderId)
+    }
     <div class="form-group">
         @Html.LabelFor(x => x.RaceSubCategoryId, new { @class = "col-sm-4 control-label" })
         <div class="col-sm-8">

@@ -15,7 +15,7 @@ namespace MujZavod.Admin.Helpers
         {
             
             string head = "<thead><tr>" + string.Join("\n", getColumnNames(typeof(T)).Select(x => "<th>" + x + "</th>")) + "</tr></thead>";
-            string table = $"<table class='table-primary table stripped' id='{gridViewModel.Id}' width='100%'>{head}</table>";
+            string table = $"<table class='table-light table table-striped' id='{gridViewModel.Id}' width='100%'>{head}</table>";
 
             string columns = Newtonsoft.Json.JsonConvert.SerializeObject(getColumns(typeof(T))); 
             string script = $"<script>new MujZavod.Grid({{Id: '{gridViewModel.Id}', ajax: '{gridViewModel.Url}', columns: {columns}, name: '{gridViewModel.Name}', addUrl: '{gridViewModel.addUrl}'}});</script>";

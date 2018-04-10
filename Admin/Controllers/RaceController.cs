@@ -326,11 +326,13 @@ namespace MujZavod.Admin.Controllers
                     au = new Data.Identity.ApplicationUser();
                 }
 
-                au.FirstName = model.FirstName;
-                au.LastName = model.LastName;
-                au.EGenderId = model.GenderId;
-                au.BirthDate = model.BirthDate.Value;
-
+                if (!model.isRegistered)
+                {
+                    au.FirstName = model.FirstName;
+                    au.LastName = model.LastName;
+                    au.EGenderId = model.GenderId;
+                    au.BirthDate = model.BirthDate.Value;
+                }
                 raceCategoryUser.RunnerNumber = model.RunnerNumber;
                 raceCategoryUser.RaceSubCategoryId = model.RaceSubCategoryId;
 
@@ -352,6 +354,7 @@ namespace MujZavod.Admin.Controllers
                 }
                 return Content("OK");
             }
+            model.RaceSubCategoryDropDownModel = new Models.DropDown.RaceSubCategoryDropDownModel(model.RaceCategoryId.Value);
             return PartialView("/Views/Race/Category/SubCategory/EditUser.cshtml", model);
         }
 
@@ -459,6 +462,31 @@ namespace MujZavod.Admin.Controllers
                 throw new Code.Exceptions.MzSecurityException();
 
             RaceCategoryUsersRepository.Remove(raceCategoryUser, true);
+
+            return Content("OK");
+        }
+
+        public ActionResult RemoveRaceRound(int id)
+        {
+
+            var raceRound = RaceRoundRepository.GetById(id);
+            if (!User.Can().EditCategory(raceRound.RaceCategory))
+                throw new Code.Exceptions.MzSecurityException();
+
+            RaceRoundRepository.Remove(raceRound, true);
+
+            return Content("OK");
+        }
+
+
+        public ActionResult RemoveRace(int id)
+        {
+
+            var race = RaceRepository.GetById(id);
+            if (!User.Can().EditRace(race))
+                throw new Code.Exceptions.MzSecurityException();
+
+            RaceRepository.Remove(race, true);
 
             return Content("OK");
         }

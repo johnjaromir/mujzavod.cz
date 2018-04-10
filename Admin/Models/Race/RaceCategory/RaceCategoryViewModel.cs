@@ -23,6 +23,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory
         [Required]
         public DateTime? Start { get; set; }
 
+        public bool canEdit { get; set; }
 
         
         public Round.RoundGridViewModel RoundGridViewModel { get; set; }
@@ -50,12 +51,15 @@ namespace MujZavod.Admin.Models.Race.RaceCategory
 
                 Start = raceCategory.Start;
 
+                canEdit = !raceCategory.Race.PublishDate.HasValue;
                 if (inDetail)
                 {
-                    RoundGridViewModel = new Round.RoundGridViewModel(raceCategory.Id);
-                    SubCategoryGridViewModel = new SubCategory.SubCategoryGridViewModel(raceCategory.Id);
-                    RaceRunnersGridViewModel = new RaceRunners.RaceRunnersGridViewModel(raceCategory.Id);
+                    RoundGridViewModel = new Round.RoundGridViewModel(raceCategory.Id, canEdit);
+                    SubCategoryGridViewModel = new SubCategory.SubCategoryGridViewModel(raceCategory.Id, canEdit);
+                    RaceRunnersGridViewModel = new RaceRunners.RaceRunnersGridViewModel(raceCategory.Id, true);
                 }
+
+                
             }
         }
     }

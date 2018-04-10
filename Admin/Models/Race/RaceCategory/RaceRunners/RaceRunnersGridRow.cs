@@ -67,9 +67,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
                 }
 
 
-                // editujeme jen neregistrovany
-                if (raceCategoryUser.ApplicationUser.Roles?.Count() == 0)
-                {
+                
                     ret += new Helpers.MzButton()
                     {
                         innerHtml = "Upravit",
@@ -77,7 +75,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
                         mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
                         js = "new MujZavod.Modal().loadFromUrl('/Race/SubCategoryUserEdit?id=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); modal.close(); });"
                     };
-                }
+                
 
                 
                 return ret;

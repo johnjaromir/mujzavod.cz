@@ -31,14 +31,29 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.Round
             {
                 string ret = string.Empty;
 
-                ret += new Helpers.MzButton()
+                ret += "<span class='pull-right'>";
+
+
+                if (!raceRound.RaceCategory.Race.PublishDate.HasValue)
                 {
-                     cssClass = "pull-right",
-                      innerHtml = "Upravit",
-                       mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
-                        js = "new MujZavod.Modal().loadFromUrl('/Race/CategoryRoundEdit/" + Id + "?RaceCategoryId=" + raceRound.RaceCategoryId + "', function (modal) { modal.close(); MujZavod.Grids['RoundGrid_"+raceRound.RaceCategoryId+"'].refresh() });"
-                };
-                //ret += $"<a href='#' onclick=\"new MujZavod.Modal().loadFromUrl('/Race/CategoryRoundEdit/"+Id+"?RaceCategoryId="+raceRound.RaceCategoryId+"', function (modal) { location.reload(); });\" class='btn btn-default' >Upravit</a>";
+                    ret += new Helpers.MzButton()
+                    {
+                        cssClass = "btn-sm m-l-1",
+                        innerHtml = "Upravit",
+                        mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
+                        js = "new MujZavod.Modal().loadFromUrl('/Race/CategoryRoundEdit/" + Id + "?RaceCategoryId=" + raceRound.RaceCategoryId + "', function (modal) { modal.close(); MujZavod.Grids['RoundGrid_" + raceRound.RaceCategoryId + "'].refresh() });"
+                    };
+
+                    ret += new Helpers.MzButton()
+                    {
+                        innerHtml = "Smazat",
+                        cssClass = "btn-sm m-l-1",
+                        mzButtonType = Helpers.MzButton.MzButtonType.DELETE,
+                        js = "MujZavod.Confirm('Opravdu si přejete smazat měřený úsek?', function() { MujZavod.DoAction('/Race/RemoveRaceRound?id=" + Id + "', function () { MujZavod.Grids['RoundGrid_" + raceRound.RaceCategoryId + "'].refresh(); }); } );"
+                    };
+                }
+
+                ret += "</span>";
 
                 return ret;
             }

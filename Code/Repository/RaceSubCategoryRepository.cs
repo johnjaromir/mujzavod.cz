@@ -16,7 +16,8 @@ namespace MujZavod.Code.Repository
         public override IQueryable<RaceSubCategory> GetAll()
         {
             return base.GetAll().Include(x => x.AllowedGenders).Include(x => x.RaceCategory)
-                .Include(x => x.RaceCategoryUsers.Select(y => y.ApplicationUser));
+                .Include(x => x.RaceCategoryUsers.Select(y => y.ApplicationUser))
+                .Include(x => x.RaceCategory.Race);
         }
 
         public IQueryable<RaceSubCategory> GetSubCategoryForUser(int genderId, DateTime birthDate, int raceCategoryId)

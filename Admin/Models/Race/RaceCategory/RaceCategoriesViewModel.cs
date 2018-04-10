@@ -8,6 +8,7 @@ namespace MujZavod.Admin.Models.Race.RaceCategory
     public class RaceCategoriesViewModel
     {
         public int RaceId { get; set; }
+        public bool canEdit { get; set; }
         public List<RaceCategoryViewModel> RaceCategories {get;set;}
     }
 }

@@ -34,22 +34,24 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.SubCategory
             {
                 string ret = "";
 
-                ret += new Helpers.MzButton()
+                if (!raceSubCategory.RaceCategory.Race.PublishDate.HasValue)
                 {
-                    innerHtml = "Smazat",
-                    cssClass = "pull-right",
-                    mzButtonType = Helpers.MzButton.MzButtonType.DELETE,
-                    js = "MujZavod.Confirm('Opravdu si přejete smazat podkategorii? Budou spolu s ní odstraněni i závodnící.', function() { MujZavod.DoAction('/Race/RemoveSubCategory?id=" + Id + "', function () { MujZavod.Grids['SubCategoryGrid_" + raceSubCategory.RaceCategoryId + "'].refresh(); }); } );"
-                };
+                    ret += new Helpers.MzButton()
+                    {
+                        innerHtml = "Smazat",
+                        cssClass = "pull-right btn-sm m-l-1",
+                        mzButtonType = Helpers.MzButton.MzButtonType.DELETE,
+                        js = "MujZavod.Confirm('Opravdu si přejete smazat podkategorii? Budou spolu s ní odstraněni i závodnící.', function() { MujZavod.DoAction('/Race/RemoveSubCategory?id=" + Id + "', function () { MujZavod.Grids['SubCategoryGrid_" + raceSubCategory.RaceCategoryId + "'].refresh(); }); } );"
+                    };
 
-                ret += new Helpers.MzButton()
-                {
-                    innerHtml = "Upravit",
-                    cssClass = "pull-right",
-                    mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
-                    js = "new MujZavod.Modal().loadFromUrl('/Race/SubCategoryEdit?id=" + Id + "&raceCategoryId="+raceSubCategory.RaceCategoryId+"', function (modal) { MujZavod.Grids['SubCategoryGrid_" + raceSubCategory.RaceCategoryId+"'].refresh(); modal.close(); });"
-                };
-
+                    ret += new Helpers.MzButton()
+                    {
+                        innerHtml = "Upravit",
+                        cssClass = "pull-right btn-sm m-l-1",
+                        mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
+                        js = "new MujZavod.Modal().loadFromUrl('/Race/SubCategoryEdit?id=" + Id + "&raceCategoryId=" + raceSubCategory.RaceCategoryId + "', function (modal) { MujZavod.Grids['SubCategoryGrid_" + raceSubCategory.RaceCategoryId + "'].refresh(); modal.close(); });"
+                    };
+                }
                 
 
                 return ret;
