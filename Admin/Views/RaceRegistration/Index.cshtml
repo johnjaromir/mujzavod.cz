@@ -1,7 +1,7 @@
 ﻿@model MujZavod.Admin.Models.RaceRegistration.RaceRegistrationViewModel
 @{
-    ViewBag.Title = "Detail " + Model.Name;
-    Layout = "~/Views/Shared/_LayoutPresentation.cshtml";
+    ViewBag.Title = Model.Name;
+    Layout = Model.inIframe ? "~/Views/Shared/_LayoutPresentation.cshtml" : "~/Views/Shared/_Layout.cshtml";
 }
 
 @section scripts
@@ -43,19 +43,28 @@
     }
     @if (Model.EndDate.HasValue)
     {
-        <ul class="nav nav-tabs tab-resize-nav nav-xs" id="tab-resize-tabs">
-            @foreach (var category in Model.Categories)
-            {
-                <li class="@(category.Id == Model.Categories[0].Id ? "active" : "")"><a data-toggle="tab" href="#category-tab-@(category.Id)">@category.Name</a></li>
-            }
-        </ul>
-        <div id="divRaceCategoryContent" class="tab-content">
-            @foreach(var category in Model.Categories)
-            {
-                <div class="tab-pane @(category.Id == Model.Categories[0].Id ? "active" : "")" id="category-tab-@(category.Id)">
-                    @Html.Partial("/Views/RaceRegistration/RaceCategory.cshtml", category)
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Výsledky závodu
                 </div>
-            }
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs tab-resize-nav nav-xs" id="tab-resize-tabs">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <li class="@(category.Id == Model.Categories[0].Id ? "active" : "")"><a data-toggle="tab" href="#category-tab-@(category.Id)">@category.Name</a></li>
+                    }
+                </ul>
+                <div id="divRaceCategoryContent" class="tab-content">
+                    @foreach(var category in Model.Categories)
+                    {
+                        <div class="tab-pane @(category.Id == Model.Categories[0].Id ? "active" : "")" id="category-tab-@(category.Id)">
+                            @Html.Partial("/Views/RaceRegistration/RaceCategory.cshtml", category)
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     }
 </div>

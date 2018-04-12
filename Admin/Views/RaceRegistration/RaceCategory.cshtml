@@ -11,17 +11,20 @@
     {
         <div class="tab-pane @(category.Id == Model.SubCategoriesResults[0].Id ? "active" : "")" id="subcategory-tab-@(category.Id)">
             
-            <table class="table">
-                <tr>
-                    <th>Pořadí</th>
-                    <th>Číslo závodníka</th>
-                    <th>Jméno</th>
-                    <th>Příjmení</th>
-                    @foreach(var round in category.Rounds)
-                    {
-                        <th>@round</th>
-                    }
-                </tr>
+            <table class="table table-striped display nowrap" id="mzTable_@(category.Id)">
+                <thead>
+                    <tr>
+                        <th>Pořadí</th>
+                        <th>Číslo závodníka</th>
+                        <th>Jméno</th>
+                        <th>Příjmení</th>
+                        @foreach(var round in category.Rounds)
+                        {
+                            <th>@round</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
                 @foreach(var runner in category.Runners)
                 {
                     <tr>
@@ -35,8 +38,24 @@
                         }
                     </tr>
                 }
+                </tbody>
             </table>
 
         </div>
+
+        <script>
+
+            var table = $('#mzTable_@(category.Id)').DataTable({
+                
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+
+            table.buttons().container()
+                .appendTo('#mzTable_@(category.Id)_wrapper .DT-lf-right');
+
+            
+        </script>
     }
 </div>
