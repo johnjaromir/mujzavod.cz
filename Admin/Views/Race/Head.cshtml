@@ -69,6 +69,10 @@ new { onclick = "MujZavod.RemoveRace(); return false;" }, "")
                     {
                         @Html.MzButton("Zveřejnit výsledky", MzButton.MzButtonType.DEFAULT, new { onclick = "MujZavod.EndRace(); return false;" }, "pull-right")
                     }
+                    else
+                    {
+                        @Html.MzButton("Zobrazit výsledky", MzButton.MzButtonType.DEFAULT, new { onclick = "var modalResults = new MujZavod.Modal('lg');  modalResults.loadFromUrl('" + Url.Action("RaceResults", "RaceRegistration", new { id = Model.RaceKey })+ "'); modalResults.setTitle('Výsledky závodu'); return false;" }, "pull-right")
+                    }
                 </div>
             </div>
             <div class="panel-body form-horizontal">

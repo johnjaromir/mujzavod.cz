@@ -134,12 +134,14 @@ namespace MujZavod.Admin.Controllers
 
 
 
-        public ActionResult Detail(string raceKey)
-        {
-            var race = RaceRepository.getRaceByKey(raceKey);
-            return View(new Models.RaceRegistration.RaceRegistrationViewModel(race));
-        }
+        
 
+
+        public ActionResult RaceResults(string Id)
+        {
+            var race = RaceRepository.getRaceByKeyDetail(Id);
+            return PartialView("~/Views/RaceRegistration/RaceResults.cshtml", new Models.RaceRegistration.RaceRegistrationViewModel(race));
+        }
 
 
 

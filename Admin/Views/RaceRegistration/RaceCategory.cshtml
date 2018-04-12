@@ -44,18 +44,18 @@
         </div>
 
         <script>
-
+            @*
             var table = $('#mzTable_@(category.Id)').DataTable({
                 
                 buttons: [
-                    'csv', 'excel', 'pdf', 'print'
+                    'csv', 'excel', 'pdf'
                 ]
             });
 
             table.buttons().container()
                 .appendTo('#mzTable_@(category.Id)_wrapper .DT-lf-right');
-
-            
+                *@
+            new MujZavod.Grid({ Id: 'mzTable_@(category.Id)' });
         </script>
     }
 </div>

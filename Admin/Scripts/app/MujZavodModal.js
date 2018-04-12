@@ -55,11 +55,11 @@ MujZavod.Modal = function (size) {
     }
 
     this.setTitle = function (title) {
-        _title.html(title);
+        this._title.html(title);
     }
 
     this.setFooter = function (footer) {
-        _footer.html(footer);
+        this._footer.html(footer);
     }
 
 
@@ -81,7 +81,7 @@ MujZavod.Modal = function (size) {
         this.setBody(data);
 
         var title = $(data).find('[data-mz-modal-title]');
-        if (title != null) {
+        if (title != null && title != undefined && title.length > 0) {
             this._title.html('');
             this._title.append(title);
             this._body.find('[data-mz-modal-title]').remove();
