@@ -40,34 +40,35 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
             {
                 string ret = "";
 
-                
-
-                ret += new Helpers.MzButton()
+                if (!raceCategoryUser.RaceCategory.Race.EndDate.HasValue)
                 {
-                    innerHtml = "Smazat",
-                    cssClass = "pull-right btn-sm m-l-1",
-                    mzButtonType = Helpers.MzButton.MzButtonType.DELETE,
-                    js = "MujZavod.Confirm('Opravdu si přejete smazat zvodníka?', function() { MujZavod.DoAction('/Race/RemoveRaceCategoryUser?id=" + Id + "', function () { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); }); } );"
-                };
 
-
-                
-
-                if (raceCategoryUser.RaceCategory.Race.Date < DateTime.Now)
-                {
                     ret += new Helpers.MzButton()
                     {
-                        innerHtml = "Upravit časy",
+                        innerHtml = "Smazat",
                         cssClass = "pull-right btn-sm m-l-1",
-                        mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
-                        js = "new MujZavod.Modal().loadFromUrl('/Race/EditUserTimes?runnerId=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); modal.close(); });"
-
-
+                        mzButtonType = Helpers.MzButton.MzButtonType.DELETE,
+                        js = "MujZavod.Confirm('Opravdu si přejete smazat zvodníka?', function() { MujZavod.DoAction('/Race/RemoveRaceCategoryUser?id=" + Id + "', function () { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); }); } );"
                     };
-                }
 
 
-                
+
+
+                    if (raceCategoryUser.RaceCategory.Race.Date < DateTime.Now)
+                    {
+                        ret += new Helpers.MzButton()
+                        {
+                            innerHtml = "Upravit časy",
+                            cssClass = "pull-right btn-sm m-l-1",
+                            mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
+                            js = "new MujZavod.Modal().loadFromUrl('/Race/EditUserTimes?runnerId=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); modal.close(); });"
+
+
+                        };
+                    }
+
+
+
                     ret += new Helpers.MzButton()
                     {
                         innerHtml = "Upravit",
@@ -75,8 +76,8 @@ namespace MujZavod.Admin.Models.Race.RaceCategory.RaceRunners
                         mzButtonType = Helpers.MzButton.MzButtonType.EDIT,
                         js = "new MujZavod.Modal().loadFromUrl('/Race/SubCategoryUserEdit?id=" + Id + "', function (modal) { MujZavod.Grids['RaceRunnersGrid_" + raceCategoryUser.RaceCategoryId + "'].refresh(); modal.close(); });"
                     };
-                
 
+                }
                 
                 return ret;
             }

@@ -13,6 +13,8 @@ namespace MujZavod.Admin.Controllers
         {
             if (User.IsInRole("Organizer"))
                 return RedirectToAction("Index", "Race");
+            else if (User.IsInRole("User"))
+                return RedirectToAction("Index", "Runner");
             return View();
         }
     }

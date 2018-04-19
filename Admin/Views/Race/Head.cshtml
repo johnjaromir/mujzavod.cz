@@ -21,6 +21,8 @@
             <div class="panel-heading">
                 <div class="panel-title">
                     Základní informace
+@if (!Model.PublishDate.HasValue)
+{
                     <span class="pull-right">
                         @Html.MzButton("Upravit", MzButton.MzButtonType.EDIT,
 new { onclick = "new MujZavod.Modal('md').loadFromUrl('" + Url.Action("Edit", "Race", new { Id = Model.Id }) + "', function (raceModal) { raceModal.close(); $('#raceHead').load('" + Url.Action("Head", "Race", new { id = Model.Id }) + "'); });" }, "")
@@ -28,18 +30,31 @@ new { onclick = "new MujZavod.Modal('md').loadFromUrl('" + Url.Action("Edit", "R
                         @Html.MzButton("Smazat", MzButton.MzButtonType.DELETE,
 new { onclick = "MujZavod.RemoveRace(); return false;" }, "")
                     </span>
+}
                 </div>
             </div>
             <div class="panel-body form-horizontal">
                 <div class="row">
                     <div class="col-sm-4">
-                        @Html.LabelValueRowFor(x => x.Name, 4, 8)
+                        @Html.LabelFor(x => x.Name)
+                        <div>
+                            @Html.Raw(Model.Name)
+                        </div>
+                        @*@Html.LabelValueRowFor(x => x.Name, 4, 8)*@
                     </div>
                     <div class="col-sm-4">
-                        @Html.LabelValueRowFor(x => x.Date, 4, 8)
+                        @Html.LabelFor(x => x.Date)
+                        <div>
+                            @Html.Raw(Model.Date)
+                        </div>
+                        @*@Html.LabelValueRowFor(x => x.Date, 4, 8)*@
                     </div>
                     <div class="col-sm-4">
-                        @Html.LabelValueRowFor(x => x.SignToDate, 4, 8)
+                        @Html.LabelFor(x => x.SignToDate)
+                        <div>
+                            @Html.Raw(Model.SignToDate)
+                        </div>
+                        @*@Html.LabelValueRowFor(x => x.SignToDate, 4, 8)*@
                     </div>
                 </div>
                 <div class="row">
@@ -63,15 +78,15 @@ new { onclick = "MujZavod.RemoveRace(); return false;" }, "")
                     @if (!Model.PublishDate.HasValue)
                     {
                         @Html.MzButton("Zveřejnit závod", MzButton.MzButtonType.DEFAULT, 
-                            new { onclick = "MujZavod.PublishRace(); return false;"  }, "pull-right")
+                            new { onclick = "MujZavod.PublishRace(); return false;"  }, "pull-right btn-warning","fa fa-check-square")
                     }
                     else if (!Model.EndDtae.HasValue)
                     {
-                        @Html.MzButton("Zveřejnit výsledky", MzButton.MzButtonType.DEFAULT, new { onclick = "MujZavod.EndRace(); return false;" }, "pull-right")
+                        @Html.MzButton("Zveřejnit výsledky", MzButton.MzButtonType.DEFAULT, new { onclick = "MujZavod.EndRace(); return false;" }, "pull-right btn-warning", "fa fa-check-square")
                     }
                     else
                     {
-                        @Html.MzButton("Zobrazit výsledky", MzButton.MzButtonType.DEFAULT, new { onclick = "var modalResults = new MujZavod.Modal('lg');  modalResults.loadFromUrl('" + Url.Action("RaceResults", "RaceRegistration", new { id = Model.RaceKey })+ "'); modalResults.setTitle('Výsledky závodu'); return false;" }, "pull-right")
+                        @Html.MzButton("Zobrazit výsledky", MzButton.MzButtonType.DEFAULT, new { onclick = "var modalResults = new MujZavod.Modal('lg');  modalResults.loadFromUrl('" + Url.Action("RaceResults", "RaceRegistration", new { id = Model.RaceKey })+ "'); modalResults.setTitle('Výsledky závodu'); return false;" }, "pull-right", "fa fa-sort-numeric-asc")
                     }
                 </div>
             </div>

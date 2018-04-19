@@ -53,5 +53,7 @@ namespace MujZavod.Code.Repository
             );
             base.Remove(entity, saveChanges);
         }
+
+        
     }
 }

@@ -14,11 +14,12 @@ namespace MujZavod.Admin.Helpers
                                      string innerHtml,
                                      MzButton.MzButtonType mzButtonType,
                                      object htmlAttributes,
-                                     string cssClass = null)
+                                     string cssClass = null,
+                                     string iconClass = null)
         {
             return MzButton(helper, innerHtml, mzButtonType,
                           HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes),
-                          cssClass
+                          cssClass, iconClass
             );
         }
 
@@ -26,14 +27,16 @@ namespace MujZavod.Admin.Helpers
                                            string innerHtml,
                                            MzButton.MzButtonType mzButtonType,
                                            IDictionary<string, object> htmlAttributes,
-                                           string cssClass= null)
+                                           string cssClass= null,
+                                           string iconClass = null)
         {
             
             return MvcHtmlString.Create(new MzButton() {
                 innerHtml = innerHtml,
                 mzButtonType = mzButtonType,
                 htmlAttributes = htmlAttributes,
-                cssClass = cssClass
+                cssClass = cssClass,
+                iconClass = iconClass
             }.ToString());
         }
 

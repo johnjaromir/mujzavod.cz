@@ -50,5 +50,15 @@ namespace MujZavod.Code.Repository
 
             base.Remove(entity, saveChanges);
         }
+
+
+        public IQueryable<RaceCategoryUser> GetAllByUser(string userId)
+        {
+            return base.GetAll()
+                .Include(x => x.RaceCategory.Race)
+                .Include(x=>x.RaceRoundUsers)
+                .Include(x=>x.RaceSubCategory)
+                .Where(y => y.ApplicationUserId == userId);
+        }
     }
 }

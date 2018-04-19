@@ -402,18 +402,26 @@ namespace MujZavod.Admin.Controllers
 
                 if (round == null)
                 {
-                    round = new Data.Models.RaceRoundUser()
+                    if (roundTime.Time.HasValue)
                     {
-                        RaceCategoryUserId = runner.Id,
-                        RaceRoundId = roundTime.RoundId,
-                        Time = roundTime.Time.Value
-                    };
-                    repo.Create(round, true);
+                        round = new Data.Models.RaceRoundUser()
+                        {
+                            RaceCategoryUserId = runner.Id,
+                            RaceRoundId = roundTime.RoundId,
+                            Time = roundTime.Time.Value
+                        };
+                        repo.Create(round, true);
+                    }
                 }
                 else
                 {
-                    round.Time = roundTime.Time.Value;
-                    repo.Update(round, true);
+                    if (roundTime.Time.HasValue)
+                    {
+                        round.Time = roundTime.Time.Value;
+                        repo.Update(round, true);
+                    }
+                    else
+                        repo.Remove(round, true);
                 }
             }
 
@@ -424,6 +432,34 @@ namespace MujZavod.Admin.Controllers
         {
             var race = RaceRepository.GetById(RaceId);
             race.EndDate = DateTime.Now;
+
+
+            foreach (var raceCategory in race.RaceCategories)
+            {
+                var orderedRunners = raceCategory.RaceRounds.SelectMany(x => x.RaceRoundUsers)
+                    .GroupBy(x => x.RaceCategoryUserId).Select(x => new { userId = x.Key, time = x.Max(y => y.Time) })
+                    .OrderBy(x => x.time).Select((x, index) => new { userId = x.userId, time = x.time, order = index });
+
+
+
+                var orderedSubCategoryRunners = raceCategory.RaceSubCategories.ToDictionary(dic => dic.Id,
+                    dic => dic.RaceCategoryUsers.SelectMany(x => x.RaceRoundUsers)
+                    .GroupBy(x => x.RaceCategoryUserId).Select(x => new { userId = x.Key, time = x.Max(y => y.Time) })
+                    .OrderBy(x => x.time).Select((x, index) => new { userId = x.userId, time = x.time, order = index }));
+
+
+                foreach (var raceCategoryUser in raceCategory.RaceCategoryUsers)
+                {
+                    raceCategoryUser.OrderInCategory = orderedRunners.FirstOrDefault(x => x.userId == raceCategoryUser.Id)?.order + 1;
+                    raceCategoryUser.OrderInSubCategory = orderedSubCategoryRunners
+                                                            .FirstOrDefault(x => x.Key == raceCategoryUser.RaceSubCategoryId)
+                                                                .Value.FirstOrDefault(z => z.userId == raceCategoryUser.Id)?.order + 1;
+
+                    RaceCategoryUsersRepository.Update(raceCategoryUser, false);
+                }
+
+            }
+
             RaceRepository.Update(race, true);
             return Content("OK");
         }

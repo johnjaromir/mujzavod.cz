@@ -76,7 +76,7 @@
     <nav class="navbar px-navbar">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">MujZavod</a>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">MujZavod</a>
             </div>
        
 
@@ -89,6 +89,12 @@
                     {
                     <li class="px-nav-item">
                         <a href="@Url.Action("Index", "Race")"><span class="px-nav-label">Seznam závodů</span></a>
+                    </li>
+                    }
+                    @if (User.IsInRole("User"))
+                    {
+                    <li class="px-nav-item">
+                        <a href="@Url.Action("Index", "Runner")"><span class="px-nav-label">Seznam závodů</span></a>
                     </li>
                     }
                 </ul>

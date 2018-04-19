@@ -13,7 +13,7 @@ namespace MujZavod.Admin.Models.RaceRegistration
 
         public RaceCategoryResult(Data.Models.RaceCategory raceCategory)
         {
-
+            /*
             var orderedRunners = raceCategory.RaceRounds.SelectMany(x => x.RaceRoundUsers)
                 .GroupBy(x => x.RaceCategoryUserId).Select(x => new { userId = x.Key, time = x.Max(y => y.Time) })
                 .OrderBy(x => x.time).Select((x, index) => new { userId = x.userId, time = x.time, order = index });
@@ -24,7 +24,7 @@ namespace MujZavod.Admin.Models.RaceRegistration
                 dic => dic.RaceCategoryUsers.SelectMany(x=>x.RaceRoundUsers)
                 .GroupBy(x => x.RaceCategoryUserId).Select(x => new { userId = x.Key, time = x.Max(y => y.Time) })
                 .OrderBy(x => x.time).Select((x, index) => new { userId = x.userId, time = x.time, order = index }));
-
+                */
 
             Id = raceCategory.Id;
             Name = raceCategory.Name;
@@ -40,8 +40,8 @@ namespace MujZavod.Admin.Models.RaceRegistration
                     LastName = y.ApplicationUser.LastName,
                     Times = y.RaceRoundUsers.Where(z => z.RaceCategoryUserId == y.Id).Select(z => z.Time).ToList(),
                     RunnerNumber = y.RunnerNumber,
-                    CategoryOrder = orderedRunners.First(ou => ou.userId == y.Id).order + 1,
-                    SubCategoryOrder = orderedSubCategoryRunners.First(ou => ou.Key == x.Id).Value.First(ou => ou.userId == y.Id).order + 1
+                    CategoryOrder = /*orderedRunners.First(ou => ou.userId == y.Id).order + 1*/ y.OrderInCategory,
+                    SubCategoryOrder = /*orderedSubCategoryRunners.First(ou => ou.Key == x.Id).Value.First(ou => ou.userId == y.Id).order + 1*/ y.OrderInSubCategory
                 }).ToList()
             }).ToList();
         }

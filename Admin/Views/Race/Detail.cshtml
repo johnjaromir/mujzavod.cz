@@ -56,8 +56,8 @@
                     if (result) {
                         $.get('@Url.Action("EndRace", "Race", new { RaceId = Model.RaceViewModel.Id })', function (data) {
                             if (data == "OK") {
-                                $('#raceHead').load('@Url.Action("Head", "Race", new { id = Model.RaceViewModel.Id })');
-
+                                //$('#raceHead').load('@Url.Action("Head", "Race", new { id = Model.RaceViewModel.Id })');
+                                location.reload();
                             }
                         })
                     }

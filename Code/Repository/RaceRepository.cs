@@ -49,5 +49,7 @@ namespace MujZavod.Code.Repository
             entity.RaceCategories.ToList().ForEach(x => raceCategoryRepo.Remove(x, false));
             base.Remove(entity, saveChanges);
         }
+
+        
     }
 }

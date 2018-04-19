@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201804010253151_raceroundusers1.Designer.cs">
       <DependentUpon>201804010253151_raceroundusers1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804140833448_orderincategory.cs" />
+    <Compile Include="Migrations\201804140833448_orderincategory.Designer.cs">
+      <DependentUpon>201804140833448_orderincategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Organizer.cs" />
     <Compile Include="Models\Enums\BaseEnum.cs" />
@@ -155,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804010253151_raceroundusers1.resx">
       <DependentUpon>201804010253151_raceroundusers1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140833448_orderincategory.resx">
+      <DependentUpon>201804140833448_orderincategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

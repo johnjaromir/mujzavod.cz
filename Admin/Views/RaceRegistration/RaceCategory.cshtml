@@ -14,7 +14,9 @@
             <table class="table table-striped display nowrap" id="mzTable_@(category.Id)">
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>Pořadí</th>
+                        <th>Pořadí v podkategorii</th>
                         <th>Číslo závodníka</th>
                         <th>Jméno</th>
                         <th>Příjmení</th>
@@ -28,6 +30,8 @@
                 @foreach(var runner in category.Runners)
                 {
                     <tr>
+                        <td>@runner.RunnerNumber</td>
+                        <td>@runner.CategoryOrder</td>
                         <td>@runner.SubCategoryOrder</td>
                         <td>@runner.RunnerNumber</td>
                         <td>@runner.FirstName</td>

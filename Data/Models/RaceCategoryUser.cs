@@ -25,6 +25,11 @@ namespace MujZavod.Data.Models
         public int? RunnerNumber { get; set; }
         public bool IsPaid { get; set; }
 
+
+        public int? OrderInCategory { get; set; }
+        public int? OrderInSubCategory { get; set; }
+
+
         public virtual ICollection<Models.RaceRoundUser> RaceRoundUsers { get; set; }
     }
 }

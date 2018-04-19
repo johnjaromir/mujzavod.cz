@@ -80,7 +80,7 @@ MujZavod.Registration = function (opts) {
             else {
                 // pokud chceme vytvořit účet, zkontrolujeme dostupnost přihlašovacího jména
                 if (this.getElem('#CreateAccount').is(':checked')) {
-                    if (this.getElem('#Password').val().length <= 6) {
+                    if (this.getElem('#Password').val().length < 6) {
                         this.showError('Heslo musí mít minimálně 6 znaků');
                     }
                     else if (this.getElem('#Password').val() != this.getElem('#ConfirmPassword').val()) {
@@ -215,7 +215,7 @@ MujZavod.Registration = function (opts) {
     }
 
     this.showError = function (msg) {
-        alert(msg);
+        MujZavod.Alert(msg);
     }
 
     this.show();
