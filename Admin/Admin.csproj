@@ -349,6 +349,7 @@
     <Content Include="Scripts\app\MujZavodTools.js" />
     <Content Include="Scripts\js\app.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
+    <Content Include="Scripts\js\jquery.min.js" />
     <Content Include="Scripts\js\pixeladmin.min.js" />
     <Content Include="Scripts\pace\pace.min.js" />
     <Content Include="Web.config">

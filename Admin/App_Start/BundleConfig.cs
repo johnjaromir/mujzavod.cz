@@ -47,7 +47,9 @@ namespace MujZavod.Admin
                       "~/scripts/js/jquery.min.js",
                       "~/scripts/js/bootstrap.min.js",
                       "~/scripts/js/pixeladmin.min.js",
+                      
                       "~/Scripts/app/MujZavodModal.js",
+                      "~/Scripts/app/MujZavodTools.js",
                       "~/Scripts/app/MujZavodRegistration.js"
                       ));
 
